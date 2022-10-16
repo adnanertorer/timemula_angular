@@ -1,0 +1,148 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Ürün</strong> İşlemleri
+        </div>
+        <div class="card-body">
+          <form action="" method="post" class="form-horizontal">
+            <input type="hidden" name="id" id="id">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="productId">Ürün</label>
+              <div class="col-md-9">
+                <select id="productId" name="productId" #productId (change)="productOnChange(productId.value)" [(ngModel)]="warehosue.productId" class="form-control">
+                  <option value="0">Seçiniz</option>
+                  <option *ngFor="let item of products" value="{{item.id}}">{{item.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="prType">İşlem Türü</label>
+              <div class="col-md-9">
+                <select id="prType" name="prType" [(ngModel)]="warehosue.prType" #prType (change)="typeOnChange(prType.value)" class="form-control">
+                  <option value="0">Seçiniz</option>
+                  <option value="4">Stok Girişi</option>
+                  <option value="2">Stok Çıkışı</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="currentAccount">Hesap(Bireysel, Tüzel) </label>
+              <div class="col-md-9">
+                <div *ngIf="isCustomer">
+                <select id="currentAccount" name="currentAccount" [(ngModel)]="warehosue.currentAccount" class="form-control">
+                  <option value="0">Seçiniz</option>
+                    <option *ngFor="let item of customers" value="{{item.id}}">{{item.name}} {{item.surname}}</option>
+                </select>
+              </div>
+                <div *ngIf="isSupplier">
+                  <select id="currentAccount" name="currentAccount" [(ngModel)]="warehosue.currentAccount" class="form-control">
+                    <option value="0">Seçiniz</option>
+                  <option *ngFor="let item of suppliers" value="{{item.id}}">{{item.companyName}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="unityPrice">Birim fiyat</label>
+              <div class="col-md-9">
+                <input type="number" [(ngModel)]="unitPrice" id="unitPrice" name="unitPrice" class="form-control" disabled>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="amount">İşlem Adedi</label>
+              <div class="col-md-9">
+                <input type="number" id="amount" name="amount" (input)="onAmountChange($event.target.value)" 
+                [(ngModel)]="warehosue.amount" class="form-control" placeholder="İşlem Adedi">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="discount">İndirim</label>
+              <div class="col-md-9">
+                <input type="number" id="discount" [(ngModel)]="warehosue.discount" name="discount" (input)="onDiscountChange($event.target.value)"  class="form-control" placeholder="İndirim(% olarak giriniz)">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="cost">Toplam Fiyat</label>
+              <div class="col-md-9">
+                <input type="number" id="cost" name="cost" [(ngModel)]="warehosue.cost" class="form-control" placeholder="Toplam Fiyat">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button type="button" (click)="add()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> {{buttonText}}</button>
+          <button type="reset" (click)="reset()" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Vazgeç</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<mat-form-field appearance="standard">
+  <mat-label>Filtre</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Adı Soyadı..." #input>
+</mat-form-field>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort #productSort="matSort">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ürün Adı</th>
+      <td mat-cell *matCellDef="let row"> {{row.name}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="unitPrice">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Birim Fiyat</th>
+      <td mat-cell *matCellDef="let row"> {{row.unitPrice}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Birim Miktarı</th>
+      <td mat-cell *matCellDef="let row"> {{row.amount}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="discount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>İndirim</th>
+      <td mat-cell *matCellDef="let row"> %{{row.discount}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="cost">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>İndirim</th>
+      <td mat-cell *matCellDef="let row">{{row.cost}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>İşlem Zamanı</th>
+      <td mat-cell *matCellDef="let row"> {{row.createdAt | date: 'dd/M/yyyy hh:mm'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="createdByName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Oluşturan</th>
+      <td mat-cell *matCellDef="let row"> {{row.createdByName}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="transactionType">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>İşlem Türü</th>
+      <td mat-cell *matCellDef="let row"> {{row.transactionType}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>İşlemler</th>
+      <td mat-cell *matCellDef="let row">
+        <button type="button" class="btn btn-info">Detaylar</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">Aradığınız kriterlere uygun kayıt bulunamadı "{{input.value}}"</td>
+    </tr>
+  </table>
+
+  <mat-paginator #productPaginator [pageSizeOptions]="[10, 25, 50, 75, 100]" aria-label="Select page of users"></mat-paginator>
+</div>
+
+

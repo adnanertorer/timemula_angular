@@ -1,0 +1,33 @@
+export interface Customer {
+    id: number;
+    citizenIdentityNumber: string;
+    name: string;
+    surname: string;
+    phone: string;
+    gsm: string;
+    gender: string;
+    email: string;
+    address: string;
+    birthDate: Date;
+    birthPlace: string;
+    password: string;
+    instagramAddress: string;
+    facebookAddress: string;
+    linkedinAddress: string;
+    isChild: boolean;
+    isActive: boolean;
+    bloodGroupId: number;
+    disease: string;
+    searchResourceId: number;
+    smsRequest: boolean;
+    emailRequest: boolean;
+    parentTypeId: number;
+    parentIdentity: string;
+    parentName: string;
+    parentSurname: string;
+    parentEmail: string;
+    parentProf: string;
+    instagramParentAddress: string;
+    facebookParentAddress: string;
+    linkedinParentAddress: string;
+}

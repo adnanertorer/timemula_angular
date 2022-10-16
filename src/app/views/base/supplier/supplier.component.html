@@ -1,0 +1,91 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Tedarikçi</strong> Kayıt Formu
+        </div>
+        <div class="card-body">
+          <form class="form-horizontal">
+            <input type="hidden" name="id" id="id" [(ngModel)]="supplier.id">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="companyName">Firma adı</label>
+              <div class="col-md-9">
+                <input type="text" id="companyName" [(ngModel)]="supplier.companyName"
+                       name="companyName" class="form-control" placeholder="Firma adı">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="authorized">Yetkili</label>
+              <div class="col-md-9">
+                <input type="text" id="authorized" name="authorized" [(ngModel)]="supplier.authorized" class="form-control" placeholder="Yetkili kişi">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="phone">Telefon</label>
+              <div class="col-md-9">
+                <input type="tel" id="phone" name="phone" [(ngModel)]="supplier.phone" class="form-control" placeholder="Telefon">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="address">Adres</label>
+              <div class="col-md-9">
+                <input type="text" id="address" name="address" [(ngModel)]="supplier.address" class="form-control" placeholder="Firma adresi">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="isActive">Aktif</label>
+              <div class="col-md-9">
+                <input type="checkbox" id="isActive" name="isActive" [(ngModel)]="supplier.isActive" />
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button type="button" (click)="add()"  class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> {{buttonText}}</button>
+          <button type="button" (click)="reset()" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Vazgeç</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="col-md-12">
+        <div class="card-header">
+          <strong>Tedarikçi Listesi</strong>
+        </div>
+        <div class="card-body">
+          <table class="table table-sm">
+            <thead>
+            <tr>
+              <th>Firma Adı</th>
+              <th>Yetkili Kişi</th>
+              <th>Telefon</th>
+              <th>Adres</th>
+              <th>Aktif</th>
+              <th>İşlemler</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of pageOfItems">
+                <td>{{item.id}}</td>
+                <td>{{item.companyName}}</td>
+                <td>{{item.authorized}}</td>
+                <td>{{item.address}}</td>
+                <td>{{item.isActive ? 'Evet' : 'Hayır'}}</td>
+                <td>
+                  <button class="btn btn-success" (click)="getDetailFromTable(item)">Detay</button>
+                  <button class="btn btn-info" (click)="remove(item.id)">Sil</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer pb-0 pt-3">
+          <jw-pagination [items]="supplierList" (changePage)="onChangePage($event)"></jw-pagination>
+      </div>
+      </div><!--/.col-->
+    </div><!--/.row-->
+  </div>

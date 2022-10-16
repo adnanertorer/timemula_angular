@@ -1,0 +1,124 @@
+import { Component, OnInit } from '@angular/core';
+import { LessonEducatorModel } from 'src/app/shared/model/lesson-educator-model';
+import { LessonModel } from 'src/app/shared/model/lesson-model';
+import { StaffModel } from 'src/app/shared/model/staff-model';
+import { VLessonEducator } from 'src/app/shared/model/v-lesson-educator';
+import { LessonEducatorService } from 'src/app/shared/services/lesson-educator.service';
+import { LessonService } from 'src/app/shared/services/lesson.service';
+import { StaffService } from 'src/app/shared/services/staff.service';
+declare let alertify: any;
+
+@Component({
+  selector: 'app-lesson-educator',
+  templateUrl: './lesson-educator.component.html',
+  styleUrls: ['./lesson-educator.component.css']
+})
+export class LessonEducatorComponent implements OnInit {
+
+  model: LessonEducatorModel;
+  list: VLessonEducator[] = [];
+  lessonList: LessonModel[];
+  staffList: StaffModel[] = [];
+  pageOfItems: Array<any>;
+  buttonText = "Kaydet";
+
+  constructor(private service: LessonEducatorService, private lessonService: LessonService, private staffService: StaffService) { }
+
+  ngOnInit() {
+    this.model = {
+      createdAt: new Date(),
+      id: 0,
+      isActive: true,
+      seansPrice: 0,
+      staffId: 0,
+      createdBy: 0,
+      lessonId: 0
+    };
+    this.getList();
+    this.getLessons();
+    this.getEducators();
+  }
+
+  getList(){
+    this.service.getList().subscribe((data)=>{
+      if(data.success){
+        this.list = data.dynamicClass as VLessonEducator[];
+      }
+    })
+  }
+
+  getLessons(){
+    this.lessonService.getList().subscribe((data)=>{
+      if(data.success){
+        this.lessonList = data.dynamicClass as LessonModel[];
+      }
+    })
+  }
+
+  getEducators(){
+    this.staffService.getTeachers().subscribe((data)=>{
+      if(data.success){
+        this.staffList = data.dynamicClass as StaffModel[];
+      }
+    })
+  }
+
+  onChangePage(pageOfItems: any[]): void {
+    this.pageOfItems = pageOfItems;
+  }
+
+  getDetailFromTable(resource: any): void {
+    this.model = resource;
+    this.buttonText = "Güncelle";
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  reset(): void {
+    this.buttonText = "Kaydet";
+    this.ngOnInit();
+  }
+
+  add(): void {
+    this.model.lessonId = parseInt(this.model.lessonId.toString());
+    this.model.staffId = parseInt(this.model.staffId.toString());
+    this.model.seansPrice = parseFloat(this.model.seansPrice.toString());
+    if (this.model.id == 0) {
+      this.service.add(this.model).subscribe((data) => {
+        if (data.success) {
+          this.ngOnInit();
+          alertify.set('notifier', 'position', 'top-right');
+          alertify.success(data.clientMessage, 2);
+        }
+      }, (err) => {
+        alertify.error(err, 2);
+      });
+    } else {
+      this.service.update(this.model).subscribe((data) => {
+        if (data.success) {
+          this.ngOnInit();
+          alertify.set('notifier', 'position', 'top-right');
+          alertify.success(data.clientMessage, 2);
+        }
+      }, (err) => {
+        alertify.error(err, 2);
+      });
+    }
+  }
+
+  remove(id: number): void {
+    this.service.remove(id).subscribe((data) => {
+      if (data.success) {
+        this.ngOnInit();
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.success(data.clientMessage, 2);
+      } else {
+        alert(data.clientMessage);
+      }
+    });
+  }
+
+}

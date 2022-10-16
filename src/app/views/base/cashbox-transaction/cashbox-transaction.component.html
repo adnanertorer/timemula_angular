@@ -1,0 +1,58 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Kasa</strong> Hareketleri
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+              <div class="col-md-12">
+                <div class="card-header">
+                  <strong>Kasa Hareketleri</strong> 
+                </div>
+                <div class="card-body">
+                  <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th>Kasa Adı</th>
+                        <th>İşlem Tipi</th>
+                        <th>Miktar</th>
+                        <th>İşlem Zamanı</th>
+                        <th>İşlemi Yapan</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of pageOfItems">
+                        <td>{{item.cashBoxName}}</td>
+                        <td>{{item.transactionType}}</td>
+                        <td>{{item.cost}}</td>
+                        <td>{{item.createdAt | date: 'dd/M/yyyy H:mm'}}</td>
+                        <td>{{item.createdByName}}</td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td></td>
+                        <td>Toplam Gelir : {{totalIncome}}</td>
+                        <td>Toplam Gider : {{totalExpense}}</td>
+                        <td>Kasa Net : {{net}}</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+                <div class="card-footer pb-0 pt-3">
+                  <jw-pagination [items]="list" (changePage)="onChangePage($event)"></jw-pagination>
+              </div>
+              </div><!--/.col-->
+            </div><!--/.row-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>

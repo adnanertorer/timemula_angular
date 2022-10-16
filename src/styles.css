@@ -1,0 +1,11 @@
+@import url('../node_modules/@syncfusion/ej2-schedule/styles/material.css'); 
+#js-licensing{
+    display: none;
+}
+
+.custom-input-margin{
+    margin-top: 10px;
+}
+
+
+

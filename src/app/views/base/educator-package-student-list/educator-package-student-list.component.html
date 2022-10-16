@@ -1,0 +1,24 @@
+<div class="container animated fadeIn">
+  <div class="row justify-content-center">
+          <div class="col-md-4" *ngFor="let item of service.selectedTeacherStudents">
+              <mat-card class="card">
+                  <mat-card-header>
+                      <div mat-card-avatar class="card-header-image"></div>
+                      <mat-card-title class="card-title">{{item.name}} {{item.surname}}</mat-card-title>
+                      <mat-card-subtitle>{{item.subCategoryName}} / {{item.artPackageName}}</mat-card-subtitle>
+                  </mat-card-header>
+                  <img mat-card-image src="http://demo.9piksel.com/lifearts/wp-content/uploads/2022/05/hamile-yoga-egitimi-1.jpg">
+                  <mat-card-content>
+                      <p><b>Eğitmen: </b> {{item.educatorName}}</p>
+                      <p><b>Sınıf: </b> {{item.classromName}}</p>
+                      <p><b>Paket Adı: </b> {{item.subCategoryName}} / {{item.artPackageName}}</p>
+                      <p><b>İlk Dersin Başlama Zamanı: </b> {{item.startDate}}</p>
+                      <p><b>Son Dersin Bitiş Zamanı: </b> {{item.finishDate}}</p>
+                  </mat-card-content>
+                  <mat-card-actions>
+                      <button (click)="openLessons(item.customerId)" class="primary-button secondary-button" role="button">Detaylar</button>
+                  </mat-card-actions>
+              </mat-card>
+          </div>
+  </div>
+</div>

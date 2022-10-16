@@ -1,0 +1,124 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Genel Rapor</strong>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-2 col-6">
+              <!-- small box -->
+              <div class="small-box bg-success">
+                <div class="inner">
+                  <h3>{{totalCustomer}}</h3>
+                  <p>Toplam Öğrenci</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+                <a  routerLinkActive="router-link-active"class="small-box-footer">Daha Fazla Bilgi <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <div class="col-lg-2 col-6">
+              <!-- small box -->
+              <div class="small-box bg-success">
+                <div class="inner">
+                  <h3>{{totalDeptCollect}}</h3>
+                  <p>Toplam Tahsilat</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+                <a  routerLinkActive="router-link-active"class="small-box-footer">Daha Fazla Bilgi <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <div class="col-lg-2 col-6">
+              <!-- small box -->
+              <div class="small-box bg-success">
+                <div class="inner">
+                  <h3>{{totalPayments}}</h3>
+                  <p>Toplam Ödeme</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+                <a  routerLinkActive="router-link-active"class="small-box-footer">Daha Fazla Bilgi <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <div class="col-lg-2 col-6">
+              <!-- small box -->
+              <div class="small-box bg-success">
+                <div class="inner">
+                  <h3>{{totalSaledPackage}}</h3>
+                  <p>Toplam Satılan Paket</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+                <a  routerLinkActive="router-link-active"class="small-box-footer">Daha Fazla Bilgi <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <div class="col-lg-2 col-6">
+              <!-- small box -->
+              <div class="small-box bg-success">
+                <div class="inner">
+                  <h3>{{myInteger.result}}</h3>
+                  <p>Bugünkü Öğrenci Sayısı</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+                <a  routerLinkActive="router-link-active"class="small-box-footer">Daha Fazla Bilgi <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <div class="col-lg-2 col-6">
+              <!-- small box -->
+              <div class="small-box bg-success">
+                <div class="inner">
+                  <h3>{{last3Days.result}}</h3>
+                  <p>Paket Bitimine 3 Gün Kala</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+                <a  routerLinkActive="router-link-active"class="small-box-footer">Daha Fazla Bilgi <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4 col-6">
+              <div id="packages"></div>
+            </div>
+            <div class="col-lg-8 col-6">
+              <h3>Bugünkü Dersler ve Öğrenciler</h3>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Sınıf</th>
+                    <th>Paket</th>
+                    <th>Eğitmen</th>
+                    <th>Öğrenci</th>
+                    <th>Ders Zamanı</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of currentLessonSummaries">
+                    <td>{{item.classromName}}</td>
+                    <td>{{item.subCategoryName}} - {{item.artPackageName}}</td>
+                    <td>{{item.educatorName}}</td>
+                    <td>{{item.name}} {{item.surname}}</td>
+                    <td>{{item.startDate | date: 'dd.MM.yyyy hh:mm'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

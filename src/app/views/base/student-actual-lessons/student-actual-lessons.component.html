@@ -1,0 +1,29 @@
+<div class="container animated fadeIn">
+    <button (click)="openList()" class="primary-button" role="button">Takvimde Gör</button>
+    <div class="row justify-content-center">
+            <div class="col-md-4" *ngFor="let item of list">
+                <mat-card class="card">
+                    <mat-card-header>
+                        <div mat-card-avatar class="card-header-image"></div>
+                        <mat-card-title class="card-title">{{item.name}} {{item.surname}}</mat-card-title>
+                        <mat-card-subtitle>{{item.lessonName}} / {{item.artPackageName}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <img mat-card-image src="{{mainUrl}}lesson-images/{{item.lessonPhoto}}">
+                    <mat-card-content>
+                        <p><b>Eğitmen: </b> {{item.educatorName}}</p>
+                        <p><b>Sınıf: </b> {{item.classromName}}</p>
+                        <p><b>Paket Adı: </b>{{item.lessonName}} / {{item.artPackageName}}</p>
+                        <p><b>Dersin Başlama Zamanı: </b> {{item.startDate | date: 'dd/M/yyyy H:mm'}}</p>
+                        <p><b>Dersin Bitiş Zamanı: </b> {{item.finishDate | date: 'dd/M/yyyy H:mm'}}</p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                      <i *ngIf="item.isDone" class="icon-ok approved"> Derse Katılım Sağlanmış</i>
+                        <button class="primary-button" (click)="setApprove(item.id)" *ngIf="!item.isDone" role="button">Katıldı</button>
+                        <i *ngIf="item.isMoved" class="icon-mail-forward moved"> Ders Taşınmış</i>
+                        <i *ngIf="item.isCancel" class="icon-mail-forward cancel"> Ders Yanmış</i>
+                    </mat-card-actions> 
+                </mat-card>
+            </div>
+    </div>
+  </div>
+  

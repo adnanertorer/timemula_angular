@@ -1,0 +1,48 @@
+<app-header
+  [navbarBrandRouterLink]="['/dashboard']"
+  [fixed]="true"
+  [navbarBrandFull]="{src: 'assets/img/brand/logo.png', width: 150, height: 50, alt: 'Lifearts Yönetim Paneli'}"
+  [navbarBrandMinimized]="{src: 'assets/img/brand/logo.png', width: 95, height: 30, alt: 'Lifearts Yönetim Paneli'}"
+  [sidebarToggler]="'lg'"
+  [asideMenuToggler]="'lg'">
+  <ul class="nav navbar-nav d-md-down-none">
+    <li class="nav-item px-3">
+      <a class="nav-link" href="#">Lifearts Yönetim Paneli</a>
+    </li>
+    <!--<li class="nav-item px-3">
+      <a class="nav-link" href="#">Users</a>
+    </li>
+    <li class="nav-item px-3">
+      <a class="nav-link" href="#">Settings</a>
+    </li>-->
+  </ul>
+  <ul class="nav navbar-nav ml-auto">
+  </ul>
+</app-header>
+<div class="app-body">
+  <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" 
+  [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
+    <app-sidebar-nav [navItems]="navItems" [perfectScrollbar]
+     [disabled]="appSidebar.minimized"></app-sidebar-nav>
+    <app-sidebar-minimizer></app-sidebar-minimizer>
+  </app-sidebar>
+  <!-- Main content -->
+  <main class="main">
+    <cui-breadcrumb>
+      <li class="breadcrumb-menu d-md-down-none">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+          <a class="btn" href="#"><i class="icon-speech"></i></a>
+          <a class="btn" [routerLink]="['/dashboard']"><i class="icon-graph"></i> &nbsp;Yönetim Paneli</a>
+          <a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Ayarlar</a>
+        </div>
+      </li>
+    </cui-breadcrumb>
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+      <ng-http-loader></ng-http-loader>
+    </div>
+  </main>
+</div>
+<app-footer>
+  <span><a>Almula Yazılım ve Tanıtım Hizmetleri Ticaret A.Ş.</a> &copy; 2022</span>
+</app-footer>

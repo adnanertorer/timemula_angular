@@ -1,0 +1,47 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+      <div class="col-md-12">
+        <div class="card-header">
+          <strong>{{name}} {{surname}} Paket Dersleri</strong> 
+        </div>
+        <div class="card-body">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>Paket</th>
+                <th>Ders</th>
+                <th>Sınıf</th>
+                <th>Başlama</th>
+                <th>Bitiş</th>
+                <th>Durum</th>
+                <th>İşlemler</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of pageOfItems">
+                <td>{{item.artPackageName}}</td>
+                <td>{{item.lessonName}}</td>
+                <td>{{item.classromName}}</td>
+                <td>{{item.startDate | date: 'dd/M/yyyy H:mm'}}</td>
+                <td>{{item.finishDate | date: 'dd/M/yyyy H:mm'}}</td>
+                <td><span style="color: green; font-weight: bold;" *ngIf="item.isDone">Tamamlandı</span>
+                  <span *ngIf="!item.isDone && !item.isCancel">Tamamlanmadı</span>
+                  <span style="color: red; font-weight: bold;" *ngIf="item.isCancel">Ders Yandı</span>
+                </td>
+                <td>
+                  <button (click)="openPackageMove(item.id)" type="button" class="btn btn-warning">Ders Kaydır</button>
+                  &nbsp; <button (click)="cancelLesson(item.id)" type="button" class="btn btn-danger">Ders İptal</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer pb-0 pt-3">
+          <jw-pagination [items]="list" (changePage)="onChangePage($event)"></jw-pagination>
+      </div>
+      </div><!--/.col-->
+    </div><!--/.row-->
+  </div>
+</div>

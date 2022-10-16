@@ -1,0 +1,120 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Randevu</strong> Kayıt Formu
+        </div>
+        <div class="card-body">
+          <form action="" method="post" class="form-horizontal">
+            <input type="hidden" name="id" id="id" [(ngModel)]="model.id">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="categoryId">Görüşülen Kişi</label>
+              <div class="col-md-9">
+                <input type="text" name="requestByName" id="requestByName" [(ngModel)]="model.requestByName" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="subCategoryId">Konu</label>
+              <div class="col-md-9">
+                <input type="text" name="title" id="title" [(ngModel)]="model.title" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="lessonId">Açıklama</label>
+              <div class="col-md-9">
+                <textarea cols="30" rows="5" name="requestDescription" id="requestDescription" [(ngModel)]="model.requestDescription" class="form-control"></textarea>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="artPackageName">Randevu Tarihi</label>
+              <div class="col-md-9">
+                <ejs-datepicker #date (change)="onDateChange()" format='yyyy-MM-dd' placeholder='Enter date'
+                [value]=dateValue></ejs-datepicker>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="seanceCount">Randevu Saati</label>
+              <div class="col-md-9">
+                <ngb-timepicker [(ngModel)]="time" [seconds]="true"
+                [hourStep]="hourStep" [minuteStep]="minuteStep" [secondStep]="secondStep" name="time"></ngb-timepicker>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="duration">Görüşme Gerçekleşti mi?</label>
+              <div class="col-md-9">
+                <input type="checkbox" name="isDone" id="isDone"
+                [(ngModel)]="model.isDone">
+              </div>
+            </div>
+          </form>
+          <div class="card-footer">
+            <button type="submit" (click)="addOrUpdate()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> {{buttonText}}</button>
+            <button *ngIf="isVisibleCancelButton" type="reset" (click)="reset()" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Vazgeç</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <mat-form-field appearance="standard">
+        <mat-label>Filtre</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Kişi Adı..." #input>
+      </mat-form-field>
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+      
+          <ng-container matColumnDef="requestByName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Görüşülen Kişi</th>
+            <td mat-cell *matCellDef="let row"> {{row.requestByName}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="meetingDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Randevu Tarihi</th>
+            <td mat-cell *matCellDef="let row"> {{row.meetingDate | date: 'dd.MM.yyyy hh:mm'}}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="meetingTime">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Randevu Saati </th>
+            <td mat-cell *matCellDef="let row"> {{row.meetingTime}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Konu</th>
+            <td mat-cell *matCellDef="let row"> {{row.title}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="requestDescription">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Açıklama</th>
+            <td mat-cell *matCellDef="let row"> {{row.requestDescription}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="createdAt">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>İşlem Zamanı</th>
+            <td mat-cell *matCellDef="let row"> {{row.createdAt | date: 'dd.MM.yyyy hh:mm'}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="isDone">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Görüşme Gerçekleşti mi?</th>
+            <td mat-cell *matCellDef="let row"> {{row.isDone ? 'Evet' : 'Hayır'}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> İşlemler </th>
+            <td mat-cell *matCellDef="let row">
+              <button (click)="getDetail(row)" class="btn btn-info" value="Detaylar">Detaylar</button>&nbsp;<button (click)="remove(row.id)" class="btn btn-danger" value="Detaylar">Sil</button>  
+            </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">Aradığınız kriterlere uygun kayıt bulunamadı "{{input.value}}"</td>
+          </tr>
+        </table>
+        <mat-paginator #meetingPaginator [pageSizeOptions]="[10, 25, 50, 75, 100]" aria-label="Select page of users"></mat-paginator>
+    </div><!--/.row-->
+  </div>
+</div>

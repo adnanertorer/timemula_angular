@@ -1,0 +1,92 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="col-md-12">
+        <div class="card-header">
+          <strong>Borçlu Cari Hesap Listesi</strong>
+        </div>
+        <div class="card-body">
+          <table class="table table-sm">
+            <thead>
+            <tr>
+              <th>Adı</th>
+              <th>İşlem Tutarı</th>
+              <th>Kalan Borç</th>
+              <th>İşlemler</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of pageOfItemTransactions">
+              <td>{{item.currentAccount}}</td>
+              <td>{{item.currentBalance}}</td>
+              <td>
+                <button (click)="getCollection(item)" type="button" class="btn btn-success">Tahsilat</button>&nbsp;
+                <button (click)="getInstallment(item)" type="button" class="btn btn-warning">Taksitlendir</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer pb-0 pt-3">
+          <jw-pagination [items]="transactionList" (changePage)="onChangeTransactionPage($event)"></jw-pagination>
+      </div>
+      </div><!--/.col-->
+    </div><!--/.row-->
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="col-md-12">
+        <div class="card-header">
+          <strong>Tahsilat Listesi</strong>
+        </div>
+        <div class="card-body">
+          <table class="table table-sm">
+            <thead>
+            <tr>
+              <th>Adı</th>
+              <th>Kasa</th>
+              <th>İşlem Zamanı</th>
+              <th>İşlemi Yapan</th>
+              <th>Tahsilat Tutarı</th>
+              <th>Açıklama</th>
+              <th>İşlemler</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of pageOfItems">
+              <td>{{item.name}} {{item.surname}}</td>
+              <td>{{item.cashBoxName}}</td>
+              <td>{{item.createdAt | date: 'dd/M/yyyy H:mm'}}</td>
+              <td>{{item.createdByName}}</td>
+              <td>{{item.collectionAmount}}</td>
+              <td>{{item.description}}</td>
+              <td>
+                <a title="Detay">Detay</a> || 
+                <a title="Sil">Sil</a>
+              </td>
+            </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Toplam Tahsilat :{{totalCollection}}</td>
+                <td></td>
+                <td>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="card-footer pb-0 pt-3">
+          <jw-pagination [items]="deptCollectionList" (changePage)="onChangePage($event)"></jw-pagination>
+      </div>
+      </div><!--/.col-->
+    </div><!--/.row-->
+  </div>
+</div>

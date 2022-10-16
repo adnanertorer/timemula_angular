@@ -1,0 +1,123 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Ders/Sınıf</strong> İlişkisi Kayıt Formu
+        </div>
+        <div class="card-body">
+          <form action="" method="post" class="form-horizontal">
+            <input type="hidden" name="id" id="id" [(ngModel)]="packageClassroom.id">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="categoryId">Kategori</label>
+              <div class="col-md-9">
+                <select name="categoryId" (change)="categoryOnChange($event.target.value)" id="categoryId" [(ngModel)]="packageClassroom.categoryId"
+                 class="form-control">
+                  <option value="0">Seçiniz</option>
+                  <option value="{{item.id}}" *ngFor="let item of categories">{{item.categoryName}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="subCategoryId">Alt Kategori</label>
+              <div class="col-md-9">
+                <select name="subCategoryId" id="subCategoryId" (change)="subCategoryOnChange($event.target.value)" [(ngModel)]="packageClassroom.subCategoryId" class="form-control">
+                  <option value="0">Seçiniz</option>
+                  <option value="{{item.id}}" *ngFor="let item of subCategories">{{item.subCategoryName}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="lessonId">Ders</label>
+              <div class="col-md-9">
+                <select name="lessonId" id="lessonId" [(ngModel)]="packageClassroom.lessonId" class="form-control">
+                  <option value="0">Seçiniz</option>
+                  <option value="{{item.id}}" *ngFor="let item of lessons">{{item.lessonName}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="classroomId">Sınıf</label>
+              <div class="col-md-9">
+                <select name="classroomId" id="classroomId" [(ngModel)]="packageClassroom.classroomId" class="form-control">
+                  <option value="0">Seçiniz</option>
+                  <option value="{{item.id}}" *ngFor="let item of classrooms">{{item.classromName}} / Kapasite ({{item.quta}}) </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="minCapacity">Ders Minimum Kişi Sayısı</label>
+              <div class="col-md-9">
+                <input type="number" name="minCapacity" class="form-control" id="minCapacity"
+                [(ngModel)]="packageClassroom.minCapacity">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="maxCapacity">Ders Maksimum Kişi Sayısı</label>
+              <div class="col-md-9">
+                <input type="number" name="maxCapacity" class="form-control" id="maxCapacity"
+                [(ngModel)]="packageClassroom.maxCapacity">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="priority">Dersin Önceliği</label>
+              <div class="col-md-9">
+                <input type="number" name="priority" class="form-control" id="priority"
+                [(ngModel)]="packageClassroom.priority">
+              </div>
+            </div>
+          </form>
+          <div class="card-footer">
+            <button type="submit" (click)="add()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> {{buttonText}}</button>
+            <button type="reset" (click)="reset()" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Vazgeç</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+      <div class="col-md-12">
+        <div class="card-header">
+          <strong>Ders/Sınıf İlişkisi Listesi</strong> 
+        </div>
+        <div class="card-body">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>Derslik Adı</th>
+                <th>Ders Adı</th>
+                <th>Sınıf Kapasitesi</th>
+                <th>Ders Min. Kişi Sayısı</th>
+                <th>Ders Maks. Kişi Sayısı</th>
+                <th>Dersin Önceliği</th>
+                <th>Kaydeden Kullanıcı</th>
+                <th>Kayıt Zamanı</th>
+                <th>İşlemler</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of pageOfItems">
+                <td>{{item.classromName}}</td>
+                <td>{{item.lessonName}}</td>
+                <td>{{item.maxCapacity}}</td>
+                <td>{{item.minCapacity}}</td>
+                <td>{{item.maxCapacity}}</td>
+                <td>{{item.priority}}</td>
+                <td>{{item.createdByName}}</td>
+                <td>{{item.createdAt | date: 'dd/M/yyyy hh:mm'}}</td>
+                <td>
+                  <a (click)="getDetailFromTable(item)" title="Detay">Detay</a>
+                  <a (click)="remove(item.id)" title="Sil">Sil</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer pb-0 pt-3">
+          <jw-pagination [items]="list" (changePage)="onChangePage($event)"></jw-pagination>
+      </div>
+      </div><!--/.col-->
+    </div><!--/.row-->
+</div>

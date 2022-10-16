@@ -1,0 +1,40 @@
+<div class="app-body">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mx-auto">
+          <div class="card-group">
+            <div class="card p-4">
+              <div class="card-body">
+                <form (ngSubmit)="login()" accept-charset="UTF-8">
+                  <h1>Giriş</h1>
+                  <p class="text-muted">Life Arts Yönetim Sistemi</p>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-user"></i></span>
+                    </div>
+                    <input type="email" name="email" id="email" [(ngModel)]="user.email" class="form-control" placeholder="e-posta adresiniz" autocomplete="email" required>
+                  </div>
+                  <div class="input-group mb-4">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-lock"></i></span>
+                    </div>
+                    <input type="password" name="password" id="password" [(ngModel)]="user.password" class="form-control" placeholder="parolanız" autocomplete="current-password" required>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <button type="submit" class="btn btn-primary px-4">Giriş</button>
+                    </div>
+                    <div class="col-6 text-right">
+                      <button type="button" class="btn btn-link px-0">Parolamı Unuttum</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
