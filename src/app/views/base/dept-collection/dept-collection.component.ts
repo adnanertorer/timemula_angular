@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CashboxModel } from 'src/app/shared/model/cashbox-model';
 import { DeptCollectionModel } from 'src/app/shared/model/dept-collection-model';
 import { AccountingTransactionService } from 'src/app/shared/services/accounting-transaction.service';
@@ -11,6 +11,10 @@ import { DeptCollectionDialogData } from 'src/app/shared/model/dept-collection-d
 import { VCurrentBalanceModel } from 'src/app/shared/model/v-current-balance-model';
 import { VDeptCollectionModel } from 'src/app/shared/model/v-dept-collection-model';
 import { Router } from '@angular/router';
+import { DeptCollectionFilterModel } from 'src/app/shared/model/dept-collection-filter-model';
+import { Customer } from 'src/app/shared/model/customer';
+import { DatePickerComponent } from '@syncfusion/ej2-angular-calendars';
+import { CustomerService } from 'src/app/shared/services/customer.service';
 
 @Component({
   selector: 'app-dept-collection',
@@ -20,6 +24,18 @@ import { Router } from '@angular/router';
 export class DeptCollectionComponent implements OnInit {
 
   transactionList: VCurrentBalanceModel[] = [];
+
+  @ViewChild('date')
+  public Date: DatePickerComponent;
+  @ViewChild('endDate')
+  public EndDate: DatePickerComponent;
+
+  public dateValue: Date = new Date();
+  public endDateValue: Date = new Date();
+  public month: number = new Date().getMonth();
+  public fullYear: number = new Date().getFullYear();
+  public minDate: Date = new Date(this.fullYear, this.month , 1);
+  public maxDate: Date = new Date(this.fullYear, this.month, 30);
 
   deptCollection: DeptCollectionModel = {
    // accountingTransactionId: 0,
@@ -33,6 +49,8 @@ export class DeptCollectionComponent implements OnInit {
   };
   deptCollectionList: VDeptCollectionModel[] = [];
   cashBoxList: CashboxModel[] = [];
+  cashBoxes: CashboxModel[] = [];
+  customers: Customer[] = [];
   buttonText = "Kaydet";
   pageOfItems: Array<any>;
   pageOfItemTransactions: Array<any>;
@@ -41,10 +59,11 @@ export class DeptCollectionComponent implements OnInit {
   strDept: number = 0;
   totalCollection: number = 0;
   modalData: DeptCollectionDialogData;
+  filter: DeptCollectionFilterModel;
 
   constructor(private accontingService: AccountingTransactionService, 
     private service: DeptCollectionService, private cashBoxService: CashboxService,
-     public dialog: MatDialog, private router: Router) { }
+     public dialog: MatDialog, private router: Router, private customerService: CustomerService) { }
 
   ngOnInit() {
     this.modalData = {
@@ -53,7 +72,15 @@ export class DeptCollectionComponent implements OnInit {
       deptCollection: this.deptCollection,
       strDept: 0
     }
+    this.filter = {
+      cashBoxId: 0,
+      customerId: 0,
+      endDate: null,
+      startDate: null 
+    };
     this.getAccounts();
+    this.getCashBoxesForFilter();
+    this.getCustomers();
     this.getList();
   }
   openDialog(): void {
@@ -71,6 +98,45 @@ export class DeptCollectionComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  onDateChange(){
+    this.dateValue = this.Date.value;
+  }
+ 
+  onEndDateChange(){
+    this.endDateValue = this.EndDate.value;
+  }
+
+  getCashBoxesForFilter(){
+    this.cashBoxService.getList().subscribe((data)=>{
+      if(data.success){
+        this.cashBoxes = data.dynamicClass as CashboxModel[];
+      }
+    })
+  }
+
+  getWithFilter(){
+    this.filter.cashBoxId = parseInt(this.filter.cashBoxId.toString());
+    this.filter.customerId = parseInt(this.filter.customerId.toString());
+    this.filter.startDate = this.dateValue;
+    this.filter.endDate = this.endDateValue;
+    this.service.getByFilter(this.filter).subscribe((data) => {
+      this.deptCollectionList = data.dynamicClass as VDeptCollectionModel[];
+      this.totalCollection = 0;
+      this.deptCollectionList.forEach(element => {
+        this.totalCollection = element.collectionAmount + this.totalCollection;
+      });
+      this.pageOfItems = this.deptCollectionList;
+    })
+  }
+
+  getCustomers(){
+    this.customerService.getList().subscribe((data)=>{
+      if(data.success){
+        this.customers = data.dynamicClass as Customer[];
+      }
+    })
   }
 
   onChangePage(pageOfItems: any[]): void {

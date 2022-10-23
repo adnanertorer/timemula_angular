@@ -39,6 +39,45 @@
   <div class="col-md-12">
     <div class="card">
       <div class="col-md-12">
+        <div class="card-header" style="margin-top: 5px;">
+          <strong>Detaylı</strong> Arama Formu
+        </div>
+        <div class="card-body">
+          <div class="form-group row">
+            <div class="col-md-2">
+              <label for="transactionTypeId">Kasa</label>
+              <select name="cashBoxId" class="form-control" [(ngModel)]="filter.cashBoxId">
+                <option value="0">Seçiniz</option>
+                <option value="{{item.id}}" *ngFor="let item of cashBoxes">{{item.cashBoxName}}</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label for="educatorId">Müşteri</label>
+              <select name="educatorId" class="form-control" [(ngModel)]="filter.customerId">
+                <option value="0">Seçiniz</option>
+                <option value="{{item.id}}" *ngFor="let item of customers">{{item.name}} {{item.surname}}</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label for="dateValue">Başlama Tarihi</label>
+              <ejs-datepicker #date (change)="onDateChange()" format='yyyy-MM-dd' placeholder='Enter date' [value]=dateValue></ejs-datepicker>
+            </div>
+            <div class="col-md-3">
+              <label for="ednDateValue">Bitiş Tarihi</label>
+              <ejs-datepicker #endDate (change)="onEndDateChange()" format='yyyy-MM-dd' placeholder='Enter date' [value]=endDateValue></ejs-datepicker>
+            </div>
+            <div class="col-md-2">
+              <label for=""></label>
+              <input type="button" style="margin-top: 25px;" class="btn btn-info" value="Kriterlere Göre Ara" (click)="getWithFilter()">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="col-md-12">
         <div class="card-header">
           <strong>Tahsilat Listesi</strong>
         </div>

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { BaseResponse } from '../model/BaseResponse';
+import { EducatorCostFilterModel } from '../model/educator-cost-filter-model';
 import { EducatorCostModel } from '../model/educator-cost-model';
 import { EducatorLessonCostModel } from '../model/educator-lesson-cost-model';
 
@@ -18,6 +19,16 @@ export class EducatorCostService {
   getList(){
     return this.http
         .get<BaseResponse>(`${this.apiUrl}/EducatorLessonCost/List`, {observe: 'body'})
+        .pipe(
+            map((x)=> {
+                return x;
+            })
+        );
+  }
+
+  getListByFilter(filter: EducatorCostFilterModel){
+    return this.http
+        .post<BaseResponse>(`${this.apiUrl}/EducatorLessonCost/ListByFilter`, filter)
         .pipe(
             map((x)=> {
                 return x;

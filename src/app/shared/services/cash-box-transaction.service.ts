@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { BaseResponse } from '../model/BaseResponse';
 import { CashBoxTransactionModel } from '../model/cash-box-transaction-model';
+import { CashboxFilterModel } from '../model/cashbox-filter-model';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +58,26 @@ export class CashBoxTransactionService {
   remove(id: number){
     return this.http
     .delete<BaseResponse>(`${this.apiUrl}/CashBoxTransaction/Remove/?id=${id.toString()}`, {observe: 'body'})
+        .pipe(
+            map((x)=> {
+                return x;
+            })
+        );
+  }
+
+  getByFilter(resource: CashboxFilterModel){
+    return this.http
+        .post<BaseResponse>(`${this.apiUrl}/CashBoxTransaction/ListByFilter`, resource)
+        .pipe(
+            map((x)=> {
+                return x;
+            })
+        );
+  }
+
+  getTransactionTypes(){
+    return this.http
+        .get<BaseResponse>(`${this.apiUrl}/CashBoxTransaction/TransactionTypes`, {observe: 'body'})
         .pipe(
             map((x)=> {
                 return x;

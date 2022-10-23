@@ -1,3 +1,73 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="col-md-12">
+      <div class="card-header" style="margin-top: 5px;">
+        <strong>Detaylı</strong> Arama Formu
+      </div>
+      <div class="card-body">
+        <div class="form-group row">
+          <div class="col-md-2">
+            <label for="categoryId">Ana Kategori</label>
+            <select name="categoryId" class="form-control" (change)="categoryOnChange($event.target.value)" [(ngModel)]="filter.categoryId">
+              <option value="0">Seçiniz</option>
+              <option value="{{item.id}}" *ngFor="let item of categories">{{item.categoryName}}</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label for="subCategoryId">Alt Kategori</label>
+            <select name="subCategoryId" class="form-control" (change)="subCategoryOnChange($event.target.value)" [(ngModel)]="filter.subCategoryId">
+              <option value="0">Seçiniz</option>
+              <option value="{{item.id}}" *ngFor="let item of subCategories">{{item.subCategoryName}}</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label for="lessonId">Ders</label>
+            <select name="lessonId" class="form-control" (change)="lessonOnChange($event.target.value)" [(ngModel)]="filter.lessonId">
+              <option value="0">Seçiniz</option>
+              <option value="{{item.id}}" *ngFor="let item of lessons">{{item.lessonName}}</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label for="packageId">Paket</label>
+            <select name="packageId" class="form-control" [(ngModel)]="filter.packageId">
+              <option value="0">Seçiniz</option>
+              <option value="{{item.id}}" *ngFor="let item of packages">{{item.artPackageName}} 
+                Seans Toplam: {{item.seanceCount}} <span *ngIf="item.maxCapacity">(Grup Ders)</span> <span *ngIf="item.participantId == closedGroup">(*Kapalı Grup Ders)</span></option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-2">
+            <label for="transactionTypeId">Kasa</label>
+            <select name="cashBoxId" class="form-control" [(ngModel)]="filter.cashBoxId">
+              <option value="0">Seçiniz</option>
+              <option value="{{item.id}}" *ngFor="let item of cashBoxes">{{item.cashBoxName}}</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label for="educatorId">Eğitmen</label>
+            <select name="educatorId" class="form-control" [(ngModel)]="filter.educatorId">
+              <option value="0">Seçiniz</option>
+              <option value="{{item.id}}" *ngFor="let item of educators">{{item.name}} {{item.surname}}</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label for="dateValue">Başlama Tarihi</label>
+            <ejs-datepicker #date (change)="onDateChange()" format='yyyy-MM-dd' placeholder='Enter date' [value]=dateValue></ejs-datepicker>
+          </div>
+          <div class="col-md-3">
+            <label for="ednDateValue">Bitiş Tarihi</label>
+            <ejs-datepicker #endDate (change)="onEndDateChange()" format='yyyy-MM-dd' placeholder='Enter date' [value]=endDateValue></ejs-datepicker>
+          </div>
+          <div class="col-md-2">
+            <label for=""></label>
+            <input type="button" style="margin-top: 25px;" class="btn btn-info" value="Kriterlere Göre Ara" (click)="getWithFilter()">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <h5>Yapılan Ödemeler</h5>
 <mat-form-field appearance="standard">
   <mat-label>Filtre</mat-label>

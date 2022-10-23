@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { JwPaginationModule } from 'jw-angular-pagination';
 import { MyMaterialModule } from 'src/app/material.module';
 import { DeptCollectionRouterModule } from './dept-collection-router.module';
+import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { DeptCollectionRouterModule } from './dept-collection-router.module';
     FormsModule,
     JwPaginationModule,
     MyMaterialModule,
+    DatePickerModule,
     DeptCollectionRouterModule
   ],
   declarations: [DeptCollectionComponent]

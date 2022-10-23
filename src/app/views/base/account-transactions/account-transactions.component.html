@@ -100,5 +100,5 @@
   </table>
 
   <mat-paginator #accountPaginator [pageSizeOptions]="[10, 25, 50, 75, 100]" aria-label="Select page of users"></mat-paginator>
-  <p>Toplam Cari Borcu : <b>{{totalDebt}}</b> - Toplam Cari Alacak : <b>{{totalClaim}}</b> - Net: <b>{{totalNet}}</b></p>
+  <p>Toplam Cari Borcu : <b>{{ totalDebt | number:'1.2-2'}} TL</b> - Toplam Cari Alacak : <b>{{totalClaim | number:'1.2-2'}} TL</b> - Net: <b>{{totalNet | number:'1.2-2'}} TL</b></p>
 </div>
