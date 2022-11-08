@@ -158,7 +158,7 @@ export class DeptCollectionComponent implements OnInit {
    
   }
   getInstallment(resource: any): void{
-    this.router.navigate(['finansal-islemler/odeme-planlama.html/', resource.customerId]);
+    this.router.navigate(['finansal-islemler/odeme-planlama.html/', resource.customerId, resource.relatingId]);
   }
 
   getCollection(resource: any): void{
@@ -222,7 +222,6 @@ export class DeptCollectionComponent implements OnInit {
   }
 
   openInstallmentDetailList(id: number){
-    console.log(id);
     this.router.navigate(['cari-hesaplar/musteri-taksit-listesi.html/', id]);
   }
 

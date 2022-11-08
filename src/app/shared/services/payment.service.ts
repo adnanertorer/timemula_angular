@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { BaseResponse } from '../model/BaseResponse';
+import { PaymentFilterModel } from '../model/payment-filter-model';
 import { PaymentModel } from '../model/payment-model';
 
 @Injectable({
@@ -17,6 +18,16 @@ export class PaymentService {
   getList(){
     return this.http
         .get<BaseResponse>(`${this.apiUrl}/Payment/List`, {observe: 'body'})
+        .pipe(
+            map((x)=> {
+                return x;
+            })
+        );
+  }
+
+  getListByFilter(filter: PaymentFilterModel){
+    return this.http
+        .post<BaseResponse>(`${this.apiUrl}/Payment/ListByFilter`, filter)
         .pipe(
             map((x)=> {
                 return x;

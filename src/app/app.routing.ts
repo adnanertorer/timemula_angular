@@ -289,7 +289,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/base/student-lesson-schedule/student-lesson-schedule.module').then(m => m.StudentLessonScheduleModule)
       },
       {
-        path: 'finansal-islemler/odeme-planlama.html/:id',
+        path: 'finansal-islemler/odeme-planlama.html/:id/:relationId',
         loadChildren: () => import('./views/base/customer-installment/customer-installment.module').then(m => m.CustomerInstallmentModule)
       },
       {

@@ -9,4 +9,6 @@ export interface CustomerInstallmentModel {
     amount: number;
     createdAt: Date;
     createdBy: number;
+    isManuel?: boolean;
+    paymentDate?: Date;
 }

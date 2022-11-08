@@ -190,7 +190,6 @@ export class EducatorPriceListComponent implements OnInit {
     this.costDataSource.filteredData.forEach(element => {
       this.totalCost += element.cost;
     });
-    console.log(this.totalCost);
     if (this.costDataSource.paginator) {
       this.costDataSource.paginator.firstPage();
     }

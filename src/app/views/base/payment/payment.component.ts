@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { DatePickerComponent } from '@syncfusion/ej2-angular-calendars';
 import { CashboxModel } from 'src/app/shared/model/cashbox-model';
 import { DeptCollectionDialogData } from 'src/app/shared/model/dept-collection-dialog-data';
 import { PaymentDialogData } from 'src/app/shared/model/payment-dialog-data';
+import { PaymentFilterModel } from 'src/app/shared/model/payment-filter-model';
 import { PaymentModel } from 'src/app/shared/model/payment-model';
 import { VCurrentBalanceModel } from 'src/app/shared/model/v-current-balance-model';
 import { VDeptCollectionModel } from 'src/app/shared/model/v-dept-collection-model';
@@ -20,8 +25,22 @@ declare let alertify: any;
   styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent implements OnInit {
-
+  
+  filter: PaymentFilterModel;
   transactionList: VCurrentBalanceModel[] = [];
+
+  @ViewChild('date')
+  public Date: DatePickerComponent;
+  @ViewChild('endDate')
+  public EndDate: DatePickerComponent;
+
+  public dateValue: Date = new Date();
+  public endDateValue: Date = new Date();
+  public month: number = new Date().getMonth();
+  public fullYear: number = new Date().getFullYear();
+  public minDate: Date = new Date(this.fullYear, this.month , 1);
+  public maxDate: Date = new Date(this.fullYear, this.month, 30);
+  
   generalPayment: PaymentModel = {
     paymentAmount: 0,
     createdAt: new Date,
@@ -48,6 +67,7 @@ export class PaymentComponent implements OnInit {
   };
   paymentList: VPaymentModel[] = [];
   cashBoxList: CashboxModel[] = [];
+  cashBoxListFilter: CashboxModel[] = [];
   buttonText = "Kaydet";
   pageOfItems: Array<any>;
   pageOfItemTransactions: Array<any>;
@@ -57,18 +77,23 @@ export class PaymentComponent implements OnInit {
   totalPayment: number = 0;
   modalData: PaymentDialogData;
 
+  displayColums: string[] = ['companyName', 'cashBoxName', 'paymentAmount', 'createdAt', 'description', 'id'];
+  dataSource: MatTableDataSource<VPaymentModel>;
+
+  @ViewChild('paginatorPayment') paginator: MatPaginator;
+  @ViewChild('paymentSort') sort: MatSort;
+
+
   constructor(private accontingService: AccountingTransactionService, 
     private service: PaymentService, private cashBoxService: CashboxService, public dialog: MatDialog) { }
 
   ngOnInit() {
-   /* this.deptCollection = {
-      accountingTransactionId: 0,
-      collectionAmount: 0,
-      createdAt: new Date,
-      createdBy: 0,
-      id: 0,
-      cashBoxId: 0
-    }*/
+    this.filter = {
+      cashBoxId: 0,
+      endDate: null,
+      startDate: null
+    };
+
     this.modalData = {
       cashBoxList: [],
       currentAccount: '',
@@ -77,6 +102,7 @@ export class PaymentComponent implements OnInit {
     }
     this.getAccounts();
     this.getList();
+    this.getCashBoxForFilter();
   }
   openDialog(): void {
     this.modalData = {
@@ -93,6 +119,26 @@ export class PaymentComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  onDateChange(){
+    this.dateValue = this.Date.value;
+  }
+ 
+  onEndDateChange(){
+    this.endDateValue = this.EndDate.value;
+  }
+
+  applyFilterCosts(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.totalPayment = 0;
+    this.dataSource.filteredData.forEach(element => {
+      this.totalPayment += element.paymentAmount;
+    });
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   openGeneralDialog(): void {
@@ -114,8 +160,12 @@ export class PaymentComponent implements OnInit {
     });
   }
 
-  onChangePage(pageOfItems: any[]): void {
-    this.pageOfItems = pageOfItems;
+  getCashBoxForFilter(){
+    this.cashBoxService.getList().subscribe((data)=>{
+      if(data.success){
+        this.cashBoxListFilter = data.dynamicClass as CashboxModel[];
+      }
+    })
   }
 
   onChangeTransactionPage(pageOfItems: any[]): void {
@@ -139,6 +189,7 @@ export class PaymentComponent implements OnInit {
     this.isCollection = true;
     this.openDialog();
   }
+
   getDetailTransaction(resource: any): void {
 
   }
@@ -178,7 +229,25 @@ export class PaymentComponent implements OnInit {
       this.paymentList.forEach(element => {
         this.totalPayment = element.paymentAmount + this.totalPayment;
       });
-      this.pageOfItems = this.paymentList;
+
+      this.dataSource = new MatTableDataSource(this.paymentList);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+    })
+  }
+
+  getWithFilter(){
+    this.filter.startDate = this.dateValue;
+    this.filter.endDate = this.endDateValue;
+    this.service.getListByFilter(this.filter).subscribe((data) => {
+      this.paymentList = data.dynamicClass as VPaymentModel[];
+      this.paymentList.forEach(element => {
+        this.totalPayment = element.paymentAmount + this.totalPayment;
+      });
+
+      this.dataSource = new MatTableDataSource(this.paymentList);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
     })
   }
 

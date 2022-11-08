@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { JwPaginationModule } from 'jw-angular-pagination';
 import { MyMaterialModule } from 'src/app/material.module';
 import { PaymentRouterModule } from './payment-router.module';
+import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { PaymentRouterModule } from './payment-router.module';
     FormsModule,
     JwPaginationModule,
     MyMaterialModule,
+    DatePickerModule,
     PaymentRouterModule
   ],
   declarations: [PaymentComponent]

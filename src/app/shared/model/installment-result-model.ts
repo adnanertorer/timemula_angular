@@ -9,4 +9,5 @@ export interface InstallmentResultModel {
     createdAt: Date;
     createdBy: number;
     mainId: number;
+    relatingId?: string;
 }

@@ -34,6 +34,7 @@ export class CustomerInstallmentComponent implements OnInit {
   public maxDate: Date = new Date(this.fullYear, this.month, 27);
 
   startDateModel: NgbDateStruct;
+  selectedRelationId: string = '';
   
   constructor(private accontingService: AccountingTransactionService,
      private service: CustomerInstallmentService, private activatedRoute: ActivatedRoute,
@@ -68,6 +69,7 @@ export class CustomerInstallmentComponent implements OnInit {
 
     this.activatedRoute.params.subscribe(params => {
       const id = params["id"];
+      this.selectedRelationId = params['relationId'];
       this.selectedCustomerId = parseInt(id);
       this.installment.customerId = this.selectedCustomerId;
       this.instalmentResult.customerId = this.selectedCustomerId;
@@ -102,10 +104,12 @@ export class CustomerInstallmentComponent implements OnInit {
     this.installment.dayNumber = 1;
     this.installment.totalInstallment = 1;
     this.installment.interest = 0;
+    this.installment.isManuel = true;
+    this.installment.paymentDate = manuelDate;
+    this.installment.amount = this.manuelTotalPayment;
     if(this.manuelTotalPayment == 0){
       errorStr += 'Lütfen ödeme miktarını yazınız.\n';
     }
-
     this.service.addManuel(this.installment).subscribe((data)=>{
       if(data.success){
         this.instalmentResult = data.dynamicClass as InstallmentResultModel;
@@ -148,6 +152,7 @@ export class CustomerInstallmentComponent implements OnInit {
   }
 
   approve(){
+    this.instalmentResult.relatingId = this.selectedRelationId;
     this.service.addSub(this.instalmentResult).subscribe((data)=>{
       if(data.success){
         alertify.set('notifier', 'position', 'top-right');
