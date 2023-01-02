@@ -133,7 +133,6 @@ export class AuthService implements OnDestroy{
                     fullName: tokenModel.fullName
                 });
                 this.setLocalStorage(tokenModel);
-               // this.startTokenTimer();
                 return x;
             })
         );

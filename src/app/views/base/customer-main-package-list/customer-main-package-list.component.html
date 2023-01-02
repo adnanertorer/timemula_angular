@@ -31,8 +31,8 @@
                   <span style="color: red; font-weight: bold;" *ngIf="item.isCancel">Ders Yandı</span>
                 </td>
                 <td>
-                  <button (click)="openPackageMove(item.id)" type="button" class="btn btn-warning">Ders Kaydır</button>
-                  &nbsp; <button (click)="cancelLesson(item.id)" type="button" class="btn btn-danger">Ders İptal</button>
+                  <button *ngIf="!item.isDone && !item.isCancel" (click)="openPackageMove(item.id)" type="button" class="btn btn-warning">Ders Kaydır</button>
+                  &nbsp; <button *ngIf="!item.isDone && !item.isCancel" (click)="cancelLesson(item.id)" type="button" class="btn btn-danger">Ders İptal</button>
                 </td>
               </tr>
             </tbody>

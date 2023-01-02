@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { finalize } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { ApplicationUser, AuthService } from '../../shared';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-main-report',
   templateUrl: 'login.component.html'
 })
 export class LoginComponent implements OnInit {
@@ -16,6 +15,7 @@ export class LoginComponent implements OnInit {
   private subscription: Subscription;
   private readonly accessTokenName = `${environment.access_token_name}`;
   private readonly refreshTokeName = `${environment.refresh_token_name}`;
+  returnClientMessage:string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
           const accessToken = localStorage.getItem(this.accessTokenName);
           const refreshToken = localStorage.getItem(this.refreshTokeName);
           if (x && accessToken && refreshToken) {
-            const returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'dashboard';
+            const returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'genel-rapor.html';
             this.router.navigate([returnUrl]);
           }
         }
@@ -51,17 +51,26 @@ export class LoginComponent implements OnInit {
     if (!this.user.email || !this.user.password) {
       return;
     }
-    this.busy = true;
-    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'dashboard';
+    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'genel-rapor.html';
     this.authService
       .login(this.user)
-      .pipe(finalize(() => (this.busy = false)))
       .subscribe(
-        () => {
-          this.router.navigate([returnUrl]);
+        (data) => {
+          if(data.success){
+            this.loginError = false;
+            this.returnClientMessage = data.clientMessage;
+            this.router.navigate([returnUrl]);
+          }else{
+            this.returnClientMessage = data.clientMessage;
+          }
         },
-        () => {
+        (data) => {
+          this.returnClientMessage = data;
           this.loginError = true;
+          if(this.returnClientMessage.trim().length > 0){
+            alert(this.returnClientMessage = data);
+          }
+          
         }
       );
   }

@@ -1,3 +1,4 @@
+import { BaseResponse } from '../model/BaseResponse';
 import { AuthService } from './auth.service';
 
 // tslint:disable-next-line: typedef

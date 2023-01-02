@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { iif } from 'rxjs';
 import { Customer } from 'src/app/shared/model/customer';
 import { VCustomerLessonsTempMain } from 'src/app/shared/model/v-customer-lessons-temp-main';
 import { VCustomerMainModel } from 'src/app/shared/model/v-customer-main-model';
@@ -21,10 +20,12 @@ export class CustomerLessonDetailComponent implements OnInit {
   name:string = "";
   surname:string = "";
   selectedCustomerId: number= 0;
+  currentDate: Date = new Date();
   constructor(private service: CustomerLessonService,  private activatedRoute: ActivatedRoute,
      private customerService: CustomerService, private router: Router) { }
 
   ngOnInit() {
+    console.log(this.currentDate);
     this.activatedRoute.params.subscribe(params => {
       const id = params["id"];
       this.selectedCustomerId = parseInt(id);
@@ -44,6 +45,18 @@ export class CustomerLessonDetailComponent implements OnInit {
     this.service.getListByCustomer(customerId).subscribe((data)=>{
       if(data.success){
         this.list = data.dynamicClass as VCustomerMainModel[];
+        this.list.forEach(element => {
+          let maxDate: Date = new Date(element.maxFinishDate.toString());
+          let now: Date = new Date(this.currentDate.toString());
+          console.log(maxDate);
+          console.log(now);
+          if(maxDate < now){
+            element.endLesson = true;
+          }else{
+            element.endLesson = false;
+          }
+        });
+        console.log(this.list);
         this.pageOfItems = this.list;
       }
     })

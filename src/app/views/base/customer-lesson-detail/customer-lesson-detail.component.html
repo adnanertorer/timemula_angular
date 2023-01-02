@@ -26,8 +26,9 @@
                 <td>{{item.minStartDate | date: 'dd/M/yyyy H:mm'}}</td>
                 <td>{{item.maxFinishDate | date: 'dd/M/yyyy H:mm'}}</td>
                 <td>
-                  <button type="button" class="btn btn-success" (click)="openList(item.unicStrId)">Detay</button> &nbsp;
-                  <button type="button" class="btn btn-warning" (click)="openForChangePackage(item.unicStrId)">Paket Değişikliği</button>
+                  <button *ngIf="item.endLesson == false" type="button" class="btn btn-success" (click)="openList(item.unicStrId)">Detay</button> &nbsp;
+                  <button *ngIf="item.endLesson == false" type="button" class="btn btn-warning" (click)="openForChangePackage(item.unicStrId)">Paket Değişikliği</button>
+                  <span *ngIf="item.endLesson == true">Paket Sona Ermiş</span>
                 </td>
               </tr>
             </tbody>

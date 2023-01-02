@@ -1,13 +1,13 @@
-<app-header
+<app-header style="height: 65px;"
   [navbarBrandRouterLink]="['/dashboard']"
   [fixed]="true"
-  [navbarBrandFull]="{src: 'assets/img/brand/logo.png', width: 150, height: 50, alt: 'Lifearts Yönetim Paneli'}"
-  [navbarBrandMinimized]="{src: 'assets/img/brand/logo.png', width: 95, height: 30, alt: 'Lifearts Yönetim Paneli'}"
+  [navbarBrandFull]="{src: 'assets/img/brand/almula-logo.png', width: 50, height: 50, alt: 'Lifearts Yönetim Paneli'}"
+  [navbarBrandMinimized]="{src: 'assets/img/brand/almula-logo.png', width: 65, height: 30, alt: 'Lifearts Yönetim Paneli'}"
   [sidebarToggler]="'lg'"
   [asideMenuToggler]="'lg'">
   <ul class="nav navbar-nav d-md-down-none">
     <li class="nav-item px-3">
-      <a class="nav-link" href="#">Lifearts Yönetim Paneli</a>
+      <a class="nav-link" href="#">Timemula Yönetim Paneli</a>
     </li>
     <!--<li class="nav-item px-3">
       <a class="nav-link" href="#">Users</a>
@@ -19,8 +19,8 @@
   <ul class="nav navbar-nav ml-auto">
   </ul>
 </app-header>
-<div class="app-body">
-  <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" 
+<div class="app-body" style="margin-top: 65px;">
+  <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" style="font-size: small;"
   [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
     <app-sidebar-nav [navItems]="navItems" [perfectScrollbar]
      [disabled]="appSidebar.minimized"></app-sidebar-nav>

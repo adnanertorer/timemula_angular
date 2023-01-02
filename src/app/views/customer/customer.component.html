@@ -8,7 +8,7 @@
           <button class="btn btn-warning" *ngIf="isReset" (click)="resetForm()" style="float: right;">Vazgeç</button>
         </div>
         <div class="card-body" *ngIf="isNewRecord">
-          <mat-tab-group>
+          <mat-tab-group style="padding: 10px;">
             <mat-tab label="Kişisel Bilgiler">
               <form action="" method="post" class="form-horizontal">
                 <input type="hidden" name="id" id="id" [(ngModel)]="customer.id">

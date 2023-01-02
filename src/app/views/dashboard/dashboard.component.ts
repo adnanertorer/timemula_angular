@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
           const accessToken = localStorage.getItem(this.accessTokenName);
           const refreshToken = localStorage.getItem(this.refreshTokeName);
           if (x && accessToken && refreshToken) {
-            const returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'dashboard';
+            const returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'genel-rapor.html';
             this.router.navigate([returnUrl]);
           }
         }

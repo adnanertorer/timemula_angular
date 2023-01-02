@@ -9,4 +9,5 @@ export interface VCustomerMainModel {
     minStartDate: Date;
     maxFinishDate: Date;
     unicStrId: string;
+    endLesson?: boolean;
 }
