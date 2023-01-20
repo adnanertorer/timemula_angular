@@ -39,10 +39,8 @@
                   <label class="col-md-3 col-form-label" for="gender">Cinsiyet</label>
                   <div class="col-md-9" [formGroup]="form">
                     <select formControlName="gender" [(ngModel)]="customer.gender" name="gender" class="form-control">
-                      <option value="Seçiniz">Seçiniz</option>
-                      <option value="Erkek">Erkek</option>
-                      <option value="Kadın">Kadın</option>
-                      <option value="Belirtmek İstemiyorum">Belirtmek İstemiyorum</option>
+                      <option value="0">Seçiniz</option>
+                      <option value="{{item.id}}" *ngFor="let item of genders">{{item.genderName}}</option>
                     </select>
                     <small *ngIf="form.get('gender').value == 'Seçiniz' && form.get('gender').touched" class="text-danger">Cinsiyet gereklidir</small>
                   </div>
@@ -50,8 +48,8 @@
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label" for="birthDate">Doğum Tarihi</label>
                   <div class="col-md-9" [formGroup]="form">
-                    <input type="date" formControlName="birthDate" #birthDate [(ngModel)]="customer.birthDate"
-                    [value]="customer.birthDate | date:'yyyy-MM-dd'" name="birthDate" class="form-control">
+                    <ejs-datepicker #birthDate (change)="onDateChange()" [(ngModel)]="customer.birthDate" formControlName="birthDate" format='yyyy-MM-dd' placeholder='Enter date'
+                    [value]=dateValue></ejs-datepicker>
                   </div>
                   <small *ngIf="form.get('birthDate').hasError('required')" class="text-danger">Doğum tarihi gereklidir</small>
                 </div>
@@ -91,10 +89,10 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="isChild">Yetişkin mi?</label>
+                  <label class="col-md-3 col-form-label" for="isAdult">Yetişkin mi?</label>
                   <div class="col-md-9">
-                    <input type="checkbox" id="isChild" [(ngModel)]="customer.isChild"
-                    name="isChild">
+                    <input type="checkbox" id="isAdult" [(ngModel)]="customer.isAdult"
+                    name="isAdult">
                   </div>
                 </div>
                 <div class="form-group row">

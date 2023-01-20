@@ -5,7 +5,6 @@ export interface Customer {
     surname: string;
     phone: string;
     gsm: string;
-    gender: string;
     email: string;
     address: string;
     birthDate: Date;
@@ -30,4 +29,6 @@ export interface Customer {
     instagramParentAddress: string;
     facebookParentAddress: string;
     linkedinParentAddress: string;
+    isAdult?: boolean;
+    gender?: number;
 }

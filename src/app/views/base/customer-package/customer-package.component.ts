@@ -33,6 +33,8 @@ import { AccountTransactionTempModel } from 'src/app/shared/model/account-transa
 import { CustomerLessonTempResourceModel } from 'src/app/shared/model/customer-lesson-temp-resource-model';
 import { CustomerDayModel } from 'src/app/shared/model/customer-day-model';
 import { DatePickerComponent } from '@syncfusion/ej2-angular-calendars';
+import { EducatorDaysHoursService } from 'src/app/shared/services/educator-days-hours.service';
+import { EducatorDaysHoursModel } from 'src/app/shared/model/educator-days-hours-model';
 declare let alertify: any;
 
 export interface dayOf{
@@ -110,6 +112,7 @@ export class CustomerPackageComponent implements OnInit {
   manuelPrice: boolean = false;
   authorized_price: number = 0;
   customerDayModel: CustomerDayModel;
+  educatorDayHours: EducatorDaysHoursModel[] = [];
  
 
   public weekDays: daysEnum[] = [daysEnum.Pazartesi, daysEnum.Sali, daysEnum.Carsamba, daysEnum.Persembe, daysEnum.Cuma, daysEnum.Cumartesi, daysEnum.Pazar];
@@ -130,7 +133,7 @@ export class CustomerPackageComponent implements OnInit {
     private staffService: StaffService, private categoryService: CategoryService,
     private subCategoryService: SubCategoryService, private lessonService: LessonService,
     private router: Router, private accountingService: AccountingTransactionService,
-    private tempService: CustomerLessonsTempService
+    private tempService: CustomerLessonsTempService, private educatorDayHourService: EducatorDaysHoursService
     ) {
      }
 
@@ -230,6 +233,14 @@ export class CustomerPackageComponent implements OnInit {
   onStartTimeSelection(time: NgbTime){
     const timeStr = time.hour.toLocaleString()+':'+time.minute.toLocaleString();
     this.criteria.startDate = this.criteria.startDate+' '+timeStr;
+  }
+
+  getEducatorDayHours(id: number){
+    this.educatorDayHourService.getByEducator(id).subscribe((data)=>{
+      if(data.success){
+        this.educatorDayHours = data.dynamicClass as EducatorDaysHoursModel[];
+      }
+    })
   }
 
   sendCriteria(){
@@ -387,6 +398,7 @@ export class CustomerPackageComponent implements OnInit {
     });
     
   }
+
 
   categoryOnChange(id) {
     this.selectedCategoryId = parseInt(id);

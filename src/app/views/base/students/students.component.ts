@@ -49,7 +49,7 @@ export class StudentsComponent implements OnInit {
       emailRequest: true,//
       facebookAddress: '',//
       facebookParentAddress: '',//
-      gender: 'Seçiniz', //
+      gender: 0, //
       gsm: '', //
       id: 0, //
       instagramAddress: '',//

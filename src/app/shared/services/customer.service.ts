@@ -72,4 +72,14 @@ export class CustomerService {
               })
           );
     }
+
+    genders(){
+        return this.http
+            .get<BaseResponse>(`${this.apiUrl}/Customer/Genders`, {observe: 'body'})
+            .pipe(
+                map((x)=> {
+                    return x;
+                })
+            );
+      }
 }

@@ -4,8 +4,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { DatePickerComponent } from '@syncfusion/ej2-angular-calendars';
 import { BloodGroupModel } from 'src/app/shared/model/blood-group-model';
 import { CustomerFilter } from 'src/app/shared/model/customer-filter';
+import { GenderModel } from 'src/app/shared/model/gender-model';
 import { ParentTypeModel } from 'src/app/shared/model/parent-type-model';
 import { SearchResourceModel } from 'src/app/shared/model/search-resource-model';
 import { VCustomer } from 'src/app/shared/model/v-customer';
@@ -22,12 +25,23 @@ import { CustomerService } from '../../shared/services/customer.service';
 })
 export class CustomerComponent implements OnInit {
 
+  @ViewChild('date')
+  public Date: DatePickerComponent;
+  public dateValue: Date = new Date();
+
+  public month: number = new Date().getMonth();
+  public fullYear: number = new Date().getFullYear();
+  public minDate: Date = new Date(this.fullYear, this.month , 7);
+  public maxDate: Date = new Date(this.fullYear, this.month, 27);
+
+  startDateModel: NgbDateStruct;
 
   customer: Customer;
   customerList: VCustomer[] = [];
   bloodGroups: BloodGroupModel[] = [];
   searchServices: SearchResourceModel[] = [];
   parentTypes: ParentTypeModel[] = [];
+  genders: GenderModel[] = [];
   buttonText = 'Kaydet';
   form: UntypedFormGroup;
   customerFilter: CustomerFilter;
@@ -69,7 +83,7 @@ export class CustomerComponent implements OnInit {
       emailRequest: true,//
       facebookAddress: '',//
       facebookParentAddress: '',//
-      gender: 'Seçiniz', //
+      gender: 0, //
       gsm: '', //
       id: 0, //
       instagramAddress: '',//
@@ -131,11 +145,15 @@ export class CustomerComponent implements OnInit {
     });
 
     this.getList();
+    this.getGenders();
     this.getBloodGroups();
     this.getSearchResources();
     this.getParentTypes();
   }
 
+  onDateChange(){
+    this.dateValue = this.Date.value;
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -169,6 +187,14 @@ export class CustomerComponent implements OnInit {
     if (!pickerInput || pickerInput === '' ) {
       return 'Lütfen bir tarih seçiniz';
     }
+  }
+
+  getGenders(){
+    this.service.genders().subscribe((data)=>{
+      if(data.success){
+        this.genders = data.dynamicClass as GenderModel[];
+      }
+    })
   }
 
   getBloodGroups(){
@@ -250,6 +276,7 @@ export class CustomerComponent implements OnInit {
       this.customer.searchResourceId = parseInt(this.customer.searchResourceId.toString());
       this.customer.citizenIdentityNumber = this.customer.citizenIdentityNumber.toString();
       this.customer.parentIdentity = this.customer.parentIdentity.toString();
+      this.customer.birthDate = new Date(this.dateValue.getFullYear(), this.dateValue.getMonth(), this.dateValue.getDate(), 0, 0, 0, 0);
       this.service.add(this.customer).subscribe((data) => {
         if (data.success){
           alert(data.clientMessage);

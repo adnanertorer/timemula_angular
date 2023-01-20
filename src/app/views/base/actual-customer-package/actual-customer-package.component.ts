@@ -13,6 +13,7 @@ import { ClassroomModel } from 'src/app/shared/model/classroom-model';
 import { CriteriaFilterModel } from 'src/app/shared/model/criteria-filter-model';
 import { Customer } from 'src/app/shared/model/customer';
 import { CustomerLesson } from 'src/app/shared/model/customer-lesson';
+import { EducatorDaysHoursModel } from 'src/app/shared/model/educator-days-hours-model';
 import { FilterResponseModel } from 'src/app/shared/model/filter-response-model';
 import { LessonModel } from 'src/app/shared/model/lesson-model';
 import { SellPackageCriteriaModel } from 'src/app/shared/model/sell-package-criteria-model';
@@ -22,6 +23,7 @@ import { ActualCustomerLessonService } from 'src/app/shared/services/actual-cust
 import { ArtPackageService } from 'src/app/shared/services/art-package.service';
 import { CustomerLessonService } from 'src/app/shared/services/customer-lesson.service';
 import { CustomerService } from 'src/app/shared/services/customer.service';
+import { EducatorDaysHoursService } from 'src/app/shared/services/educator-days-hours.service';
 import { LessonService } from 'src/app/shared/services/lesson.service';
 import { StaffService } from 'src/app/shared/services/staff.service';
 import { daysEnum, participantEnum } from 'src/environments/environment';
@@ -99,6 +101,7 @@ export class ActualCustomerPackageComponent implements OnInit {
   educatorNameStr: string = '';
   selectedCustomerId: number = 0;
   criteriaModel: SellPackageCriteriaModel;
+  educatorDayHours: EducatorDaysHoursModel[] = [];
 
   public weekDays: daysEnum[] = [daysEnum.Pazartesi, daysEnum.Sali, daysEnum.Carsamba, daysEnum.Persembe, daysEnum.Cuma, daysEnum.Cumartesi, daysEnum.Pazar];
   public dayLabels = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
@@ -113,7 +116,7 @@ export class ActualCustomerPackageComponent implements OnInit {
 
   constructor(private service: ActualCustomerLessonService, private customerLessonService: CustomerLessonService,
     private activateRoot: ActivatedRoute, private lessonService: LessonService, private packageService: ArtPackageService,
-    private customerService: CustomerService, private staffService: StaffService) { }
+    private customerService: CustomerService, private staffService: StaffService, private educatorDayHourService: EducatorDaysHoursService) { }
 
   ngOnInit() {
     this.actualMoveModel = {
@@ -235,6 +238,14 @@ export class ActualCustomerPackageComponent implements OnInit {
         }
       });
     });
+  }
+
+  getEducatorDayHours(id: number){
+    this.educatorDayHourService.getByEducator(id).subscribe((data)=>{
+      if(data.success){
+        this.educatorDayHours = data.dynamicClass as EducatorDaysHoursModel[];
+      }
+    })
   }
 
   onDateChange() {
