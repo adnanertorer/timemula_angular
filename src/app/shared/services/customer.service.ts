@@ -25,7 +25,7 @@ export class CustomerService {
 
     getListWithFilter(customerFilter: CustomerFilter){
         return this.http
-            .post<BaseResponse>(`${this.apiUrl}/Customer/-get-with-filter/`, customerFilter)
+            .post<BaseResponse>(`${this.apiUrl}/Customer/GetByFilter/`, customerFilter)
             .pipe(
                 map((x)=> {
                     return x;

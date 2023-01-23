@@ -1,7 +1,8 @@
 export interface CustomerFilter {
+    identityNumber: string;
     name: string;
     surname: string;
-    gender: string;
-    child: number;
+    gender: number;
+    isAdult: number;
     address: string;
 }

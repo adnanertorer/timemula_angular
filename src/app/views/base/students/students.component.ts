@@ -32,10 +32,11 @@ export class StudentsComponent implements OnInit {
   ngOnInit() {
     this.customerFilter = {
       address: '',
-      child: 0,
-      gender: 'Hepsi',
+      isAdult: 0,
+      gender: 0,
       name: '',
-      surname: ''
+      surname: '',
+      identityNumber: ''
     };
 
     this.customer = {
