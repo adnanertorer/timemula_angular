@@ -11,6 +11,7 @@
             <tr>
               <th>Adı</th>
               <th>İşlem Tutarı</th>
+              <th>Ödenene Tutar</th>
               <th>Kalan Borç</th>
               <th>İşlemler</th>
             </tr>
@@ -18,7 +19,9 @@
             <tbody>
             <tr *ngFor="let item of pageOfItemTransactions">
               <td>{{item.currentAccount}}</td>
-              <td>{{item.currentBalance}}</td>
+              <td>{{item.totalDebt}}</td>
+              <td>{{item.totalClaim}}</td>
+              <td>{{item.totalDebt - item.totalClaim}}</td>
               <td>
                 <button (click)="getCollection(item)" type="button" class="btn btn-success">Tahsilat</button>&nbsp;
                 <button (click)="getInstallment(item)" type="button" class="btn btn-warning">Taksitlendir</button>
@@ -28,7 +31,7 @@
           </table>
         </div>
         <div class="card-footer pb-0 pt-3">
-          <jw-pagination [items]="transactionList" (changePage)="onChangeTransactionPage($event)"></jw-pagination>
+          <jw-pagination [items]="transactionGeneralList" (changePage)="onChangeTransactionPage($event)"></jw-pagination>
       </div>
       </div><!--/.col-->
     </div><!--/.row-->

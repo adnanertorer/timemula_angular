@@ -288,9 +288,13 @@ export const routes: Routes = [
         path: 'actual-hareketler/ogrenci-paket-takvimi.html/:customerId/:unicKey',
         loadChildren: () => import('./views/base/student-lesson-schedule/student-lesson-schedule.module').then(m => m.StudentLessonScheduleModule)
       },
-      {
+      /*{
         path: 'finansal-islemler/odeme-planlama.html/:id/:relationId',
         loadChildren: () => import('./views/base/customer-installment/customer-installment.module').then(m => m.CustomerInstallmentModule)
+      },*/
+      {
+        path: 'finansal-islemler/odeme-planlama.html/:id',
+        loadChildren: () => import('./views/base/customer-payment-plan/customer-payment-plan.module').then(m => m.CustomerPaymentPlanModule)
       },
       {
         path: 'dashboard',

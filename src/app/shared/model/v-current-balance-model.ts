@@ -4,4 +4,5 @@ export interface VCurrentBalanceModel {
     currentAccount: string;
     relatingId: string;
     installmentCount: number;
+    totalPayment: number;
 }

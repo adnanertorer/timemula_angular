@@ -10,4 +10,5 @@ export interface InstallmentResultModel {
     createdBy: number;
     mainId: number;
     relatingId?: string;
+    transactionId?: number;
 }

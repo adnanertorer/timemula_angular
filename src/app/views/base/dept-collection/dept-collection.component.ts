@@ -15,6 +15,7 @@ import { DeptCollectionFilterModel } from 'src/app/shared/model/dept-collection-
 import { Customer } from 'src/app/shared/model/customer';
 import { DatePickerComponent } from '@syncfusion/ej2-angular-calendars';
 import { CustomerService } from 'src/app/shared/services/customer.service';
+import { VGeneralCustomerBalanceModel } from 'src/app/shared/model/v-general-customer-balance-model';
 
 @Component({
   selector: 'app-dept-collection',
@@ -24,6 +25,7 @@ import { CustomerService } from 'src/app/shared/services/customer.service';
 export class DeptCollectionComponent implements OnInit {
 
   transactionList: VCurrentBalanceModel[] = [];
+  transactionGeneralList: VGeneralCustomerBalanceModel[] = [];
 
   @ViewChild('date')
   public Date: DatePickerComponent;
@@ -78,7 +80,8 @@ export class DeptCollectionComponent implements OnInit {
       endDate: null,
       startDate: null 
     };
-    this.getAccounts();
+    //this.getAccounts();
+    this.getAccountsGeneral();
     this.getCashBoxesForFilter();
     this.getCustomers();
     this.getList();
@@ -157,8 +160,12 @@ export class DeptCollectionComponent implements OnInit {
     });
    
   }
-  getInstallment(resource: any): void{
+ /* getInstallment(resource: any): void{
     this.router.navigate(['finansal-islemler/odeme-planlama.html/', resource.customerId, resource.relatingId]);
+  }*/
+
+  getInstallment(resource: any): void{
+    this.router.navigate(['finansal-islemler/odeme-planlama.html/', resource.customerId]);
   }
 
   getCollection(resource: any): void{
@@ -210,6 +217,14 @@ export class DeptCollectionComponent implements OnInit {
         this.totalCollection = element.collectionAmount + this.totalCollection;
       });
       this.pageOfItems = this.deptCollectionList;
+    })
+  }
+
+  getAccountsGeneral(){
+    this.accontingService.getCutomerDeptGeneral().subscribe((data)=>{
+      if(data.success){
+        this.transactionGeneralList = data.dynamicClass as VGeneralCustomerBalanceModel[];
+      }
     })
   }
 
