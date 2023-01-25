@@ -32,12 +32,8 @@ export class StudentsComponent implements OnInit {
   ngOnInit() {
     this.customerFilter = {
       address: '',
-<<<<<<< Updated upstream
       isAdult: 0,
       gender: 0,
-=======
-      child: 0,
->>>>>>> Stashed changes
       name: '',
       surname: '',
       identityNumber: ''

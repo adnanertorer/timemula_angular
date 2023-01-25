@@ -24,12 +24,7 @@ export class CustomerService {
     }
 
     getListWithFilter(filter: CustomerFilter){
-        return this.http
-<<<<<<< Updated upstream
-            .post<BaseResponse>(`${this.apiUrl}/Customer/GetByFilter/`, customerFilter)
-=======
-            .post<BaseResponse>(`${this.apiUrl}/Customer/GetByFilter/`, filter)
->>>>>>> Stashed changes
+        return this.http.post<BaseResponse>(`${this.apiUrl}/Customer/GetByFilter/`, filter)
             .pipe(
                 map((x)=> {
                     return x;
