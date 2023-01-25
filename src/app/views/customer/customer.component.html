@@ -269,12 +269,15 @@
                   <div class="col-md-3">
                     <input type="text" name="surname" class="form-control" [(ngModel)]="customerFilter.surname" placeholder="Soyadı">
                   </div>
+<<<<<<< Updated upstream
                   <div class="col-md-3">
                     <select name="gender" class="form-control" [(ngModel)]="customerFilter.gender">
                       <option value="0">Seçiniz</option>
                       <option value="{{item.id}}" *ngFor="let item of genders">{{item.genderName}}</option>
                     </select>
                   </div>
+=======
+>>>>>>> Stashed changes
                 </div>
                 <div class="form-group row">
                   <div class="col-md-3">
@@ -322,11 +325,6 @@
     <ng-container matColumnDef="email">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>E-Posta</th>
       <td mat-cell *matCellDef="let row">{{row.email}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="gender">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cinsiyet</th>
-      <td mat-cell *matCellDef="let row">{{row.gender}}</td>
     </ng-container>
 
     <ng-container matColumnDef="birthDate">

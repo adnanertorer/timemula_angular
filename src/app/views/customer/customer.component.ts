@@ -66,8 +66,12 @@ export class CustomerComponent implements OnInit {
     this.isNewRecord = false;
     this.customerFilter = {
       address: '',
+<<<<<<< Updated upstream
       isAdult: 0,
       gender: 0,
+=======
+      child: 0,
+>>>>>>> Stashed changes
       name: '',
       surname: '',
       identityNumber: ''

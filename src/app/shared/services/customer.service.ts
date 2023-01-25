@@ -23,9 +23,13 @@ export class CustomerService {
           );
     }
 
-    getListWithFilter(customerFilter: CustomerFilter){
+    getListWithFilter(filter: CustomerFilter){
         return this.http
+<<<<<<< Updated upstream
             .post<BaseResponse>(`${this.apiUrl}/Customer/GetByFilter/`, customerFilter)
+=======
+            .post<BaseResponse>(`${this.apiUrl}/Customer/GetByFilter/`, filter)
+>>>>>>> Stashed changes
             .pipe(
                 map((x)=> {
                     return x;
