@@ -16,6 +16,7 @@ import { Customer } from 'src/app/shared/model/customer';
 import { DatePickerComponent } from '@syncfusion/ej2-angular-calendars';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { VGeneralCustomerBalanceModel } from 'src/app/shared/model/v-general-customer-balance-model';
+import { VCurrentLastBalanceModel } from 'src/app/shared/model/v-current-last-balance-model';
 
 @Component({
   selector: 'app-dept-collection',
@@ -25,7 +26,7 @@ import { VGeneralCustomerBalanceModel } from 'src/app/shared/model/v-general-cus
 export class DeptCollectionComponent implements OnInit {
 
   transactionList: VCurrentBalanceModel[] = [];
-  transactionGeneralList: VGeneralCustomerBalanceModel[] = [];
+  transactionGeneralList: VCurrentLastBalanceModel[] = [];
 
   @ViewChild('date')
   public Date: DatePickerComponent;
@@ -221,9 +222,9 @@ export class DeptCollectionComponent implements OnInit {
   }
 
   getAccountsGeneral(){
-    this.accontingService.getCutomerDeptGeneral().subscribe((data)=>{
+    this.accontingService.getCurrentBalance().subscribe((data)=>{
       if(data.success){
-        this.transactionGeneralList = data.dynamicClass as VGeneralCustomerBalanceModel[];
+        this.transactionGeneralList = data.dynamicClass as VCurrentLastBalanceModel[];
       }
     })
   }
@@ -238,6 +239,11 @@ export class DeptCollectionComponent implements OnInit {
 
   openInstallmentDetailList(id: number){
     this.router.navigate(['cari-hesaplar/musteri-taksit-listesi.html/', id]);
+  }
+
+  openInstallmentItems(){
+    //vadeli-alacak-tahsilati.html
+    this.router.navigate(['cari-hesaplar/vadeli-alacak-tahsilati.html/']);
   }
 
 
