@@ -1,3 +1,5 @@
+import { AccountingTransactionModel } from "./accounting-transaction-model";
+
 export interface InstallmentResultModel {
     paymentDates: Date[];
     paymentAmount: number;
@@ -11,4 +13,6 @@ export interface InstallmentResultModel {
     mainId: number;
     relatingId?: string;
     transactionId?: number;
+    oldDebt?: number;
+    transactions: AccountingTransactionModel[];
 }

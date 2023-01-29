@@ -27,6 +27,7 @@ export class DeptCollectionComponent implements OnInit {
 
   transactionList: VCurrentBalanceModel[] = [];
   transactionGeneralList: VCurrentLastBalanceModel[] = [];
+  generalDebts: VGeneralCustomerBalanceModel[] = [];
 
   @ViewChild('date')
   public Date: DatePickerComponent;
@@ -83,6 +84,7 @@ export class DeptCollectionComponent implements OnInit {
     };
     //this.getAccounts();
     this.getAccountsGeneral();
+    this.getCustomerDepts();
     this.getCashBoxesForFilter();
     this.getCustomers();
     this.getList();
@@ -171,8 +173,8 @@ export class DeptCollectionComponent implements OnInit {
 
   getCollection(resource: any): void{
     this.deptCollection.customerId = resource.customerId;
-    this.strcurrentAccount = resource.currentAccount;
-    this.strDept = resource.currentBalance;
+    this.strcurrentAccount = resource.name+' '+resource.surname;
+    this.strDept = resource.cashDebt;
     this.isCollection = true;
     this.openDialog();
     
@@ -229,6 +231,14 @@ export class DeptCollectionComponent implements OnInit {
     })
   }
 
+  getCustomerDepts(){
+    this.accontingService.getCustomerDepts().subscribe((data)=>{
+      if(data.success){
+        this.generalDebts = data.dynamicClass as VGeneralCustomerBalanceModel[];
+      }
+    })
+  }
+
   getAccounts(){
     this.accontingService.getCutomerDepts().subscribe((data)=>{
       if(data.success){
@@ -246,7 +256,7 @@ export class DeptCollectionComponent implements OnInit {
     this.router.navigate(['cari-hesaplar/vadeli-alacak-tahsilati.html/']);
   }
 
-
+ 
   getCashBoxes(){
     this.cashBoxService.getList().subscribe((data)=>{
       if(data.success){

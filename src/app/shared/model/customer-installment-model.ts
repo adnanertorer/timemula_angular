@@ -11,4 +11,5 @@ export interface CustomerInstallmentModel {
     createdBy: number;
     isManuel?: boolean;
     paymentDate?: Date;
+    oldDebt?: number;
 }

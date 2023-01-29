@@ -56,6 +56,16 @@ export class AccountingTransactionService {
         );
   }
 
+  getCustomerDepts(){
+    return this.http
+        .get<BaseResponse>(`${this.apiUrl}/AccountingTransaction/GetCustomerDepts`, {observe: 'body'})
+        .pipe(
+            map((x)=> {
+                return x;
+            })
+        );
+  }
+
   getCutomerDeptGeneral(){
     return this.http
         .get<BaseResponse>(`${this.apiUrl}/AccountingTransaction/GetGeneralCustomerBalance`, {observe: 'body'})

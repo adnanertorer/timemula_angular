@@ -10,29 +10,27 @@
             <thead>
             <tr>
               <th>Adı</th>
-              <th>İşlem Tutarı</th>
-              <th>Taksitli/Vadeli Borç</th>
               <th>Nakit Borç</th>
+              <th>Taksitli/Vadeli Borç</th>
               <th>İşlemler</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let item of pageOfItemTransactions">
               <td>{{item.name}} {{item.surname}}</td>
-              <td>{{item.balance}}</td>
-              <td>{{item.totalInstallmentDebt}}</td>
-              <td>{{item.balance - item.totalInstallmentDebt}}</td>
+              <td>{{item.cashDebt}}</td>
+              <td>{{item.installmentDebt}}</td>
               <td>
-                <button (click)="getCollection(item)" type="button" class="btn btn-success">Vadesiz Tahsilat</button>&nbsp;
-                <button *ngIf="item.balance - item.totalInstallmentDebt >0" (click)="getInstallment(item)" type="button" class="btn btn-info">Taksitlendir</button>&nbsp;
-                <button *ngIf="item.totalInstallmentDebt>0" (click)="openInstallmentItems(item)" type="button" class="btn btn-warning">Taksit Ödeme</button>
+                <button *ngIf="item.cashDebt > 0" (click)="getCollection(item)" type="button" class="btn btn-success">Vadesiz Tahsilat</button>&nbsp;
+                <button *ngIf="item.installmentDebt > 0 || item.cashDebt > 0" (click)="getInstallment(item)" type="button" class="btn btn-info">Taksitlendir</button>&nbsp;
+                <button *ngIf="item.installmentDebt > 0" (click)="openInstallmentItems(item)" type="button" class="btn btn-warning">Taksit Ödeme</button>
               </td>
             </tr>
             </tbody>
           </table>
         </div>
         <div class="card-footer pb-0 pt-3">
-          <jw-pagination [items]="transactionGeneralList" (changePage)="onChangeTransactionPage($event)"></jw-pagination>
+          <jw-pagination [items]="generalDebts" (changePage)="onChangeTransactionPage($event)"></jw-pagination>
       </div>
       </div><!--/.col-->
     </div><!--/.row-->

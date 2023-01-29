@@ -5,6 +5,7 @@ import { DatePickerComponent } from '@syncfusion/ej2-angular-calendars';
 import { CustomerInstallmentModel } from 'src/app/shared/model/customer-installment-model';
 import { InstallmentResultModel } from 'src/app/shared/model/installment-result-model';
 import { VCurrentBalanceModel } from 'src/app/shared/model/v-current-balance-model';
+import { VGeneralCustomerBalanceModel } from 'src/app/shared/model/v-general-customer-balance-model';
 import { AccountingTransactionService } from 'src/app/shared/services/accounting-transaction.service';
 import { CustomerInstallmentService } from 'src/app/shared/services/customer-installment.service';
 declare let alertify: any;
@@ -16,7 +17,7 @@ declare let alertify: any;
 })
 export class CustomerPaymentPlanComponent implements OnInit {
 
-  transaction: VCurrentBalanceModel;
+  transaction: VGeneralCustomerBalanceModel;
   selectedCustomerId: number = 0;
   customerName:string ="";
   installment: CustomerInstallmentModel;
@@ -64,7 +65,9 @@ export class CustomerPaymentPlanComponent implements OnInit {
       customerId: 0,
       createdAt: new Date(),
       createdBy: 0,
-      mainId: 0
+      mainId: 0,
+      oldDebt: 0,
+      transactions : []
     };
 
     this.activatedRoute.params.subscribe(params => {
@@ -82,18 +85,18 @@ export class CustomerPaymentPlanComponent implements OnInit {
   }
 
   setManuelPaymentAmount(){
-    this.manuelTotalPayment = this.transaction.currentBalance;
+    this.manuelTotalPayment = this.transaction.cashDebt;
   }
 
   allDept(){
-    this.installment.amount = this.transaction.currentBalance;
+    this.installment.amount = this.transaction.cashDebt;
   }
 
   getBalance(){
     this.accontingService.getCustomerDeptDetail(this.selectedCustomerId).subscribe((data)=>{
       if(data.success){
-        this.transaction = data.dynamicClass as VCurrentBalanceModel;
-        this.customerName = this.transaction.currentAccount;
+        this.transaction = data.dynamicClass as VGeneralCustomerBalanceModel;
+        this.customerName = this.transaction.name+' '+this.transaction.surname;
       }
     })
   }
@@ -122,6 +125,7 @@ export class CustomerPaymentPlanComponent implements OnInit {
 
   add(){
     let errorStr: string = '';
+    this.installment.oldDebt = this.transaction.cashDebt;
     if(this.installment.dayNumber>28){
       errorStr += 'Ödeme günü 28 den büyük olamaz.\n';
     }

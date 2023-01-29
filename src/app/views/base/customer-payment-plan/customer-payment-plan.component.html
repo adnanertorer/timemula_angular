@@ -9,10 +9,10 @@
           <table class="table table-sm">
             <tbody>
             <tr>
-              <td>Müşteri Adı : {{transaction.currentAccount}}</td>
+              <td>Müşteri Adı : {{transaction.name}} {{transaction.surname}}</td>
             </tr>
             <tr>
-              <td>Toplam Borç : {{transaction.currentBalance}}</td>
+              <td>Toplam Borç : {{transaction.cashDebt}}</td>
             </tr>
             </tbody>
           </table>
@@ -75,13 +75,13 @@
                     [value]=dateValue></ejs-datepicker>
                   </div>
                 </div>
-                <button type="submit" (click)="addManuel()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>Kaydet</button>
+                <button type="submit" (click)="addManuel()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Kaydet</button>
               </form>
             </div>
           </div>
         </div>
         <div class="card-footer">
-          <button type="submit" (click)="add()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>Hesapla</button>
+          <button type="submit" (click)="add()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Hesapla</button>
         </div>
       </div><!--/.col-->
     </div><!--/.row-->
