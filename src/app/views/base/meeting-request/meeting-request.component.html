@@ -41,6 +41,15 @@
               </div>
             </div>
             <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="relationStaff">Görüşmeyi yapacak Kişi</label>
+              <div class="col-md-9">
+                <select name="relationStaff" id="relationStaff" [(ngModel)]="model.relationStaff" class="form-control">
+                  <option value="0">Seçiniz</option>
+                  <option *ngFor="let item of staffList" value="{{item.value}}">{{item.text}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
               <label class="col-md-3 col-form-label" for="duration">Görüşme Gerçekleşti mi?</label>
               <div class="col-md-9">
                 <input type="checkbox" name="isDone" id="isDone"
@@ -75,11 +84,6 @@
             <td mat-cell *matCellDef="let row"> {{row.meetingDate | date: 'dd.MM.yyyy hh:mm'}}</td>
           </ng-container>
       
-          <ng-container matColumnDef="meetingTime">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Randevu Saati </th>
-            <td mat-cell *matCellDef="let row"> {{row.meetingTime}} </td>
-          </ng-container>
-      
           <ng-container matColumnDef="title">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Konu</th>
             <td mat-cell *matCellDef="let row"> {{row.title}} </td>
@@ -93,6 +97,16 @@
           <ng-container matColumnDef="createdAt">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>İşlem Zamanı</th>
             <td mat-cell *matCellDef="let row"> {{row.createdAt | date: 'dd.MM.yyyy hh:mm'}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="createdByName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>İşlemi Yapan</th>
+            <td mat-cell *matCellDef="let row"> {{row.createdByName}} {{row.createdBySurname}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Görüşmeyi Yapacak Personel</th>
+            <td mat-cell *matCellDef="let row"> {{row.name}} {{row.surname}} </td>
           </ng-container>
 
           <ng-container matColumnDef="isDone">

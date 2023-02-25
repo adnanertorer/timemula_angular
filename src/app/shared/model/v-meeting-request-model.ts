@@ -1,4 +1,4 @@
-export interface MeetingRequestModel {
+export interface VMeetingRequestModel {
     id: number;
     requestByName: string;
     meetingDate: Date;
@@ -7,7 +7,9 @@ export interface MeetingRequestModel {
     createdAt: Date;
     createdBy: number;
     isDone: boolean;
-    categoryColor?: string;
-    meetingFinishDate?: Date;
     relationStaff: number;
+    name: string;
+    surname: string;
+    createdByName: string;
+    createdBySurname: string;
 }

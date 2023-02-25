@@ -5,7 +5,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DatePickerComponent } from '@syncfusion/ej2-angular-calendars';
 import { MeetingRequestModel } from 'src/app/shared/model/meeting-request-model';
+import { SelectItemModel } from 'src/app/shared/model/select-item-model';
+import { VMeetingRequestModel } from 'src/app/shared/model/v-meeting-request-model';
 import { MeetingRequestService } from 'src/app/shared/services/meeting-request.service';
+import { StaffService } from 'src/app/shared/services/staff.service';
 declare let alertify: any;
 
 @Component({
@@ -15,8 +18,9 @@ declare let alertify: any;
 })
 export class MeetingRequestComponent implements OnInit {
   model: MeetingRequestModel;
-  list: MeetingRequestModel[] = [];
-  displayedColumns: string[] = ['requestByName', 'meetingDate', 'meetingTime', 'title', 'requestDescription', 'createdAt', 'isDone', 'id'];
+  list: VMeetingRequestModel[] = [];
+  staffList: SelectItemModel[] = [];
+  displayedColumns: string[] = ['requestByName', 'meetingDate', 'title', 'requestDescription', 'createdAt', 'createdByName', 'name', 'isDone', 'id'];
   dataSource: MatTableDataSource<MeetingRequestModel>;
   @ViewChild('meetingPaginator') paginator: MatPaginator;
   @ViewChild('meetingSort') sort: MatSort;
@@ -38,10 +42,10 @@ export class MeetingRequestComponent implements OnInit {
   minuteStep = 15;
   secondStep = 30;
 
-  constructor(private service: MeetingRequestService) { }
+  constructor(private service: MeetingRequestService, private staffService: StaffService) { }
 
   ngOnInit() {
-    this.buttonText = 'Kaydet;'
+    this.buttonText = 'Kaydet';
     this.isVisibleCancelButton = false;
     this.model = {
       createdAt: new Date(),
@@ -51,9 +55,19 @@ export class MeetingRequestComponent implements OnInit {
       meetingDate: new Date(),
       requestByName: '',
       requestDescription: '',
-      title: ''
+      title: '',
+      relationStaff: 0
     };
     this.getList();
+    this.getAdminList();
+  }
+
+  getAdminList(){
+    this.staffService.getAdminList().subscribe((data)=>{
+      if(data.success){
+        this.staffList = data.dynamicClass as SelectItemModel[];
+      }
+    })
   }
 
   onDateChange(){
@@ -75,7 +89,7 @@ export class MeetingRequestComponent implements OnInit {
   getList(){
     this.service.getList().subscribe((data)=>{
       if(data.success){
-        this.list = data.dynamicClass as MeetingRequestModel[];
+        this.list = data.dynamicClass as VMeetingRequestModel[];
         this.dataSource = new MatTableDataSource(this.list);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -100,6 +114,7 @@ export class MeetingRequestComponent implements OnInit {
   }
 
   add(){
+    this.model.relationStaff = parseInt(this.model.relationStaff.toString());
     this.model.meetingDate = new Date(this.dateValue.getFullYear(), this.dateValue.getMonth(), this.dateValue.getDate(),this.time.hour, this.time.minute, 0, 0);
     this.service.add(this.model).subscribe((data)=>{
       if(data.success){

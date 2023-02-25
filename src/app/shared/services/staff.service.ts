@@ -29,6 +29,16 @@ export class StaffService {
         );
   }
 
+  getAdminList(){
+    return this.http
+        .get<BaseResponse>(`${this.apiUrl}/AdminUser/List`, {observe: 'body'})
+        .pipe(
+            map((x)=> {
+                return x;
+            })
+        );
+  }
+
   getTeachers(){
     return this.http
         .get<BaseResponse>(`${this.apiUrl}/Staff/EducatorList`, {observe: 'body'})

@@ -85,7 +85,8 @@ export class PaymentComponent implements OnInit {
 
 
   constructor(private accontingService: AccountingTransactionService, 
-    private service: PaymentService, private cashBoxService: CashboxService, public dialog: MatDialog) { }
+    private service: PaymentService, private cashBoxService: CashboxService,
+     public dialog: MatDialog) { }
 
   ngOnInit() {
     this.filter = {
