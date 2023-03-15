@@ -24,6 +24,16 @@ export class CashboxService {
         );
   }
 
+  generalReport(){
+    return this.http
+        .get<BaseResponse>(`${this.apiUrl}/CashBox/GeneralReport`, {observe: 'body'})
+        .pipe(
+            map((x)=> {
+                return x;
+            })
+        );
+  }
+
   add(resource: CashboxModel){
     return this.http
         .post<BaseResponse>(`${this.apiUrl}/CashBox/Add`, resource)

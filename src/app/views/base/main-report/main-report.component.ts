@@ -9,9 +9,11 @@ import { VDeptCollectionModel } from 'src/app/shared/model/v-dept-collection-mod
 import { VPackageCountModel } from 'src/app/shared/model/v-package-count-model';
 import { VPaymentModel } from 'src/app/shared/model/v-payment-model';
 import { ActualCustomerLessonService } from 'src/app/shared/services/actual-customer-lesson.service';
+import { CashboxService } from 'src/app/shared/services/cashbox.service';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { DeptCollectionService } from 'src/app/shared/services/dept-collection.service';
 import { PaymentService } from 'src/app/shared/services/payment.service';
+import {CashBoxGeneralReportModel} from "../../../shared/model/cash-box-general-report-model";
 declare  var ApexCharts:  any;
 
 @Component({
@@ -30,8 +32,10 @@ export class MainReportComponent implements OnInit {
   saledPackageCount: VPackageCountModel[] = [];
   currentLessonSummaries: VActualCustomerLessonModel[] = [];
   packageData: any;
+  cashBoxReportModel: CashBoxGeneralReportModel;
   constructor(private deptCollectService: DeptCollectionService, private paymentService: PaymentService,
-    private customerService: CustomerService, private actualMainService: ActualCustomerLessonService) { }
+    private customerService: CustomerService, private actualMainService: ActualCustomerLessonService,
+    private cashboxReportService: CashboxService) { }
 
   ngOnInit() {
     this.myInteger={
@@ -39,6 +43,11 @@ export class MainReportComponent implements OnInit {
     };
     this.last3Days = {
       result: 0
+    };
+    this.cashBoxReportModel = {
+      cashBoxName: '',
+      totalExpence: 0,
+      totalIncome: 0
     };
     this.getTotalDeptCollect();
     this.getTotalPayment();
@@ -90,7 +99,7 @@ export class MainReportComponent implements OnInit {
       }
     })
   }
-  
+
   getTotalSaledPackage(){
     this.actualMainService.getLessonMains().subscribe((data)=>{
       if(data.success){
@@ -117,13 +126,23 @@ export class MainReportComponent implements OnInit {
     })
   }
 
+  getCashBoxGeneralReport(){
+    this.cashboxReportService.generalReport().subscribe((data)=>{
+      if(data.success){
+          this.cashBoxReportModel = data.dynamicClass as CashBoxGeneralReportModel;
+          const totalExpense: number = this.cashBoxReportModel.totalExpence;
+          const totalIncome: number = this.cashBoxReportModel.totalIncome;
+      }
+    })
+  }
+
   getPackageCount(){
     this.actualMainService.getSaledPackageCount().subscribe((data)=>{
       if(data.success){
         this.saledPackageCount = data.dynamicClass as VPackageCountModel[];
         const countPackage: number[] = [];
         const packageName: string[] = [];
-        
+
         this.saledPackageCount.forEach(element => {
           countPackage.push(element.subCategoryCount);
           packageName.push(element.subCategoryName);
