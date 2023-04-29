@@ -26,7 +26,7 @@ export class CashboxService {
 
   generalReport(){
     return this.http
-        .get<BaseResponse>(`${this.apiUrl}/CashBox/GeneralReport`, {observe: 'body'})
+        .get<BaseResponse>(`${this.apiUrl}/CashBoxTransaction/GeneralReport`, {observe: 'body'})
         .pipe(
             map((x)=> {
                 return x;

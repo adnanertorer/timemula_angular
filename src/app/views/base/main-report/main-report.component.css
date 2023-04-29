@@ -4,4 +4,12 @@
 
 table{
      width: 100%;
+     font-size: small;
+}
+p{
+     font-size: small;
+}
+
+a{
+     font-size: small;
 }

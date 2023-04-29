@@ -198,4 +198,14 @@ export class ActualCustomerLessonService {
         );
   }
 
+  getActiveLessons(){
+    return this.http
+        .get<BaseResponse>(`${this.apiUrl}/ActualCustomerLesson/GetActiveLessons`)
+        .pipe(
+            map((x)=> {
+                return x;
+            })
+        );
+  }
+
 }

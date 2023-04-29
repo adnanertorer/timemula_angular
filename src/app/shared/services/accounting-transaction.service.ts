@@ -156,4 +156,14 @@ export class AccountingTransactionService {
         );
   }
 
+  getAccountStatus(){
+    return this.http
+        .get<BaseResponse>(`${this.apiUrl}/AccountingTransaction/GetAccountsStatus`)
+        .pipe(
+            map((x)=> {
+                return x;
+            })
+        );
+  }
+
 }

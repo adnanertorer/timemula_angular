@@ -17,7 +17,7 @@
                 <div class="icon">
                   <i class="ion ion-bag"></i>
                 </div>
-                <a  routerLinkActive="router-link-active"class="small-box-footer">Daha Fazla Bilgi <i class="fas fa-arrow-circle-right"></i></a>
+                <a routerLinkActive="router-link-active" class="small-box-footer">Daha Fazla Bilgi <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <div class="col-lg-2 col-6">
@@ -30,7 +30,7 @@
                 <div class="icon">
                   <i class="ion ion-bag"></i>
                 </div>
-                <a  routerLinkActive="router-link-active"class="small-box-footer">Daha Fazla Bilgi <i class="fas fa-arrow-circle-right"></i></a>
+                <a routerLinkActive="router-link-active" class="small-box-footer">Daha Fazla Bilgi <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <div class="col-lg-2 col-6">
@@ -43,7 +43,7 @@
                 <div class="icon">
                   <i class="ion ion-bag"></i>
                 </div>
-                <a  routerLinkActive="router-link-active"class="small-box-footer">Daha Fazla Bilgi <i class="fas fa-arrow-circle-right"></i></a>
+                <a routerLinkActive="router-link-active" class="small-box-footer">Daha Fazla Bilgi <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <div class="col-lg-2 col-6">
@@ -56,7 +56,7 @@
                 <div class="icon">
                   <i class="ion ion-bag"></i>
                 </div>
-                <a  routerLinkActive="router-link-active"class="small-box-footer">Daha Fazla Bilgi <i class="fas fa-arrow-circle-right"></i></a>
+                <a routerLinkActive="router-link-active" class="small-box-footer">Daha Fazla Bilgi <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <div class="col-lg-2 col-6">
@@ -69,7 +69,7 @@
                 <div class="icon">
                   <i class="ion ion-bag"></i>
                 </div>
-                <a  routerLinkActive="router-link-active"class="small-box-footer">Daha Fazla Bilgi <i class="fas fa-arrow-circle-right"></i></a>
+                <a routerLinkActive="router-link-active" class="small-box-footer">Daha Fazla Bilgi <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <div class="col-lg-2 col-6">
@@ -82,15 +82,15 @@
                 <div class="icon">
                   <i class="ion ion-bag"></i>
                 </div>
-                <a routerLinkActive="router-link-active"class="small-box-footer">Daha Fazla Bilgi <i class="fas fa-arrow-circle-right"></i></a>
+                <a routerLinkActive="router-link-active" class="small-box-footer">Daha Fazla Bilgi <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-lg-4 col-6">
+            <div class="col-lg-6 col-6">
               <div id="packages"></div>
             </div>
-            <div class="col-lg-8 col-6">
+            <div class="col-lg-6 col-6">
               <h3>Bugünkü Dersler ve Öğrenciler</h3>
               <table class="table">
                 <thead>
@@ -109,6 +109,69 @@
                     <td>{{item.educatorName}}</td>
                     <td>{{item.name}} {{item.surname}}</td>
                     <td>{{item.startDate | date: 'dd.MM.yyyy hh:mm'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-lg-6 col-6">
+              <h3>Kasa Genel Durum</h3>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Kasa</th>
+                    <th>Gelir</th>
+                    <th>Gider</th>
+                    <th>Net</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of cashBoxReportModel">
+                      <td>{{item.cashBoxName}}</td>
+                      <td>{{item.totalIncome}}</td>
+                      <td>{{item.totalExpence}}</td>
+                      <td>{{item.totalIncome - item.totalExpence}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-lg-6 col-6">
+              <h3>Müşteri Aktif Paket Listesi</h3>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Müşteri</th>
+                    <th>Ders</th>
+                    <th>Paket</th>
+                    <th>Sınıf</th>
+                    <th>Bitiş Tarihi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of actualCustomerLessons">
+                      <td>{{item.customerName}}</td>
+                      <td>{{item.lessonName}}</td>
+                      <td>{{item.packageName}}</td>
+                      <td>{{item.classroom}}</td>
+                      <td>{{item.finishAt}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-lg-6 col-6">
+              <h3>Toplam Cari Borç/Alacak</h3>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Toplam Cari Borç</th>
+                    <th>Toplam Cari Alacak</th>
+                    <th>Kalan Cari Borç</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{accountsStatus.totalCustomerDept}}</td>
+                    <td>{{accountsStatus.totalCompanyDept}}</td>
+                    <td>{{accountsStatus.totalCustomerDept-accountsStatus.totalCompanyDept}}</td>
                   </tr>
                 </tbody>
               </table>

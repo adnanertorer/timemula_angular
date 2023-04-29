@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActualCustomerLessonModel } from 'src/app/shared/model/actual-customer-lesson-model';
 import { MyInteger } from 'src/app/shared/model/my-integer';
 import { VActualCustomerLessonMainModel } from 'src/app/shared/model/v-actual-customer-lesson-main-model';
@@ -14,7 +14,11 @@ import { CustomerService } from 'src/app/shared/services/customer.service';
 import { DeptCollectionService } from 'src/app/shared/services/dept-collection.service';
 import { PaymentService } from 'src/app/shared/services/payment.service';
 import {CashBoxGeneralReportModel} from "../../../shared/model/cash-box-general-report-model";
+import { ActualCustomerLessonResourceModel } from 'src/app/shared/model/actual-customer-lesson-resource-model';
+import { AccountsStatusModel } from 'src/app/shared/model/accounts-status-model';
+import { AccountingTransactionService } from 'src/app/shared/services/accounting-transaction.service';
 declare  var ApexCharts:  any;
+
 
 @Component({
   selector: 'app-main-report',
@@ -32,10 +36,16 @@ export class MainReportComponent implements OnInit {
   saledPackageCount: VPackageCountModel[] = [];
   currentLessonSummaries: VActualCustomerLessonModel[] = [];
   packageData: any;
-  cashBoxReportModel: CashBoxGeneralReportModel;
+  cashboxData: any;
+  cashBoxReportModel: CashBoxGeneralReportModel[] = [];
+  cashBoxNames: string[] = [];
+  actualCustomerLessons: ActualCustomerLessonResourceModel[] = [];
+  accountsStatus: AccountsStatusModel;
+
+
   constructor(private deptCollectService: DeptCollectionService, private paymentService: PaymentService,
     private customerService: CustomerService, private actualMainService: ActualCustomerLessonService,
-    private cashboxReportService: CashboxService) { }
+    private cashboxReportService: CashboxService, private accountingService: AccountingTransactionService) { }
 
   ngOnInit() {
     this.myInteger={
@@ -44,11 +54,10 @@ export class MainReportComponent implements OnInit {
     this.last3Days = {
       result: 0
     };
-    this.cashBoxReportModel = {
-      cashBoxName: '',
-      totalExpence: 0,
-      totalIncome: 0
-    };
+    this.accountsStatus = {
+      totalCompanyDept: 0,
+      totalCustomerDept: 0
+    }
     this.getTotalDeptCollect();
     this.getTotalPayment();
     this.getTotalCustomer();
@@ -56,6 +65,9 @@ export class MainReportComponent implements OnInit {
     this.getTodayStudents();
     this.getPackageCount();
     this.getCurrentLessonsSummaries();
+    this.getCashBoxGeneralReport();
+    this.getActiveLessons();
+    this.getAccountStatus();
   }
 
   getTotalDeptCollect(){
@@ -129,9 +141,7 @@ export class MainReportComponent implements OnInit {
   getCashBoxGeneralReport(){
     this.cashboxReportService.generalReport().subscribe((data)=>{
       if(data.success){
-          this.cashBoxReportModel = data.dynamicClass as CashBoxGeneralReportModel;
-          const totalExpense: number = this.cashBoxReportModel.totalExpence;
-          const totalIncome: number = this.cashBoxReportModel.totalIncome;
+          this.cashBoxReportModel = data.dynamicClass as CashBoxGeneralReportModel[];
       }
     })
   }
@@ -145,7 +155,7 @@ export class MainReportComponent implements OnInit {
 
         this.saledPackageCount.forEach(element => {
           countPackage.push(element.subCategoryCount);
-          packageName.push(element.subCategoryName);
+          packageName.push(element.subCategoryName+' '+element.artPackageName);
         });
         this.packageData = {
           series: countPackage,
@@ -203,4 +213,22 @@ export class MainReportComponent implements OnInit {
       }
     });
   }
+
+  getActiveLessons(){
+    this.actualMainService.getActiveLessons().subscribe((data)=>{
+      if(data.success){
+        this.actualCustomerLessons = data.dynamicClass as ActualCustomerLessonResourceModel[];
+      }
+    });
+  }
+
+  getAccountStatus(){
+    this.accountingService.getAccountStatus().subscribe((data)=>{
+      if(data.success){
+        this.accountsStatus = data.dynamicClass as AccountsStatusModel;
+      }
+    });
+  }
+
+  
 }
