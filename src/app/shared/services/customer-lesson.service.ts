@@ -230,4 +230,14 @@ export class CustomerLessonService {
         );
   }
 
+  getCustomerLessonTotal(){
+    return this.http
+        .get<BaseResponse>(`${this.apiUrl}/CustomerLesson/TotalCustomerLesson`, {observe: 'body'})
+        .pipe(
+            map((x)=> {
+                return x;
+            })
+        );
+  }
+
 }

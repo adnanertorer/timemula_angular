@@ -17,6 +17,8 @@ import {CashBoxGeneralReportModel} from "../../../shared/model/cash-box-general-
 import { ActualCustomerLessonResourceModel } from 'src/app/shared/model/actual-customer-lesson-resource-model';
 import { AccountsStatusModel } from 'src/app/shared/model/accounts-status-model';
 import { AccountingTransactionService } from 'src/app/shared/services/accounting-transaction.service';
+import { CustomerLessonTotalModel } from 'src/app/shared/model/customer-lesson-total-model';
+import { CustomerLessonService } from 'src/app/shared/services/customer-lesson.service';
 declare  var ApexCharts:  any;
 
 
@@ -41,11 +43,13 @@ export class MainReportComponent implements OnInit {
   cashBoxNames: string[] = [];
   actualCustomerLessons: ActualCustomerLessonResourceModel[] = [];
   accountsStatus: AccountsStatusModel;
+  customerLessonTotalList: CustomerLessonTotalModel[] = [];
 
 
   constructor(private deptCollectService: DeptCollectionService, private paymentService: PaymentService,
     private customerService: CustomerService, private actualMainService: ActualCustomerLessonService,
-    private cashboxReportService: CashboxService, private accountingService: AccountingTransactionService) { }
+    private cashboxReportService: CashboxService, private accountingService: AccountingTransactionService,
+    private customerLessonService: CustomerLessonService) { }
 
   ngOnInit() {
     this.myInteger={
@@ -68,6 +72,7 @@ export class MainReportComponent implements OnInit {
     this.getCashBoxGeneralReport();
     this.getActiveLessons();
     this.getAccountStatus();
+    this.getCustomerLessonTotal();
   }
 
   getTotalDeptCollect(){
@@ -226,6 +231,15 @@ export class MainReportComponent implements OnInit {
     this.accountingService.getAccountStatus().subscribe((data)=>{
       if(data.success){
         this.accountsStatus = data.dynamicClass as AccountsStatusModel;
+      }
+    });
+  }
+
+  getCustomerLessonTotal(){
+    this.customerLessonService.getCustomerLessonTotal().subscribe((data)=>{
+      if(data.success){
+        this.customerLessonTotalList = data.dynamicClass as CustomerLessonTotalModel[];
+        this.customerLessonTotalList = this.customerLessonTotalList.filter((item)=>item.total == 1);
       }
     });
   }
