@@ -91,27 +91,7 @@
               <div id="packages"></div>
             </div>
             <div class="col-lg-6 col-6">
-              <h3>Bugünkü Dersler ve Öğrenciler</h3>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>Sınıf</th>
-                    <th>Paket</th>
-                    <th>Eğitmen</th>
-                    <th>Öğrenci</th>
-                    <th>Ders Zamanı</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of currentLessonSummaries">
-                    <td>{{item.classromName}}</td>
-                    <td>{{item.subCategoryName}} - {{item.artPackageName}}</td>
-                    <td>{{item.educatorName}}</td>
-                    <td>{{item.name}} {{item.surname}}</td>
-                    <td>{{item.startDate | date: 'dd.MM.yyyy hh:mm'}}</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div id="earningPackages"></div>
             </div>
             <div class="col-lg-6 col-6">
               <h3>Kasa Genel Durum</h3>
@@ -187,6 +167,85 @@
                 <tbody>
                   <tr *ngFor="let item of customerLessonTotalList">
                     <td>{{item.customerName}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-lg-6 col-6">
+              <h3>En çok kazandıran eğitmen</h3>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Eğitmen</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{earningEducator.educatorName}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-lg-6 col-6">
+              <h3>Bugünkü Dersler ve Öğrenciler</h3>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Sınıf</th>
+                    <th>Paket</th>
+                    <th>Eğitmen</th>
+                    <th>Öğrenci</th>
+                    <th>Ders Zamanı</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of currentLessonSummaries">
+                    <td>{{item.classromName}}</td>
+                    <td>{{item.subCategoryName}} - {{item.artPackageName}}</td>
+                    <td>{{item.educatorName}}</td>
+                    <td>{{item.name}} {{item.surname}}</td>
+                    <td>{{item.startDate | date: 'dd.MM.yyyy hh:mm'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-lg-6 col-6">
+              <div id="totalCustomerPackages"></div>
+            </div>
+            <div class="col-lg-6 col-6">
+              <h3>Bu hafta doğum günü olanlar</h3>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Müşteri</th>
+                    <th>Doğum Tarihi</th>
+                    <th>Sms Gönder</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of birthdateInWeekCustomers">
+                    <td>{{item.name}} {{item.surname}}</td>
+                    <td>{{item.birthday | date: 'dd.MM.yyyy'}}</td>
+                    <td><button class="btn btn-success">Sms Gönder</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-lg-6 col-6">
+              <h3>Bu hafta içindeki randevular</h3>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Görüşülecek Müşteri</th>
+                    <th>Görüşmeyi Yapacak Çalışan</th>
+                    <th>Randevu Zamanı</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of vmeetingInWeekList">
+                    <td>{{item.requestByName}}</td>
+                    <td>{{item.name}} {{item.surname}}</td>
+                    <td>{{item.meetingDate | date: 'dd.MM.yyyy hh:mm'}}</td>
                   </tr>
                 </tbody>
               </table>

@@ -19,6 +19,14 @@ import { AccountsStatusModel } from 'src/app/shared/model/accounts-status-model'
 import { AccountingTransactionService } from 'src/app/shared/services/accounting-transaction.service';
 import { CustomerLessonTotalModel } from 'src/app/shared/model/customer-lesson-total-model';
 import { CustomerLessonService } from 'src/app/shared/services/customer-lesson.service';
+import { EarningEducatorModel } from 'src/app/shared/model/earning-educator-model';
+import { EducatorCostService } from 'src/app/shared/services/educator-cost.service';
+import { VEarningPackageModel } from 'src/app/shared/model/v-earning-package-model';
+import { ArtPackageService } from 'src/app/shared/services/art-package.service';
+import { TotalCustomerPackageModel } from 'src/app/shared/model/total-customer-package-model';
+import { Customer } from 'src/app/shared/model/customer';
+import { VMeetingRequestModel } from 'src/app/shared/model/v-meeting-request-model';
+import { MeetingRequestService } from 'src/app/shared/services/meeting-request.service';
 declare  var ApexCharts:  any;
 
 
@@ -39,19 +47,32 @@ export class MainReportComponent implements OnInit {
   currentLessonSummaries: VActualCustomerLessonModel[] = [];
   packageData: any;
   cashboxData: any;
+  earningPackageData: any;
+  totalCustomerPackageData: any;
   cashBoxReportModel: CashBoxGeneralReportModel[] = [];
   cashBoxNames: string[] = [];
   actualCustomerLessons: ActualCustomerLessonResourceModel[] = [];
   accountsStatus: AccountsStatusModel;
   customerLessonTotalList: CustomerLessonTotalModel[] = [];
+  earningEducator: EarningEducatorModel;
+  earningPackageList: VEarningPackageModel[] = [];
+  totalCustomerPackageList: TotalCustomerPackageModel[] = [];
+  birthdateInWeekCustomers: Customer[] = [];
+  vmeetingInWeekList: VMeetingRequestModel[] = [];
 
 
   constructor(private deptCollectService: DeptCollectionService, private paymentService: PaymentService,
     private customerService: CustomerService, private actualMainService: ActualCustomerLessonService,
     private cashboxReportService: CashboxService, private accountingService: AccountingTransactionService,
-    private customerLessonService: CustomerLessonService) { }
+    private customerLessonService: CustomerLessonService, private educatorCostService: EducatorCostService,
+    private artPackageService: ArtPackageService, private meetingService: MeetingRequestService) { }
 
   ngOnInit() {
+    this.earningEducator = {
+      educatorId: 0,
+      educatorName: '',
+      cost: 0,
+    };
     this.myInteger={
       result: 0
     };
@@ -73,6 +94,10 @@ export class MainReportComponent implements OnInit {
     this.getActiveLessons();
     this.getAccountStatus();
     this.getCustomerLessonTotal();
+    this.getEarningEducator();
+    this.getEarningPackages();
+    this.getTotalCustomerPackages();
+    this.getMeetingInWeek();
   }
 
   getTotalDeptCollect(){
@@ -244,5 +269,163 @@ export class MainReportComponent implements OnInit {
     });
   }
 
-  
+  getEarningEducator() {
+    this.educatorCostService.getEarning().subscribe((data)=>{
+      if(data.success){
+        this.earningEducator = data.dynamicClass as EarningEducatorModel;
+      }
+    });
+  }
+
+  getBirthdayInWeek(){
+    this.customerService.getBirthdayInWeek().subscribe((data)=>{
+      if(data.success){
+        this.birthdateInWeekCustomers = data.dynamicClass as Customer[];
+      }
+    });
+  }
+
+  getTotalCustomerPackages(){
+    this.customerLessonService.getTotalCustomerPackages().subscribe((data)=>{
+      if(data.success){
+        this.totalCustomerPackageList = data.dynamicClass as TotalCustomerPackageModel[];
+        const totalPackage: number[] = [];
+        const customerNames: string[] = [];
+
+        this.totalCustomerPackageList.forEach(element => {
+          totalPackage.push(element.total);
+          customerNames.push(element.name+' '+element.surname);
+        });
+        this.totalCustomerPackageData = {
+          series: totalPackage,
+          title: {
+            floating: false,
+            text: 'En çok paket alan müşteriler',
+            align: 'left',
+            style: {
+              fontSize: '16px'
+            }
+          },
+          labels: customerNames,
+          dataLabels: {
+            enabled: true
+          },
+          chart: {
+            width: '100%',
+            height: 1200,
+            type: 'pie',
+            toolbar: {
+              show: true,
+              offsetX: 0,
+              offsetY: 0,
+              tools: {
+                download: true,
+              },
+              autoSelected: 'zoom'
+            },
+            animations: {
+              enabled: true,
+              easing: 'easeinout',
+              speed: 800,
+              animateGradually: {
+                enabled: true,
+                delay: 150
+              },
+              dynamicAnimation: {
+                enabled: true,
+                speed: 350
+              }
+            }
+          },
+          responsive: [{
+            breakpoint: 750,
+            options: {
+              chart: {
+                width: 650
+              },
+            }
+          }]
+        };
+        document.querySelector("#totalCustomerPackages").innerHTML = "";
+        var team = new ApexCharts(document.querySelector("#totalCustomerPackages"), this.totalCustomerPackageData);
+        team.render();
+      }
+    });
+  }
+
+  getEarningPackages() {
+    this.artPackageService.getEarningPackage().subscribe((data)=>{
+      if(data.success){
+        this.earningPackageList = data.dynamicClass as VEarningPackageModel[];
+        const costPackage: number[] = [];
+        const packageName: string[] = [];
+
+        this.earningPackageList.forEach(element => {
+          costPackage.push(element.debt);
+          packageName.push(element.subCategoryName+' '+element.artPackageName);
+        });
+        this.earningPackageData = {
+          series: costPackage,
+          title: {
+            floating: false,
+            text: 'Paket Kazandırma Oranı',
+            align: 'left',
+            style: {
+              fontSize: '16px'
+            }
+          },
+          labels: packageName,
+          dataLabels: {
+            enabled: true
+          },
+          chart: {
+            width: '100%',
+            height: 1200,
+            type: 'pie',
+            toolbar: {
+              show: true,
+              offsetX: 0,
+              offsetY: 0,
+              tools: {
+                download: true,
+              },
+              autoSelected: 'zoom'
+            },
+            animations: {
+              enabled: true,
+              easing: 'easeinout',
+              speed: 800,
+              animateGradually: {
+                enabled: true,
+                delay: 150
+              },
+              dynamicAnimation: {
+                enabled: true,
+                speed: 350
+              }
+            }
+          },
+          responsive: [{
+            breakpoint: 750,
+            options: {
+              chart: {
+                width: 650
+              },
+            }
+          }]
+        };
+        document.querySelector("#earningPackages").innerHTML = "";
+        var team = new ApexCharts(document.querySelector("#earningPackages"), this.earningPackageData);
+        team.render();
+      }
+    });
+  }
+
+  getMeetingInWeek(){
+    this.meetingService.getMeetingInWeek().subscribe((data) => {
+      if(data.success){
+        this.vmeetingInWeekList = data.dynamicClass as VMeetingRequestModel[];
+      }
+    });
+  }
 }

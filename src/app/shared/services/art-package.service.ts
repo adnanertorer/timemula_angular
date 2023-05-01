@@ -84,4 +84,14 @@ export class ArtPackageService {
         );
   }
 
+  getEarningPackage(){
+    return this.http
+        .get<BaseResponse>(`${this.apiUrl}/ArtPackage/GetEarningPackage`, {observe: 'body'})
+        .pipe(
+            map((x)=> {
+                return x;
+            })
+        );
+  }
+
 }

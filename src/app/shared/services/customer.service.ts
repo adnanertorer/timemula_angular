@@ -81,4 +81,14 @@ export class CustomerService {
                 })
             );
       }
+
+      getBirthdayInWeek(){
+        return this.http
+            .get<BaseResponse>(`${this.apiUrl}/Customer/BirthDayInWeek`, {observe: 'body'})
+            .pipe(
+                map((x)=> {
+                    return x;
+                })
+            );
+      }
 }

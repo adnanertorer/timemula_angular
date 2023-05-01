@@ -73,4 +73,14 @@ export class MeetingRequestService {
             })
         );
   }
+
+  getMeetingInWeek(){
+    return this.http
+        .get<BaseResponse>(`${this.apiUrl}/MeetingRequest/MeetingInWeek`, {observe: 'body'})
+        .pipe(
+            map((x)=> {
+                return x;
+            })
+        );
+  }
 }

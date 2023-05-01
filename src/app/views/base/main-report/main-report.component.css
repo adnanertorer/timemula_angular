@@ -13,3 +13,7 @@ p{
 a{
      font-size: small;
 }
+
+h3{
+     font-size: unset;
+}

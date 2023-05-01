@@ -240,4 +240,15 @@ export class CustomerLessonService {
         );
   }
 
+  getTotalCustomerPackages(){
+    return this.http
+        .get<BaseResponse>(`${this.apiUrl}/CustomerLesson/TotalCustomerPackages`, {observe: 'body'})
+        .pipe(
+            map((x)=> {
+                return x;
+            })
+        );
+  }
+
+
 }
