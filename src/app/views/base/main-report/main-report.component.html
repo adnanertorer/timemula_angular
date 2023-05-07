@@ -250,6 +250,11 @@
                 </tbody>
               </table>
             </div>
+            <div class="col-lg-6 col-6">
+              <ejs-schedule #scheduleObj width='100%' style="overflow: visible" 
+              height='550px' [selectedDate]='selectedDate'
+[eventSettings]='eventSettings' (eventRendered)="oneventRendered($event)"></ejs-schedule>
+            </div>
           </div>
         </div>
       </div>

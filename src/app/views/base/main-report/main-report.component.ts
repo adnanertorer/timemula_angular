@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActualCustomerLessonModel } from 'src/app/shared/model/actual-customer-lesson-model';
 import { MyInteger } from 'src/app/shared/model/my-integer';
 import { VActualCustomerLessonMainModel } from 'src/app/shared/model/v-actual-customer-lesson-main-model';
 import { VActualCustomerLessonModel } from 'src/app/shared/model/v-actual-customer-lesson-model';
-import { VActualLessonSummaryModel } from 'src/app/shared/model/v-actual-lesson-summary-model';
 import { VCustomer } from 'src/app/shared/model/v-customer';
 import { VDeptCollectionModel } from 'src/app/shared/model/v-dept-collection-model';
 import { VPackageCountModel } from 'src/app/shared/model/v-package-count-model';
@@ -27,7 +25,21 @@ import { TotalCustomerPackageModel } from 'src/app/shared/model/total-customer-p
 import { Customer } from 'src/app/shared/model/customer';
 import { VMeetingRequestModel } from 'src/app/shared/model/v-meeting-request-model';
 import { MeetingRequestService } from 'src/app/shared/services/meeting-request.service';
+import { GroupedLessonModel } from 'src/app/shared/model/grouped-lesson-model';
+import { MainLessonAndDates } from 'src/app/shared/model/main-lesson-and-dates';
+import { EventRenderedArgs, EventSettingsModel, ScheduleComponent } from '@syncfusion/ej2-angular-schedule';
+import { LessonAndDatesModel } from 'src/app/shared/model/lesson-and-dates-model';
 declare  var ApexCharts:  any;
+
+export interface GroupedLessonGraphModel{
+  name: string;
+  data: SubDataModel[];
+}
+
+export interface SubDataModel{
+  x: string;
+  y: Date[];
+}
 
 
 @Component({
@@ -36,6 +48,11 @@ declare  var ApexCharts:  any;
   styleUrls: ['./main-report.component.css']
 })
 export class MainReportComponent implements OnInit {
+
+  @ViewChild('scheduleObj')
+  public scheduleObj: ScheduleComponent;
+  public eventSettings: EventSettingsModel;
+  public selectedDate: Date = new Date();
 
   totalDeptCollect: number = 0;
   totalPayments: number = 0;
@@ -49,6 +66,7 @@ export class MainReportComponent implements OnInit {
   cashboxData: any;
   earningPackageData: any;
   totalCustomerPackageData: any;
+  lessonsInWeekData: any;
   cashBoxReportModel: CashBoxGeneralReportModel[] = [];
   cashBoxNames: string[] = [];
   actualCustomerLessons: ActualCustomerLessonResourceModel[] = [];
@@ -59,6 +77,8 @@ export class MainReportComponent implements OnInit {
   totalCustomerPackageList: TotalCustomerPackageModel[] = [];
   birthdateInWeekCustomers: Customer[] = [];
   vmeetingInWeekList: VMeetingRequestModel[] = [];
+  weekLessons: MainLessonAndDates[] = [];
+  weekLessonsDataList: GroupedLessonGraphModel[] = [];
 
 
   constructor(private deptCollectService: DeptCollectionService, private paymentService: PaymentService,
@@ -98,7 +118,20 @@ export class MainReportComponent implements OnInit {
     this.getEarningPackages();
     this.getTotalCustomerPackages();
     this.getMeetingInWeek();
+    this.getLessonsInWeek();
   }
+
+  oneventRendered(args: EventRenderedArgs): void {
+    let categoryColor: string = args.data.categoryColor as string;
+    if (!args.element || !categoryColor) {
+        return;
+    }
+    if (this.scheduleObj.currentView === 'Agenda') {
+        (args.element.firstChild as HTMLElement).style.borderLeftColor = categoryColor;
+    } else {
+        args.element.style.backgroundColor = categoryColor;
+    }
+}
 
   getTotalDeptCollect(){
     this.deptCollectService.getList().subscribe((data)=>{
@@ -425,6 +458,39 @@ export class MainReportComponent implements OnInit {
     this.meetingService.getMeetingInWeek().subscribe((data) => {
       if(data.success){
         this.vmeetingInWeekList = data.dynamicClass as VMeetingRequestModel[];
+      }
+    });
+  }
+
+  getLessonsInWeek(){
+    this.actualMainService.getLessonsInWeek().subscribe((data)=>{
+      if(data.success){
+        this.weekLessons = data.dynamicClass as MainLessonAndDates[];
+        let counter = 0;
+        let subModelList: LessonAndDatesModel[] = [];
+        this.weekLessons.forEach(element => {
+          subModelList.push(element.lessonAndDates);
+        });
+        subModelList.forEach(element => {
+          counter++;
+          element.id = counter.toString();
+          element.categoryColor = 'Orange';
+          element.startDate = element.lessonDates[0];
+          element.finishedDate = element.lessonDates[1];
+        });
+        console.log(subModelList);
+        this.eventSettings = {
+          dataSource: subModelList,
+          fields: {
+            id: 'id',
+            subject: { name: 'name' },
+            startTime: { name: 'startDate' },
+            endTime: { name: 'finishedDate' },
+          },
+          allowAdding: false,
+          allowDeleting: false,
+          allowEditing: false,
+        }
       }
     });
   }

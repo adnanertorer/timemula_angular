@@ -208,4 +208,14 @@ export class ActualCustomerLessonService {
         );
   }
 
+  getLessonsInWeek(){
+    return this.http
+        .get<BaseResponse>(`${this.apiUrl}/ActualCustomerLesson/LessonsInWeek`, {observe: 'body'})
+        .pipe(
+            map((x)=> {
+                return x;
+            })
+        );
+  }
+
 }

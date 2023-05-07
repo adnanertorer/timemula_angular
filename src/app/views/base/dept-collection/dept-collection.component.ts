@@ -82,7 +82,6 @@ export class DeptCollectionComponent implements OnInit {
       endDate: null,
       startDate: null 
     };
-    //this.getAccounts();
     this.getAccountsGeneral();
     this.getCustomerDepts();
     this.getCashBoxesForFilter();
@@ -235,6 +234,7 @@ export class DeptCollectionComponent implements OnInit {
     this.accontingService.getCustomerDepts().subscribe((data)=>{
       if(data.success){
         this.generalDebts = data.dynamicClass as VGeneralCustomerBalanceModel[];
+        console.table(this.generalDebts);
       }
     })
   }

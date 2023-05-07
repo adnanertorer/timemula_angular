@@ -15,14 +15,14 @@ export class StudentLessonScheduleComponent implements OnInit {
 
   @ViewChild('scheduleObj')
   public scheduleObj: ScheduleComponent;
-  
+
   list: VActualCustomerLessonModel[] = [];
   public selectedDate: Date = new Date();
   public eventSettings: EventSettingsModel;
   public customerName: string;
   selectedCustomerId: number = 0;
-  selectedUnicKey: string= '';
-  constructor(private service: ActualCustomerLessonService,  private activatedRoute: ActivatedRoute,
+  selectedUnicKey: string = '';
+  constructor(private service: ActualCustomerLessonService, private activatedRoute: ActivatedRoute,
     private customerService: CustomerService) { }
 
   ngOnInit() {
@@ -35,40 +35,40 @@ export class StudentLessonScheduleComponent implements OnInit {
   oneventRendered(args: EventRenderedArgs): void {
     let categoryColor: string = args.data.categoryColor as string;
     if (!args.element || !categoryColor) {
-        return;
+      return;
     }
     if (this.scheduleObj.currentView === 'Agenda') {
-        (args.element.firstChild as HTMLElement).style.borderLeftColor = categoryColor;
+      (args.element.firstChild as HTMLElement).style.borderLeftColor = categoryColor;
     } else {
-        args.element.style.backgroundColor = categoryColor;
+      args.element.style.backgroundColor = categoryColor;
     }
-}
+  }
 
-  ngAfterViewInit(){
-    this.customerService.getDetails(this.selectedCustomerId).subscribe((data)=>{
-      if(data.success){
+  ngAfterViewInit() {
+    this.customerService.getDetails(this.selectedCustomerId).subscribe((data) => {
+      if (data.success) {
         let customer = data.dynamicClass as Customer;
-        this.customerName = customer.name+' '+customer.surname;
-        this.service.getListByPackage(this.selectedCustomerId, this.selectedUnicKey).subscribe((data)=>{
-          if(data.success){
+        this.customerName = customer.name + ' ' + customer.surname;
+        this.service.getListByPackage(this.selectedCustomerId, this.selectedUnicKey).subscribe((data) => {
+          if (data.success) {
             this.list = data.dynamicClass as VActualCustomerLessonModel[];
             this.list.forEach(element => {
-              if(element.isMoved){
+              if (element.isMoved) {
                 element.categoryColor = 'Orange';
-                element.artPackageName = element.artPackageName+' (Başka bir tarihe taşınmış)';
+                element.artPackageName = element.artPackageName + ' (Başka bir tarihe taşınmış)';
               }
             });
-            const lastElementIndex = this.list.indexOf(this.list[this.list.length-1]);
+            const lastElementIndex = this.list.indexOf(this.list[this.list.length - 1]);
             const lastElement = this.list[lastElementIndex];
             lastElement.categoryColor = 'Yellow';
-            lastElement.artPackageName = lastElement.artPackageName+' (Paketin son dersi)';
-            this.eventSettings ={
+            lastElement.artPackageName = lastElement.artPackageName + ' (Paketin son dersi)';
+            this.eventSettings = {
               dataSource: this.list,
-              fields:{
+              fields: {
                 id: 'id',
                 subject: { name: 'artPackageName' },
-                startTime: { name: 'startDate'},
-                endTime: { name: 'finishDate'},
+                startTime: { name: 'startDate' },
+                endTime: { name: 'finishDate' },
               },
               allowAdding: false,
               allowDeleting: false,
