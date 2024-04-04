@@ -29,8 +29,25 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
           });
         }
 
+        if (err.status === 400) {
+          console.log(err.error.isValid);
+          if(err.error.isValid != undefined){
+            let errorMessage = 'Lütfen aşağıda belirtilen hataları düzeltin\n\n';
+            var errors = err.error.errors;
+            errors.forEach(element => {
+              errorMessage += element.errorMessage+'\n';
+            });
+           /* for (let index = 0; index < err.error.errors.length; index++) {
+              errorMessage += err.error.errors[index].errorMessage+'\n';
+            }*/
+            console.log(errorMessage);
+            alert(errorMessage);
+          }
+          
+        }
+
         if (!environment.production) {
-          console.error(err);
+         // console.error(err);
         }
         const error = (err && err.error && err.error.message) || err.statusText;
         return throwError(error);

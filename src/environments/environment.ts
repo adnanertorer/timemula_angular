@@ -4,10 +4,8 @@
 
 export const environment = {
   production: false,
-  // apiUrl: 'https://lifearts-api.almulayazilim.com/api',
    apiUrl: 'https://localhost:5001/api',
    mainUrl: 'https://localhost:5001/',
- // apiUrl: 'http://157.90.74.92/api',
   access_token_name: 'access_token',
   refresh_token_name: 'refresh-token',
   logout_event_name: 'logout-event',

@@ -46,6 +46,10 @@ export class LoginComponent implements OnInit {
 
     });
   }
+
+  register(){
+    this.router.navigate(['register']);
+  }
   
   login() {
     if (!this.user.email || !this.user.password) {
