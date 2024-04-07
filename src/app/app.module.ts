@@ -51,6 +51,15 @@ import { EducatorLessonCostModalComponent } from './views/base/educator-lesson-c
 import { GeneralPaymentSubComponent } from './views/base/general-payment-sub/general-payment-sub.component';
 import { CustomerLessonsTempService } from './shared/services/customer-lessons-temp.service';
 import { InstallmentCollectionComponent } from './views/base/installment-collection/installment-collection.component';
+import { RegisterWizardStepsComponent } from './views/register-wizard-steps/register-wizard-steps.component';
+import { ComplateRegisterWizardComponent } from './views/register-wizard-steps/complate-register-wizard/complate-register-wizard.component';
+import { RegisterFormPageComponent } from './views/register-wizard-steps/register-form-page/register-form-page.component';
+import { StepTemplateComponent } from './views/register-wizard-steps/step-template/step-template.component';
+import { CreateCategoryComponent } from './views/base/create-category/create-category.component';
+import { JwPaginationModule } from 'jw-angular-pagination';
+import { CreateSubCategoryComponent } from './views/base/create-sub-category/create-sub-category.component';
+import { CreateLessonComponent } from './views/base/create-lesson/create-lesson.component';
+import { CreateClassroomComponent } from './views/base/create-classroom/create-classroom.component';
 
 
 
@@ -67,7 +76,15 @@ import { InstallmentCollectionComponent } from './views/base/installment-collect
     PaymentSubComponent,
     EducatorLessonCostModalComponent,
     GeneralPaymentSubComponent,
-    InstallmentCollectionComponent
+    InstallmentCollectionComponent,
+    RegisterWizardStepsComponent,
+    ComplateRegisterWizardComponent,
+    RegisterFormPageComponent,
+    StepTemplateComponent,
+    CreateCategoryComponent,
+    CreateSubCategoryComponent,
+    CreateLessonComponent,
+    CreateClassroomComponent
     //ConfirmationDialogComponent,
   ],
   imports: [
@@ -95,6 +112,7 @@ import { InstallmentCollectionComponent } from './views/base/installment-collect
     IconModule,
     ModalModule,
     DatePickerModule,
+    JwPaginationModule,
     IconSetModule.forRoot(),
     NgHttpLoaderModule.forRoot(),
   ],

@@ -1,0 +1,111 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <p>
+            Şimdi hizmet verdiğimiz sınıflarımızı ya da salonlarımızı
+            ekleyelim..
+          </p>
+          <p>
+            Tenis kortları, yüzme havuzları da bu kapsama girer. Hizmet verilen
+            her yer kapsam dahilindedir.
+          </p>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-6">
+              <form class="form-horizontal">
+                <input
+                  type="hidden"
+                  name="id"
+                  id="id"
+                  [(ngModel)]="classroom.id"
+                />
+                <div class="form-group row">
+                  <label class="col-md-3 col-form-label" for="classromName"
+                    >Derslik Adı</label
+                  >
+                  <div class="col-md-9">
+                    <input
+                      type="text"
+                      id="classromName"
+                      [(ngModel)]="classroom.classromName"
+                      name="classromName"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 col-form-label" for="quota"
+                    >Kontenjan</label
+                  >
+                  <div class="col-md-9">
+                    <input
+                      type="number"
+                      id="quota"
+                      [(ngModel)]="classroom.quta"
+                      name="quota"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+              </form>
+              <div class="card-footer">
+                <button
+                  type="submit"
+                  (click)="add()"
+                  class="btn btn-sm btn-primary"
+                >
+                  <i class="fa fa-dot-circle-o"></i> {{ buttonText }}
+                </button>
+                <button type="submit" (click)="add()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> {{buttonText}}</button>
+                <button type="reset" (click)="reset()" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Vazgeç</button>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="card">
+                <div class="col-md-12">
+                  <div class="card-header">
+                    <strong>Sınıf/Salon Listesi</strong>
+                  </div>
+                  <div class="card-body">
+                    <table class="table table-sm">
+                      <thead>
+                        <tr>
+                          <th>Derslik/Salon Adı</th>
+                          <th>Kontenjan</th>
+                          <th>İşlemler</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of pageOfItems">
+                          <td>{{item.classromName}}</td>
+                          <td>{{item.quta}}</td>
+                          <td>
+                            <button class="btn btn-info" (click)="getDetailFromTable(item)" title="Detay"
+                            >Detay</button
+                          >&nbsp;
+                          <button class="btn btn-danger" (click)="remove(item.id)" title="Sil">Sil</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="card-footer pb-0 pt-3">
+                    <jw-pagination
+                      [items]="classrooms"
+                      (changePage)="onChangePage($event)"
+                      [pageSize]="5"
+                    ></jw-pagination>
+                  </div>
+                </div>
+                <!--/.col-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared';
+import { BaseResponse } from 'src/app/shared/model/BaseResponse';
+import { TokenModel } from 'src/app/shared/model/TokenModel';
 import { RegisterCompanyModel } from 'src/app/shared/model/register-company-model';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-register-main',
   templateUrl: 'register.component.html'
 })
 export class RegisterComponent implements OnInit{
@@ -29,16 +31,24 @@ export class RegisterComponent implements OnInit{
     if(this.model.password === this.passwordAgain){
       this.service.registerCompany(this.model).subscribe(res => {
         if(res.success){
-          this.router.navigate(['/login']);
+          const response = res as BaseResponse;
+          const tokenModel = response.dynamicClass as TokenModel;
+
+          this.service._user.next({
+            email: this.model.email,
+            accessToken: tokenModel.token,
+            fullName: this.model.name+' '+this.model.surname,
+            password: '',
+            refreshToken: ''
+          });
+
+          this.service.setLocalStorage(tokenModel);
+          this.service.startTokenTimer();
+          this.router.navigate(['form']);
         }
       });
     }else{
       alert("Parolalar uyuşmuyor");
     }
-
-    
   }
-
-
-
 }

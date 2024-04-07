@@ -43,7 +43,7 @@ export class AuthService implements OnDestroy {
   private readonly lifearts_email = `${environment.user_email}`;
   private timer: Subscription;
   // tslint:disable-next-line: variable-name
-  private _user = new BehaviorSubject<ApplicationUser>(null);
+  public _user = new BehaviorSubject<ApplicationUser>(null);
   user$: Observable<ApplicationUser> = this._user.asObservable();
 
   // tslint:disable-next-line: typedef
@@ -173,7 +173,7 @@ export class AuthService implements OnDestroy {
       );
   }
 
-  setLocalStorage(x: TokenModel) {
+  public setLocalStorage(x: TokenModel) {
     try {
       localStorage.setItem(this.accessTokenName, x.token);
       localStorage.setItem(this.refreshTokeName, x.refreshToken);
@@ -204,7 +204,7 @@ export class AuthService implements OnDestroy {
     return Date.now() - Date.parse(timer);
   }
 
-  private startTokenTimer() {
+  public startTokenTimer() {
     const timeout = this.getTokenRemainTime();
     this.timer = of(true)
       .pipe(

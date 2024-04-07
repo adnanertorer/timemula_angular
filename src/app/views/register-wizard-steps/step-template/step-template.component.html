@@ -1,0 +1,19 @@
+<div class="step-template">
+  <div *ngIf="step.stepIndex == 1">
+    <app-create-category></app-create-category>
+  </div>
+  <div *ngIf="step.stepIndex == 2">
+    <app-create-sub-category></app-create-sub-category>
+  </div>
+  <div *ngIf="step.stepIndex == 3">
+    <app-create-lesson></app-create-lesson>
+  </div>
+  <div *ngIf="step.stepIndex == 4">
+    <app-create-classroom></app-create-classroom>
+  </div>
+  <button class="step-complete-btn" (click)="onCompleteStep()">
+    <span class="completed-step-check material-icons">
+      {{ step.isComplete ? "check_circle" : "panorama_fish_eye" }} </span
+    >Complete Step {{ step.stepIndex }}
+  </button>
+</div>
