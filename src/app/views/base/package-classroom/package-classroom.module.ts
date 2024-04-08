@@ -7,13 +7,16 @@ import { MyMaterialModule } from 'src/app/material.module';
 import { PackageClassroomRouterModule } from './package-classroom-router.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    JwPaginationModule,
-    MyMaterialModule,
-    PackageClassroomRouterModule
-  ],
-  declarations: [PackageClassroomComponent]
+    imports: [
+        CommonModule,
+        FormsModule,
+        JwPaginationModule,
+        MyMaterialModule,
+        PackageClassroomRouterModule
+    ],
+    exports: [
+        PackageClassroomComponent
+    ],
+    declarations: [PackageClassroomComponent]
 })
 export class PackageClassroomModule { }

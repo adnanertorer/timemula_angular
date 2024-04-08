@@ -1,19 +1,21 @@
 <div class="step-template">
-  <div *ngIf="step.stepIndex == 1">
+  <div *ngIf="step.name === 'category'">
     <app-create-category></app-create-category>
   </div>
-  <div *ngIf="step.stepIndex == 2">
+  <div *ngIf="step.name === 'subCategory'">
     <app-create-sub-category></app-create-sub-category>
   </div>
-  <div *ngIf="step.stepIndex == 3">
+  <div *ngIf="step.name === 'lesson'">
     <app-create-lesson></app-create-lesson>
   </div>
-  <div *ngIf="step.stepIndex == 4">
-    <app-create-classroom></app-create-classroom>
+  <div *ngIf="step.name === 'classroom'">
+    <app-package-classroom></app-package-classroom>
   </div>
+  <div *ngIf="step.stepIndex == 5"></div>
+  <div *ngIf="step.stepIndex == 6"></div>
+  <div *ngIf="step.stepIndex == 7"></div>
   <button class="step-complete-btn" (click)="onCompleteStep()">
     <span class="completed-step-check material-icons">
-      {{ step.isComplete ? "check_circle" : "panorama_fish_eye" }} </span
-    >Complete Step {{ step.stepIndex }}
+      {{ step.isComplete ? "check_circle" : "panorama_fish_eye" }} </span>Complete Step {{ step.stepIndex }}
   </button>
 </div>

@@ -33,7 +33,7 @@ export class CreateLessonComponent implements OnInit {
   private readonly mainUrl = `${environment.mainUrl}`;
   private readonly apiUrl = `${environment.apiUrl}`;
   @Output() public onUploadFinished = new EventEmitter();
-  
+
   constructor(private service: LessonService, private categoryService: CategoryService,
     private subCategoryService: SubCategoryService, private http: HttpClient) { }
 
@@ -61,7 +61,7 @@ export class CreateLessonComponent implements OnInit {
           return false;
       }
     }
-  
+
     getList(){
       this.service.getList().subscribe((data)=>{
         if(data.success){
@@ -74,7 +74,7 @@ export class CreateLessonComponent implements OnInit {
     categoryOnChange(id) {
       this.getSubCategories(parseInt(id));
     }
-  
+
     getCategories(){
       this.categoryService.getList().subscribe((data)=>{
         if(data.success){
@@ -90,7 +90,7 @@ export class CreateLessonComponent implements OnInit {
         }
       })
     }
-  
+
     onChangePage(pageOfItems: any[]): void {
       this.pageOfItems = pageOfItems;
     }
@@ -119,7 +119,7 @@ export class CreateLessonComponent implements OnInit {
       this.buttonText = "Kaydet";
       this.ngOnInit();
     }
-  
+
     public uploadFile = (files) => {
       if (files.length === 0) {
         return;
@@ -127,7 +127,7 @@ export class CreateLessonComponent implements OnInit {
       this.filesTemp = files;
       this.fileToUpload = <File>this.filesTemp[0];
       this.isFileExist = true;
-      
+
       if(!this.validateFile(this.fileToUpload.name)){
         alert('Lütfen fotoğrafınızı jpg, jpeg ya da png formatında yükleyiniz.');
         this.isFileExist = false;
@@ -183,7 +183,7 @@ export class CreateLessonComponent implements OnInit {
         });
       }
     }
-  
+
     remove(id: number): void {
       this.service.remove(id).subscribe((data) => {
         if (data.success) {

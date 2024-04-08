@@ -4,6 +4,7 @@ import { SubCategoryModel } from 'src/app/shared/model/sub-category-model';
 import { VSubCategory } from 'src/app/shared/model/v-sub-category';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { SubCategoryService } from 'src/app/shared/services/sub-category.service';
+import {StepsService} from "../../../shared/services/steps.service";
 declare let alertify: any;
 
 @Component({
@@ -20,7 +21,7 @@ export class CreateSubCategoryComponent implements OnInit {
   pageOfItems: Array<any>;
   pageOfSubItems: Array<any>;
   buttonText = "Kaydet";
-  
+
   constructor(private categoryService: CategoryService, private subCategoryService: SubCategoryService) { }
 
   ngOnInit() {

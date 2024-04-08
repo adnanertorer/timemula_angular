@@ -13,7 +13,7 @@ import { StepsService } from 'src/app/shared/services/steps.service';
 export class RegisterFormPageComponent implements OnInit {
 
   currentStep: Observable<StepModel>;
-  
+
   constructor(private stepsService: StepsService, private router: Router) { }
 
   ngOnInit() {
@@ -33,6 +33,6 @@ export class RegisterFormPageComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.router.navigate(['/complete']);
+    this.router.navigate(['complete']);
   }
 }

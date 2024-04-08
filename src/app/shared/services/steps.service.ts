@@ -3,11 +3,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { StepModel } from '../model/step-model';
 
 const STEPS = [
-  { stepIndex: 1, isComplete: false },
-  { stepIndex: 2, isComplete: false },
-  { stepIndex: 3, isComplete: false },
-  { stepIndex: 4, isComplete: false },
-  { stepIndex: 5, isComplete: false },
+  { stepIndex: 1, isComplete: false, name: 'category'},
+  { stepIndex: 2, isComplete: false, name: 'subCategory' },
+  { stepIndex: 3, isComplete: false, name: 'lesson' },
+  { stepIndex: 4, isComplete: false, name: 'classroom' },
+  { stepIndex: 5, isComplete: false, name: 'educator' },
+  { stepIndex: 6, isComplete: false, name: 'lesson-classroom' },
+  { stepIndex: 7, isComplete: false, name: 'educator-lesson' },
 ];
 
 @Injectable({
@@ -30,7 +32,6 @@ export class StepsService {
   }
 
   getCurrentStep() : Observable<StepModel> {
-    console.log(this.steps$.value.length +' '+ this.currentStep$.value);
     return this.currentStep$.asObservable();
   }
 
@@ -40,9 +41,10 @@ export class StepsService {
 
   moveToNextStep(): void {
     const index = this.currentStep$.value.stepIndex;
-
     if (index < this.steps$.value.length) {
+      console.log(this.steps$.value[index].name);
       this.currentStep$.next(this.steps$.value[index]);
+      console.log(this.currentStep$);
     }
   }
 

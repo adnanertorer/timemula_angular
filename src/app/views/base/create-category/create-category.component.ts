@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CategoryModel } from 'src/app/shared/model/category-model';
 import { CategoryService } from 'src/app/shared/services/category.service';
+import {StepsService} from "../../../shared/services/steps.service";
 declare let alertify: any;
 
 @Component({
@@ -15,7 +16,7 @@ export class CreateCategoryComponent implements OnInit {
   categories: CategoryModel[] = [];
   pageOfItems: Array<any>;
   buttonText = "Kaydet";
-  
+
   constructor(private service: CategoryService) { }
 
   ngOnInit() {
@@ -25,7 +26,6 @@ export class CreateCategoryComponent implements OnInit {
       createdBy: 0,
       id: 0
     };
-
     this.getList();
   }
 

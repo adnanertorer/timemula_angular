@@ -60,6 +60,7 @@ import { JwPaginationModule } from 'jw-angular-pagination';
 import { CreateSubCategoryComponent } from './views/base/create-sub-category/create-sub-category.component';
 import { CreateLessonComponent } from './views/base/create-lesson/create-lesson.component';
 import { CreateClassroomComponent } from './views/base/create-classroom/create-classroom.component';
+import {PackageClassroomComponent} from "./views/base/package-classroom/package-classroom.component";
 
 
 
@@ -84,7 +85,8 @@ import { CreateClassroomComponent } from './views/base/create-classroom/create-c
     CreateCategoryComponent,
     CreateSubCategoryComponent,
     CreateLessonComponent,
-    CreateClassroomComponent
+    CreateClassroomComponent,
+    PackageClassroomComponent,
     //ConfirmationDialogComponent,
   ],
   imports: [

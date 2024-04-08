@@ -18,10 +18,10 @@ export class RegisterWizardStepsComponent implements OnInit {
 
   ngOnInit() {
     this.steps = this.stepsService.getSteps();
-    this.currentStep = this.stepsService.getCurrentStep();
   }
 
   onStepClick(step: StepModel) {
+    console.log(step);
     this.stepsService.setCurrentStep(step);
   }
 

@@ -7,8 +7,7 @@ declare let alertify: any;
 @Component({
   selector: 'app-create-classroom',
   templateUrl: './create-classroom.component.html',
-  styleUrls: ['./create-classroom.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./create-classroom.component.css']
 })
 export class CreateClassroomComponent implements OnInit {
 
