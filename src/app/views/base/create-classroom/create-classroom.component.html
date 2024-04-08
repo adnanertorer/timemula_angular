@@ -9,90 +9,122 @@
           </p>
         </div>
         <div class="card-body">
-          <div class="row">
-            <div class="col-lg-6">
-              <form class="form-horizontal">
-                <input
-                  type="hidden"
-                  name="id"
-                  id="id"
-                  [(ngModel)]="classroom.id"
-                />
-                <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="classromName"
-                    >Derslik Adı</label
-                  >
-                  <div class="col-md-9">
-                    <input
-                      type="text"
-                      id="classromName"
-                      [(ngModel)]="classroom.classromName"
-                      name="classromName"
-                      class="form-control"
-                    />
+          <div class="animated fadeIn">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <strong>Ders/Sınıf</strong> İlişkisi Kayıt Formu
+                  </div>
+                  <div class="card-body">
+                    <form action="" method="post" class="form-horizontal">
+                      <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="categoryId">Kategori</label>
+                        <div class="col-md-9">
+                          <select name="categoryId" (change)="categoryOnChange($event.target.value)" id="categoryId" [(ngModel)]="createClassroomForLesson.lesson.categoryId"
+                           class="form-control">
+                            <option value="0">Seçiniz</option>
+                            <option value="{{item.id}}" *ngFor="let item of categories">{{item.categoryName}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="subCategoryId">Alt Kategori</label>
+                        <div class="col-md-9">
+                          <select name="subCategoryId" id="subCategoryId" (change)="subCategoryOnChange($event.target.value)" [(ngModel)]="createClassroomForLesson.lesson.subCategoryId" class="form-control">
+                            <option value="0">Seçiniz</option>
+                            <option value="{{item.id}}" *ngFor="let item of subCategories">{{item.subCategoryName}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="lessonId">Ders</label>
+                        <div class="col-md-9">
+                          <select name="lessonId" id="lessonId" [(ngModel)]="createClassroomForLesson.lesson.lessonId" class="form-control">
+                            <option value="0">Seçiniz</option>
+                            <option value="{{item.id}}" *ngFor="let item of lessons">{{item.lessonName}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="classromName">Sınıf/Salon Adı</label>
+                        <div class="col-md-9">
+                          <input type="text" name="classromName" class="form-control" id="classromName"
+                          [(ngModel)]="createClassroomForLesson.classroom.classromName">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="quta">Sınıf Kotası</label>
+                        <div class="col-md-9">
+                          <input type="number" name="quta" class="form-control" id="quta"
+                          [(ngModel)]="createClassroomForLesson.classroom.quta">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="minCapacity">Ders Minimum Kişi Sayısı</label>
+                        <div class="col-md-9">
+                          <input type="number" name="minCapacity" class="form-control" id="minCapacity"
+                          [(ngModel)]="createClassroomForLesson.lesson.minCapacity">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="maxCapacity">Ders Maksimum Kişi Sayısı</label>
+                        <div class="col-md-9">
+                          <input type="number" name="maxCapacity" class="form-control" id="maxCapacity"
+                          [(ngModel)]="createClassroomForLesson.lesson.maxCapacity">
+                        </div>
+                      </div>
+                    </form>
+                    <div class="card-footer">
+                      <button type="submit" (click)="add()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> {{buttonText}}</button>
+                    </div>
                   </div>
                 </div>
-                <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="quota"
-                    >Kontenjan</label
-                  >
-                  <div class="col-md-9">
-                    <input
-                      type="number"
-                      id="quota"
-                      [(ngModel)]="classroom.quta"
-                      name="quota"
-                      class="form-control"
-                    />
-                  </div>
-                </div>
-              </form>
-              <div class="card-footer">
-                <button type="submit" (click)="add()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> {{buttonText}}</button>
-                <button type="reset" (click)="reset()" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Vazgeç</button>
               </div>
             </div>
-            <div class="col-lg-6">
-              <div class="card">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
                 <div class="col-md-12">
                   <div class="card-header">
-                    <strong>Sınıf/Salon Listesi</strong>
+                    <strong>Ders/Sınıf İlişkisi Listesi</strong> 
                   </div>
                   <div class="card-body">
                     <table class="table table-sm">
                       <thead>
                         <tr>
-                          <th>Derslik/Salon Adı</th>
-                          <th>Kontenjan</th>
+                          <th>Derslik Adı</th>
+                          <th>Ders Adı</th>
+                          <th>Sınıf Kapasitesi</th>
+                          <th>Ders Min. Kişi Sayısı</th>
+                          <th>Ders Maks. Kişi Sayısı</th>
+                          <th>Dersin Önceliği</th>
+                          <th>Kayıt Zamanı</th>
                           <th>İşlemler</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr *ngFor="let item of pageOfItems">
                           <td>{{item.classromName}}</td>
-                          <td>{{item.quta}}</td>
+                          <td>{{item.lessonName}}</td>
+                          <td>{{item.maxCapacity}}</td>
+                          <td>{{item.minCapacity}}</td>
+                          <td>{{item.maxCapacity}}</td>
+                          <td>{{item.priority}}</td>
+                          <td>{{item.createdAt | date: 'dd/M/yyyy hh:mm'}}</td>
                           <td>
-                            <button class="btn btn-info" (click)="getDetailFromTable(item)" title="Detay"
-                            >Detay</button
-                          >&nbsp;
-                          <button class="btn btn-danger" (click)="remove(item.id)" title="Sil">Sil</button>
+                            <a (click)="remove(item.id)" title="Sil">Sil</a>
                           </td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                   <div class="card-footer pb-0 pt-3">
-                    <jw-pagination
-                      [items]="classrooms"
-                      (changePage)="onChangePage($event)"
-                      [pageSize]="5"
-                    ></jw-pagination>
-                  </div>
+                    <jw-pagination [items]="list" (changePage)="onChangePage($event)"></jw-pagination>
                 </div>
-                <!--/.col-->
-              </div>
-            </div>
-          </div>
+                </div><!--/.col-->
+              </div><!--/.row-->
+          </div>          
         </div>
       </div>
     </div>

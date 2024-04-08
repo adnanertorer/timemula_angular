@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { BaseResponse } from '../model/BaseResponse';
 import { PackageClassroomModel } from '../model/package-classroom-model';
+import { CreateClassroomForLesson } from 'src/app/views/base/create-classroom/create-classroom.component';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,16 @@ export class PackageClassroomService {
   add(resource: PackageClassroomModel){
     return this.http
         .post<BaseResponse>(`${this.apiUrl}/PackageClassroom/Add`, resource)
+        .pipe(
+            map((x)=> {
+                return x;
+            })
+        );
+  }
+
+  addSetup(resource: CreateClassroomForLesson){
+    return this.http
+        .post<BaseResponse>(`${this.apiUrl}/PackageClassroom/AddSetup`, resource)
         .pipe(
             map((x)=> {
                 return x;

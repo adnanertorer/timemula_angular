@@ -1,15 +1,15 @@
 <div class="step-template">
-  <div *ngIf="step.name === 'category'">
+  <div *ngIf="step.stepIndex == 1">
     <app-create-category></app-create-category>
   </div>
-  <div *ngIf="step.name === 'subCategory'">
+  <div *ngIf="step.stepIndex == 2">
     <app-create-sub-category></app-create-sub-category>
   </div>
-  <div *ngIf="step.name === 'lesson'">
+  <div *ngIf="step.stepIndex == 3">
     <app-create-lesson></app-create-lesson>
   </div>
-  <div *ngIf="step.name === 'classroom'">
-    <app-package-classroom></app-package-classroom>
+  <div *ngIf="step.stepIndex == 4">
+    <app-create-classroom></app-create-classroom>
   </div>
   <div *ngIf="step.stepIndex == 5"></div>
   <div *ngIf="step.stepIndex == 6"></div>

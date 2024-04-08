@@ -86,7 +86,6 @@ import {PackageClassroomComponent} from "./views/base/package-classroom/package-
     CreateSubCategoryComponent,
     CreateLessonComponent,
     CreateClassroomComponent,
-    PackageClassroomComponent,
     //ConfirmationDialogComponent,
   ],
   imports: [
