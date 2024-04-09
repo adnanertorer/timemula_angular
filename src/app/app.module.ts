@@ -61,6 +61,7 @@ import { CreateSubCategoryComponent } from './views/base/create-sub-category/cre
 import { CreateLessonComponent } from './views/base/create-lesson/create-lesson.component';
 import { CreateClassroomComponent } from './views/base/create-classroom/create-classroom.component';
 import {PackageClassroomComponent} from "./views/base/package-classroom/package-classroom.component";
+import { CreateEducatorComponent } from './views/base/create-educator/create-educator.component';
 
 
 
@@ -86,6 +87,7 @@ import {PackageClassroomComponent} from "./views/base/package-classroom/package-
     CreateSubCategoryComponent,
     CreateLessonComponent,
     CreateClassroomComponent,
+    CreateEducatorComponent
     //ConfirmationDialogComponent,
   ],
   imports: [

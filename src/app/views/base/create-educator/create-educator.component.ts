@@ -1,0 +1,118 @@
+import { Component, OnInit } from '@angular/core';
+import { StaffModel } from 'src/app/shared/model/staff-model';
+import { VStaffsModel } from 'src/app/shared/model/v-staffs-model';
+import { StaffService } from 'src/app/shared/services/staff.service';
+
+@Component({
+  selector: 'app-create-educator',
+  templateUrl: './create-educator.component.html',
+  styleUrls: ['./create-educator.component.css']
+})
+export class CreateEducatorComponent implements OnInit {
+
+  staff: StaffModel;
+  staffList: VStaffsModel[] = [];
+  pageOfItems: Array<any>;
+  buttonText = "Kaydet";
+  
+  constructor(private service: StaffService) { }
+
+  ngOnInit() {
+    this.staff = {
+      address: '',
+      callenderOrder: 0,
+      createdBy: 0,
+      email: '',
+      workFinishDateTime: null,
+      workStarDateTime: new Date(),
+      gsm: '',
+      id: 0,
+      identityNumber: '',
+      name: '',
+      salaryTypeId: 0,
+      staffTypeId: 0,
+      surname: '',
+      birthDay: null,
+      branchId: 0,
+      isTeacher: false
+    };
+    this.getList();
+  }
+
+  getList(): void {
+    this.service.getList().subscribe((data)=>{
+      this.staffList = data.dynamicClass as VStaffsModel[];
+      this.pageOfItems = this.staffList;
+    })
+  }
+
+  onChangePage(pageOfItems: any[]): void {
+    this.pageOfItems = pageOfItems;
+  }
+
+  getDetailFromTable(resource: any): void {
+    //this.staff = resource;
+    const id = resource.id;
+    this.service.getDetails(id).subscribe((data)=>{
+      if(data.success){
+        this.staff = data.dynamicClass as StaffModel;
+        this.buttonText = "Güncelle";
+        window.scroll({ 
+          top: 0, 
+          left: 0, 
+          behavior: 'smooth' 
+        });
+      }
+    })
+  }
+
+  add(): void {
+    if(this.staff.id == 0){
+      this.staff.identityNumber = this.staff.identityNumber.toString();
+      this.service.add(this.staff).subscribe((data)=>{
+        if(data.success){
+          alert(data.clientMessage);
+          this.ngOnInit();
+        }else{
+          alert(data.clientMessage);
+        }
+      }, (err)=>{
+        alert(err);
+      });
+    }else{
+      this.staff.identityNumber = this.staff.identityNumber.toString();
+      this.service.update(this.staff).subscribe((data)=>{
+        if(data.success){
+          alert(data.clientMessage);
+          this.ngOnInit();
+        }else{
+          alert(data.clientMessage);
+        }
+      });
+    }
+  }
+
+  remove(id: number): void {
+   this.service.remove(id).subscribe((data)=>{
+      if(data.success){
+        alert(data.clientMessage);
+        this.ngOnInit();
+      }else{
+        alert(data.clientMessage);
+      }
+    });
+  }
+
+  reset(): void {
+   this.buttonText = "Kaydet";
+    this.ngOnInit();
+  }
+
+  parseDate(dateString: string) {
+    if (dateString) {
+      return new Date(dateString);
+    }
+    return null;
+  }
+
+}
