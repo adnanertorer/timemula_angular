@@ -29,6 +29,7 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
         }
 
         if (err.status === 400) {
+          console.log(err);
           if(err.error.isValid != undefined){
             let errorMessage = 'Lütfen aşağıda belirtilen hataları düzeltin\n\n';
             var errors = err.error.errors;

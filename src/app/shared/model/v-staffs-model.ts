@@ -18,5 +18,6 @@ export interface VStaffsModel {
     birthDate?: Date;
     branchId: number;
     branchName: string;
+    salaryAmount?: number;
 }
 

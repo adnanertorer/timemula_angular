@@ -12,7 +12,8 @@ export interface StaffModel {
     email: string;
     workStarDateTime: Date;
     workFinishDateTime?: Date;
-    birthDay?: Date;
+    birthDate?: Date;
     branchId?: number;
     isTeacher?: boolean;
+    salaryAmount?: number;
 }

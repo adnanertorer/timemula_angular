@@ -6,7 +6,7 @@
           <strong>Personel</strong> Kayıt Formu
         </div>
         <div class="card-body">
-          <form action="" method="post" class="form-horizontal">
+          <form class="form-horizontal">
             <input type="hidden" name="id" id="id" [(ngModel)]="staff.id">
             <div class="form-group row">
               <label class="col-md-3 col-form-label" for="identityNumber">T.C. Kimlik Numarası</label>
@@ -52,9 +52,9 @@
             <div class="form-group row">
               <label class="col-md-3 col-form-label" for="birthDay">Doğum Tarihi</label>
               <div class="col-md-9">
-                <input type="date" name="birthDay" id="birthDay" #birthDay
-                class="form-control" [value]="staff.birthDay | date:'yyyy-MM-dd'" 
-                (input)="staff.birthDay = parseDate($event.target.value)" >
+                <input type="date" name="birthDate" id="birthDate" #birthDate
+                class="form-control" [value]="staff.birthDate | date:'yyyy-MM-dd'" 
+                (input)="staff.birthDate = parseDate($event.target.value)" >
               </div>
             </div>
             <div class="form-group row">
@@ -69,12 +69,6 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 col-form-label" for="isTeacher">Eğitim Verebilir mi?</label>
-              <div class="col-md-9">
-                <input type="checkbox" name="isTeacher" id="isTeacher" [(ngModel)]="staff.isTeacher">
-              </div>
-            </div>
-            <div class="form-group row">
               <label class="col-md-3 col-form-label" for="salaryTypeId">Maaş Tipi</label>
               <div class="col-md-9">
                 <select name="salaryTypeId" id="salaryTypeId" [(ngModel)]="staff.salaryTypeId" 
@@ -85,6 +79,22 @@
                 </select>
               </div>
             </div>
+            <div class="form-group row">
+              <label
+                class="col-md-3 col-form-label"
+                for="salaryAmount"
+                >Ödeme Tutarı</label
+              >
+              <div class="col-md-9">
+                <input
+                  type="number"
+                  id="salaryAmount"
+                  [(ngModel)]="staff.salaryAmount"
+                  name="salaryAmount"
+                  class="form-control"
+                />
+              </div>
+              </div>
             <div class="form-group row">
               <label class="col-md-3 col-form-label" for="workStarDateTime">İşe Başlama Tarihi</label>
               <div class="col-md-9">

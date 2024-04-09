@@ -11,7 +11,9 @@
   <div *ngIf="step.stepIndex == 4">
     <app-create-classroom></app-create-classroom>
   </div>
-  <div *ngIf="step.stepIndex == 5"></div>
+  <div *ngIf="step.stepIndex == 5">
+    <app-create-educator></app-create-educator>
+  </div>
   <div *ngIf="step.stepIndex == 6"></div>
   <div *ngIf="step.stepIndex == 7"></div>
   <button class="step-complete-btn" (click)="onCompleteStep()">

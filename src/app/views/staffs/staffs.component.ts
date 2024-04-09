@@ -121,9 +121,10 @@ export class StaffsComponent implements OnInit, Qrud {
       salaryTypeId: 0,
       staffTypeId: 0,
       surname: '',
-      birthDay: null,
+      birthDate: null,
       branchId: 0,
-      isTeacher: false
+      isTeacher: false,
+      salaryAmount: 0
     };
     this.getList();
     this.getStaffTypes();

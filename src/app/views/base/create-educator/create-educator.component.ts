@@ -11,7 +11,7 @@ import { StaffService } from 'src/app/shared/services/staff.service';
 export class CreateEducatorComponent implements OnInit {
 
   staff: StaffModel;
-  staffList: VStaffsModel[] = [];
+  staffList: any[] = [];
   pageOfItems: Array<any>;
   buttonText = "Kaydet";
   
@@ -32,16 +32,17 @@ export class CreateEducatorComponent implements OnInit {
       salaryTypeId: 0,
       staffTypeId: 0,
       surname: '',
-      birthDay: null,
+      birthDate: null,
       branchId: 0,
-      isTeacher: false
+      isTeacher: false,
+      salaryAmount: 0
     };
     this.getList();
   }
 
   getList(): void {
     this.service.getList().subscribe((data)=>{
-      this.staffList = data.dynamicClass as VStaffsModel[];
+      this.staffList = data.dynamicClass as any[];
       this.pageOfItems = this.staffList;
     })
   }
@@ -76,8 +77,6 @@ export class CreateEducatorComponent implements OnInit {
         }else{
           alert(data.clientMessage);
         }
-      }, (err)=>{
-        alert(err);
       });
     }else{
       this.staff.identityNumber = this.staff.identityNumber.toString();
