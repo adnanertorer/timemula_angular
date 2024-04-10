@@ -61,6 +61,13 @@ export enum PersonTypeEnum {
   Customer = 3
 }
 
+export enum SalaryTypeEnum {
+  Monthly = 1,
+  Weekly = 2,
+  Daily = 3,
+  Seance = 5
+}
+
 
 
 /*
