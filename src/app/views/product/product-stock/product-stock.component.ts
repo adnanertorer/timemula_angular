@@ -19,7 +19,7 @@ declare let alertify: any;
   styleUrls: ['./product-stock.component.css']
 })
 export class ProductStockComponent implements OnInit {
-  buttonText = "Kaydet";
+  buttonText = Save;
   warehosue: WarehouseModel;
   stockList: VWarehouseModel[] = [];
   products: ProductModel[] = [];
@@ -134,7 +134,7 @@ export class ProductStockComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.warehosue = resource;
-    this.buttonText = "Güncelle";
+    this.buttonText = Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -143,7 +143,7 @@ export class ProductStockComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = "Kaydet";
+    this.buttonText = Save;
     this.ngOnInit();
   }
 

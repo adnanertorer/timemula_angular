@@ -13,7 +13,7 @@ export class CashboxComponent implements OnInit {
 
   cashBox: CashboxModel;
   cashBoxList: CashboxModel[] = [];
-  buttonText = "Kaydet";
+  buttonText = Save;
   pageOfItems: Array<any>;
   isBank: boolean = false;
   cashTypes = CashBoxTypeEnum;
@@ -52,7 +52,7 @@ export class CashboxComponent implements OnInit {
     }else{
       this.isBank = false;
     }
-    this.buttonText = "Güncelle";
+    this.buttonText = Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -61,7 +61,7 @@ export class CashboxComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = "Kaydet";
+    this.buttonText = Save;
     this.ngOnInit();
   }
 

@@ -21,7 +21,7 @@ export class CreateLessonComponent implements OnInit {
   lesson: LessonModel;
   lessons: VLessons[] = [];
   pageOfItems: Array<any>;
-  buttonText = "Kaydet";
+  buttonText = Save;
   categories: CategoryModel[] = [];
   subCategories: SubCategoryModel[] = [];
   filesTemp:any;
@@ -103,7 +103,7 @@ export class CreateLessonComponent implements OnInit {
             if(data.success){
               this.subCategories = data.dynamicClass as SubCategoryModel[];
               this.lesson = resource;
-              this.buttonText = "Güncelle";
+              this.buttonText = Update;
                   window.scroll({
                     top: 0,
                     left: 0,
@@ -116,7 +116,7 @@ export class CreateLessonComponent implements OnInit {
     }
 
     reset(): void {
-      this.buttonText = "Kaydet";
+      this.buttonText = Save;
       this.ngOnInit();
     }
 

@@ -9,11 +9,11 @@ import { StaffService } from 'src/app/shared/services/staff.service';
 import { daysEnum } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-educator-days-hours',
-  templateUrl: './educator-days-hours.component.html',
-  styleUrls: ['./educator-days-hours.component.css']
+  selector: 'app-create-educator-working-hours',
+  templateUrl: './create-educator-working-hours.component.html',
+  styleUrls: ['./create-educator-working-hours.component.css']
 })
-export class EducatorDaysHoursComponent implements OnInit {
+export class CreateEducatorWorkingHoursComponent implements OnInit {
 
   model: EducatorDaysHoursModel;
   list: EducatorDaysHoursModel[] = [];
@@ -24,7 +24,7 @@ export class EducatorDaysHoursComponent implements OnInit {
 
   @ViewChild('paginatorEducator') paginator: MatPaginator;
   @ViewChild('educatorSort') sort: MatSort;
-
+  
   public weekDays: daysEnum[] = [daysEnum.Pazartesi, daysEnum.Sali, daysEnum.Carsamba, daysEnum.Persembe, daysEnum.Cuma, daysEnum.Cumartesi, daysEnum.Pazar];
   public dayLabels = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
 

@@ -55,7 +55,7 @@ export class DeptCollectionComponent implements OnInit {
   cashBoxList: CashboxModel[] = [];
   cashBoxes: CashboxModel[] = [];
   customers: Customer[] = [];
-  buttonText = "Kaydet";
+  buttonText = Save;
   pageOfItems: Array<any>;
   pageOfItemTransactions: Array<any>;
   isCollection: boolean = false;
@@ -154,7 +154,7 @@ export class DeptCollectionComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.deptCollection = resource;
-    this.buttonText = "Güncelle";
+    this.buttonText = Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -184,7 +184,7 @@ export class DeptCollectionComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = "Kaydet";
+    this.buttonText = Save;
     this.ngOnInit();
   }
 

@@ -25,9 +25,9 @@ export class SubServiceComponent implements OnInit {
   subServiceList: SubService[] = [];
   staffs: StaffModel[] = [];
   pageOfItems: Array<any>;
-  buttonText = "Kaydet";
-  classroomButtonText = "Kaydet";
-  teacherButtonText = "Kaydet";
+  buttonText = Save;
+  classroomButtonText = Save;
+  teacherButtonText = Save;
   isUpdateClassroom: boolean = false;
   isUpdateTeacher: boolean = false;
   modalOpen:boolean = false;
@@ -55,9 +55,9 @@ export class SubServiceComponent implements OnInit {
     this.modalOpen = false;
     this.classroomModalOpen = false;
     this.teacherModalOpen = false;
-    this.buttonText = "Kaydet";
-    this.classroomButtonText = "Kaydet";
-    this.teacherButtonText = "Kaydet";
+    this.buttonText = Save;
+    this.classroomButtonText = Save;
+    this.teacherButtonText = Save;
     this.subService = {
       createdBy: 0,
       id: 0,
@@ -117,7 +117,7 @@ export class SubServiceComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.subService = resource;
-    this.buttonText = "Güncelle";
+    this.buttonText = Update;
     this.modalOpen = true;
     window.scroll({
       top: 0,
@@ -129,7 +129,7 @@ export class SubServiceComponent implements OnInit {
   getDetailClassroom(resource: any): void {
     this.subserviceClassroom = resource;
     this.isUpdateClassroom = true;
-    this.classroomButtonText = "Güncelle";
+    this.classroomButtonText = Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -140,7 +140,7 @@ export class SubServiceComponent implements OnInit {
   getDetailTeacher(resource: any): void {
     this.subServiceTeacher = resource;
     this.isUpdateTeacher = true;
-    this.teacherButtonText = "Güncelle";
+    this.teacherButtonText = Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -157,7 +157,7 @@ export class SubServiceComponent implements OnInit {
       priority: 0,
       sub_service_id: 0
     };
-    this.classroomButtonText = "Kaydet";
+    this.classroomButtonText = Save;
   }
 
   resetTeacher(){
@@ -169,11 +169,11 @@ export class SubServiceComponent implements OnInit {
       staff_id: 0,
       sub_service_id: 0
     };
-    this.teacherButtonText = "Kaydet";
+    this.teacherButtonText = Save;
   }
 
   reset(): void {
-    this.buttonText = "Kaydet";
+    this.buttonText = Save;
     this.ngOnInit();
   }
 
@@ -290,7 +290,7 @@ export class SubServiceComponent implements OnInit {
   openClassroomModal(id: number){
     this.subServiceId = id;
     this.isUpdateClassroom = false;
-    this.classroomButtonText = "Kaydet";
+    this.classroomButtonText = Save;
     this.getClassrooms();
     this.getSubServiceClassroomList(this.subServiceId);
     this.classroomModalOpen = true;
@@ -300,7 +300,7 @@ export class SubServiceComponent implements OnInit {
     this.teacherModalOpen = true;
     this.subServiceId = id;
     this.isUpdateTeacher = false;
-    this.teacherButtonText = "Kaydet";
+    this.teacherButtonText = Save;
     this.getTeachers();
     this.getSubServiceTeacherList(this.subServiceId);
     

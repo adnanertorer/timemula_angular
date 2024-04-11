@@ -14,7 +14,7 @@ declare let alertify: any;
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  buttonText = "Kaydet";
+  buttonText = Save;
   product: ProductModel;
   productList: ProductModel[] = [];
   pageOfItems: Array<any>;
@@ -54,7 +54,7 @@ export class ProductComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.product = resource;
-    this.buttonText = "Güncelle";
+    this.buttonText = Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -63,7 +63,7 @@ export class ProductComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = "Kaydet";
+    this.buttonText = Save;
     this.ngOnInit();
   }
 

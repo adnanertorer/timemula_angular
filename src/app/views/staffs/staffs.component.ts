@@ -22,7 +22,7 @@ export class StaffsComponent implements OnInit, Qrud {
   staffTypes: StaffType[] = [];
   salaryTypes: SalaryType[] = [];
   pageOfItems: Array<any>;
-  buttonText = "Kaydet";
+  buttonText = Save;
   branches: Branch[] = [];
 
   constructor(private service: StaffService, private staffTypeService: StaffTypeService,
@@ -53,7 +53,7 @@ export class StaffsComponent implements OnInit, Qrud {
     this.service.getDetails(id).subscribe((data)=>{
       if(data.success){
         this.staff = data.dynamicClass as StaffModel;
-        this.buttonText = "Güncelle";
+        this.buttonText = Update;
         window.scroll({ 
           top: 0, 
           left: 0, 
@@ -102,7 +102,7 @@ export class StaffsComponent implements OnInit, Qrud {
   }
 
   reset(): void {
-   this.buttonText = "Kaydet";
+   this.buttonText = Save;
     this.ngOnInit();
   }
 

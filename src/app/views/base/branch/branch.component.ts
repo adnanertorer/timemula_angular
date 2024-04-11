@@ -13,7 +13,7 @@ export class BranchComponent implements OnInit {
   branch: Branch;
   branchList: Branch[] = [];
   pageOfItems: Array<any>;
-  buttonText = "Kaydet";
+  buttonText = Save;
 
   constructor(private service: BranchService) { }
 
@@ -34,7 +34,7 @@ export class BranchComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.branch = resource;
-    this.buttonText = "Güncelle";
+    this.buttonText = Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -43,7 +43,7 @@ export class BranchComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = "Kaydet";
+    this.buttonText = Save;
     this.ngOnInit();
   }
 

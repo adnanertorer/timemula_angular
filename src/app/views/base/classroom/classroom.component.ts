@@ -15,7 +15,7 @@ export class ClassroomComponent implements OnInit {
   classrooms: ClassroomModel[] = [];
   subServiceId: number;
   pageOfItems: Array<any>;
-  buttonText = "Kaydet";
+  buttonText = Save;
   constructor(private activatedRoute: ActivatedRoute, private service: ClassroomService) { }
 
   ngOnInit() {
@@ -41,7 +41,7 @@ export class ClassroomComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.classroom = resource;
-    this.buttonText = "Güncelle";
+    this.buttonText = Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -50,7 +50,7 @@ export class ClassroomComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = "Kaydet";
+    this.buttonText = Save;
     this.ngOnInit();
   }
 

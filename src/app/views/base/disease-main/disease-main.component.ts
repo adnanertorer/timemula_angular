@@ -16,7 +16,7 @@ export class DiseaseMainComponent implements OnInit {
   model: DiseaseMainModel;
   list: DiseaseMainModel[] = [];
 
-  buttonText: string = "Kaydet";
+  buttonText: string = Save;
   displayColums: string[] = ['diseaseCategoryName', 'isActive','id'];
   dataSource: MatTableDataSource<DiseaseMainModel>;
 
@@ -26,7 +26,7 @@ export class DiseaseMainComponent implements OnInit {
   constructor(private service: DiseaseMainService, private router: Router) { }
 
   ngOnInit() {
-    this.buttonText = "Kaydet";
+    this.buttonText = Save;
     this.model = {
       createdAt: new Date(),
       createdBy: 0,
@@ -60,7 +60,7 @@ export class DiseaseMainComponent implements OnInit {
     this.service.getDetails(id).subscribe((data)=>{
       if(data.success){
         this.model = data.dynamicClass as DiseaseMainModel;
-        this.buttonText = "Güncelle";
+        this.buttonText = Update;
       }
     })
   }

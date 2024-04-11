@@ -21,7 +21,7 @@ export class CreateLessonEducatorComponent implements OnInit {
   lessonList: LessonModel[];
   staffList: StaffModel[] = [];
   pageOfItems: Array<any>;
-  buttonText = "Kaydet";
+  buttonText = Save;
   isSeancePrice: boolean = false;
   
   constructor(private service: LessonEducatorService, private lessonService: LessonService, private staffService: StaffService) { }
@@ -73,7 +73,7 @@ export class CreateLessonEducatorComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.model = resource;
-    this.buttonText = "Güncelle";
+    this.buttonText = Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -94,7 +94,7 @@ export class CreateLessonEducatorComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = "Kaydet";
+    this.buttonText = Save;
     this.ngOnInit();
   }
 

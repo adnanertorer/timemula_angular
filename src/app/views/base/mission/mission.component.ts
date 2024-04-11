@@ -14,7 +14,7 @@ export class MissionComponent implements OnInit {
   mission: MissionModel;
   missionList: MissionModel[] = [];
   pageOfItems: Array<any>;
-  buttonText = "Kaydet";
+  buttonText = Save;
 
   constructor(private service: MissionService) { }
 
@@ -34,7 +34,7 @@ export class MissionComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.mission = resource;
-    this.buttonText = "Güncelle";
+    this.buttonText = Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -43,7 +43,7 @@ export class MissionComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = "Kaydet";
+    this.buttonText = Save;
     this.ngOnInit();
   }
 

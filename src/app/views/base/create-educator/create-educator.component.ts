@@ -13,7 +13,7 @@ export class CreateEducatorComponent implements OnInit {
   staff: StaffModel;
   staffList: any[] = [];
   pageOfItems: Array<any>;
-  buttonText = "Kaydet";
+  buttonText = Save;
   
   constructor(private service: StaffService) { }
 
@@ -57,7 +57,7 @@ export class CreateEducatorComponent implements OnInit {
     this.service.getDetails(id).subscribe((data)=>{
       if(data.success){
         this.staff = data.dynamicClass as StaffModel;
-        this.buttonText = "Güncelle";
+        this.buttonText = Update;
         window.scroll({ 
           top: 0, 
           left: 0, 
@@ -103,7 +103,7 @@ export class CreateEducatorComponent implements OnInit {
   }
 
   reset(): void {
-   this.buttonText = "Kaydet";
+   this.buttonText = Save;
     this.ngOnInit();
   }
 

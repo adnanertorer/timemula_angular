@@ -13,7 +13,7 @@ export class SalaryTypesComponent implements OnInit {
   salaryType: SalaryType;
   salaryTypes: SalaryType[] = [];
   pageOfItems: Array<any>;
-  buttonText = "Kaydet";
+  buttonText = Save;
   constructor(private service: SalaryTypeService) { }
 
   ngOnInit() {
@@ -31,7 +31,7 @@ export class SalaryTypesComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.salaryType = resource;
-    this.buttonText = "Güncelle";
+    this.buttonText = Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -40,7 +40,7 @@ export class SalaryTypesComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = "Kaydet";
+    this.buttonText = Save;
     this.ngOnInit();
   }
 

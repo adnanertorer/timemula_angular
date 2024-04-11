@@ -14,11 +14,11 @@ export class LifeartsServiceComponent implements OnInit {
   lifeartsService: LifeartsService;
   serviceList: LifeartsService[] = [];
   pageOfItems: Array<any>;
-  buttonText = "Kaydet";
+  buttonText = Save;
   constructor(private service: LifeartsArtServiceService, private router: Router) { }
 
   ngOnInit() {
-    this.buttonText = "Kaydet";
+    this.buttonText = Save;
     this.lifeartsService = {
       createdBy: 0,
       id: 0,
@@ -37,7 +37,7 @@ export class LifeartsServiceComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.lifeartsService = resource;
-    this.buttonText = "Güncelle";
+    this.buttonText = Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -46,7 +46,7 @@ export class LifeartsServiceComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = "Kaydet";
+    this.buttonText = Save;
     this.ngOnInit();
   }
 

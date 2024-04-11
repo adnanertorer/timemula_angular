@@ -96,7 +96,7 @@ export class CustomerPackageComponent implements OnInit {
   filterResponses: FilterResponseModel[] = [];
   filterDetailResponses: FilterResponseModel[] = [];
   pageOfItems: Array<any>;
-  buttonText = "Kaydet";
+  buttonText = Save;
   selectedCategoryId: number = 0;
   selectedSubCategoryId: number = 0;
   closedGroup: number =  participantEnum.closedGroup;
@@ -551,7 +551,7 @@ export class CustomerPackageComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.customerLesson = resource;
-    this.buttonText = "Güncelle";
+    this.buttonText = Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -560,7 +560,7 @@ export class CustomerPackageComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = "Kaydet";
+    this.buttonText = Save;
     this.ngOnInit();
   }
 

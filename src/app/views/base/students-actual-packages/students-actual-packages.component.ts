@@ -14,7 +14,7 @@ export class StudentsActualPackagesComponent implements OnInit {
 
   list:VCustomerMainModel[] = [];
   pageOfItems: Array<any>;
-  buttonText = "Kaydet";
+  buttonText = Save;
   name:string = "";
   surname:string = "";
   selectedCustomerId: number= 0;

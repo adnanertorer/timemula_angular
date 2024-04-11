@@ -16,7 +16,7 @@ export class CustomerLessonDetailComponent implements OnInit {
   list:VCustomerMainModel[] = [];
   tempList:VCustomerLessonsTempMain[] = [];
   pageOfItems: Array<any>;
-  buttonText = "Kaydet";
+  buttonText = Save;
   name:string = "";
   surname:string = "";
   selectedCustomerId: number= 0;

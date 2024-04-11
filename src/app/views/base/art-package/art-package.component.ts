@@ -42,7 +42,7 @@ export class ArtPackageComponent implements OnInit {
   participants: ParticipantModel[] = [];
   lessons: VLessons[] = [];
   pageOfItems: Array<any>;
-  buttonText = "Kaydet";
+  buttonText = Save;
   isGroup: boolean = false;
 
   constructor(private service: ArtPackageService, private categoryService: CategoryService, 
@@ -178,7 +178,7 @@ export class ArtPackageComponent implements OnInit {
             if(data.success){
               this.lessons = data.dynamicClass as VLessons[];
               this.artPackage.lessonId = this.artPackage.lessonId;
-              this.buttonText = "Güncelle";
+              this.buttonText = Update;
               window.scroll({
                 top: 0,
                 left: 0,
@@ -196,7 +196,7 @@ export class ArtPackageComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = "Kaydet";
+    this.buttonText = Save;
     this.ngOnInit();
   }
 

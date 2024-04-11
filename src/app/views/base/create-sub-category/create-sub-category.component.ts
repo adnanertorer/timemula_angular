@@ -20,7 +20,7 @@ export class CreateSubCategoryComponent implements OnInit {
   subCategories: VSubCategory[] = [];
   pageOfItems: Array<any>;
   pageOfSubItems: Array<any>;
-  buttonText = "Kaydet";
+  buttonText = Save;
 
   constructor(private categoryService: CategoryService, private subCategoryService: SubCategoryService) { }
 
@@ -106,13 +106,13 @@ export class CreateSubCategoryComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = "Kaydet";
+    this.buttonText = Save;
     this.ngOnInit();
   }
 
   getDetailFromTable(resource: any): void {
     this.subCategory = resource;
-    this.buttonText = "Güncelle";
+    this.buttonText = Update;
     window.scroll({
       top: 0,
       left: 0,

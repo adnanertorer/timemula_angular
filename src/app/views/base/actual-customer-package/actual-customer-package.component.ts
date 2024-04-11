@@ -86,7 +86,7 @@ export class ActualCustomerPackageComponent implements OnInit {
   filterResponses: FilterResponseModel[] = [];
   filterDetailResponses: FilterResponseModel[] = [];
   pageOfItems: Array<any>;
-  buttonText = "Kaydet";
+  buttonText = Save;
   closedGroup: number = participantEnum.closedGroup;
   personCount: number = 1;
   selectedDays: dayOf[] = [];
@@ -344,7 +344,7 @@ export class ActualCustomerPackageComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = "Kaydet";
+    this.buttonText = Save;
     this.ngOnInit();
   }
 

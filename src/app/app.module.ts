@@ -63,6 +63,8 @@ import { CreateClassroomComponent } from './views/base/create-classroom/create-c
 import {PackageClassroomComponent} from "./views/base/package-classroom/package-classroom.component";
 import { CreateEducatorComponent } from './views/base/create-educator/create-educator.component';
 import { CreateLessonEducatorComponent } from './views/base/create-lesson-educator/create-lesson-educator.component';
+import { CreateEducatorWorkingHoursComponent } from './views/base/create-educator-working-hours/create-educator-working-hours.component';
+import { CreateLessonPackageComponent } from './views/base/create-lesson-package/create-lesson-package.component';
 
 
 
@@ -89,7 +91,9 @@ import { CreateLessonEducatorComponent } from './views/base/create-lesson-educat
     CreateLessonComponent,
     CreateClassroomComponent,
     CreateEducatorComponent,
-    CreateLessonEducatorComponent
+    CreateLessonEducatorComponent,
+    CreateEducatorWorkingHoursComponent,
+    CreateLessonPackageComponent
     //ConfirmationDialogComponent,
   ],
   imports: [

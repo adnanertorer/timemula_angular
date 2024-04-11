@@ -17,7 +17,12 @@
   <div *ngIf="step.stepIndex == 6">
     <app-create-lesson-educator></app-create-lesson-educator>
   </div>
-  <div *ngIf="step.stepIndex == 7"></div>
+  <div *ngIf="step.stepIndex == 7">
+    <app-create-educator-working-hours></app-create-educator-working-hours>
+  </div>
+  <div *ngIf="step.stepIndex == 8">
+    <app-create-lesson-package></app-create-lesson-package>
+  </div>
   <button class="step-complete-btn" (click)="onCompleteStep()">
     <span class="completed-step-check material-icons">
       {{ step.isComplete ? "check_circle" : "panorama_fish_eye" }} </span>Complete Step {{ step.stepIndex }}

@@ -31,7 +31,7 @@ export class CustomerHealthComponent implements OnInit {
   isRequeiredDescription: boolean = false;
   customer:Customer;
 
-  buttonText: string = "Kaydet";
+  buttonText: string = Save;
 
   displayColums: string[] = ['diseaseCategoryName', 'diaseName', 'description', 'id'];
   dataSource: MatTableDataSource<VCustomerHealthModel>;
@@ -204,7 +204,7 @@ export class CustomerHealthComponent implements OnInit {
     this.service.getDetails(id).subscribe((data)=>{
       if(data.success){
         this.model = data.dynamicClass as CustomerHealthModel;
-        this.buttonText = "Güncelle";
+        this.buttonText = Update;
       }
     })
   }

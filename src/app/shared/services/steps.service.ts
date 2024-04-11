@@ -3,13 +3,15 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { StepModel } from '../model/step-model';
 
 const STEPS = [
-  { stepIndex: 1, isComplete: true, name: 'category'},
-  { stepIndex: 2, isComplete: true, name: 'subCategory' },
-  { stepIndex: 3, isComplete: true, name: 'lesson' },
-  { stepIndex: 4, isComplete: true, name: 'classroom' },
-  { stepIndex: 5, isComplete: false, name: 'educator' },
-  { stepIndex: 6, isComplete: false, name: 'lesson-classroom' },
-  { stepIndex: 7, isComplete: false, name: 'educator-lesson' },
+  { stepIndex: 1, isComplete: true },
+  { stepIndex: 2, isComplete: true },
+  { stepIndex: 3, isComplete: true },
+  { stepIndex: 4, isComplete: true },
+  { stepIndex: 5, isComplete: true },
+  { stepIndex: 6, isComplete: true },
+  { stepIndex: 7, isComplete: false },
+  { stepIndex: 8, isComplete: false },
+  { stepIndex: 9, isComplete: false },
 ];
 
 @Injectable({
@@ -27,11 +29,11 @@ export class StepsService {
     this.currentStep$.next(this.steps$.value[0]);
   }
 
-  setCurrentStep(step: StepModel) : void {
+  setCurrentStep(step: StepModel): void {
     this.currentStep$.next(step);
   }
 
-  getCurrentStep() : Observable<StepModel> {
+  getCurrentStep(): Observable<StepModel> {
     return this.currentStep$.asObservable();
   }
 
@@ -42,9 +44,7 @@ export class StepsService {
   moveToNextStep(): void {
     const index = this.currentStep$.value.stepIndex;
     if (index < this.steps$.value.length) {
-      console.log(this.steps$.value[index].name);
       this.currentStep$.next(this.steps$.value[index]);
-      console.log(this.currentStep$);
     }
   }
 

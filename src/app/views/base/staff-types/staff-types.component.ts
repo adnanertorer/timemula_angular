@@ -13,7 +13,7 @@ export class StaffTypesComponent implements OnInit {
   staffType: StaffType;
   staffTypes: StaffType[] = [];
   pageOfItems: Array<any>;
-  buttonText = "Kaydet";
+  buttonText = Save;
 
   constructor(private service: StaffTypeService) { }
 
@@ -32,7 +32,7 @@ export class StaffTypesComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.staffType = resource;
-    this.buttonText = "Güncelle";
+    this.buttonText = Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -41,7 +41,7 @@ export class StaffTypesComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = "Kaydet";
+    this.buttonText = Save;
     this.ngOnInit();
   }
 

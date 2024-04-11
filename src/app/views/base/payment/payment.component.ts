@@ -68,7 +68,7 @@ export class PaymentComponent implements OnInit {
   paymentList: VPaymentModel[] = [];
   cashBoxList: CashboxModel[] = [];
   cashBoxListFilter: CashboxModel[] = [];
-  buttonText = "Kaydet";
+  buttonText = Save;
   pageOfItems: Array<any>;
   pageOfItemTransactions: Array<any>;
   isCollection: boolean = false;
@@ -175,7 +175,7 @@ export class PaymentComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.payment = resource;
-    this.buttonText = "Güncelle";
+    this.buttonText = Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -196,7 +196,7 @@ export class PaymentComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = "Kaydet";
+    this.buttonText = Save;
     this.ngOnInit();
   }
 

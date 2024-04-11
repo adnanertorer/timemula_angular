@@ -18,7 +18,7 @@ export class SubCategoryComponent implements OnInit {
   categories: CategoryModel[] = [];
   categoryId: number;
   pageOfItems: Array<any>;
-  buttonText = "Kaydet";
+  buttonText = Save;
   constructor(private service: SubCategoryService, private categoryService: CategoryService) { }
 
   ngOnInit() {
@@ -57,7 +57,7 @@ export class SubCategoryComponent implements OnInit {
     this.service.getDetails(id).subscribe((data)=>{
       if(data.success){
         this.subCategory = data.dynamicClass as SubCategoryModel;
-        this.buttonText = "Güncelle";
+        this.buttonText = Update;
         window.scroll({
           top: 0,
           left: 0,
@@ -68,7 +68,7 @@ export class SubCategoryComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = "Kaydet";
+    this.buttonText = Save;
     this.ngOnInit();
   }
 

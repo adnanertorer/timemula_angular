@@ -10,7 +10,7 @@ declare let alertify: any;
 })
 export class SupplierComponent implements OnInit {
 
-  buttonText = "Kaydet";
+  buttonText = Save;
   supplier: SupplierModel;
   supplierList: SupplierModel[] = [];
   pageOfItems: Array<any>;
@@ -36,7 +36,7 @@ export class SupplierComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.supplier = resource;
-    this.buttonText = "Güncelle";
+    this.buttonText = Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -45,7 +45,7 @@ export class SupplierComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = "Kaydet";
+    this.buttonText = Save;
     this.ngOnInit();
   }
 

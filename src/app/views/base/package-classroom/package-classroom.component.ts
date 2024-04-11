@@ -31,7 +31,7 @@ export class PackageClassroomComponent implements OnInit {
   selectedCategoryId: number = 0;
   selectedSubCategoryId: number = 0;
   pageOfItems: Array<any>;
-  buttonText = "Kaydet";
+  buttonText = Save;
   closedGroup: number =  participantEnum.closedGroup;
   lessons: VLessons[] = [];
   
@@ -114,7 +114,7 @@ export class PackageClassroomComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.packageClassroom = resource;
-    this.buttonText = "Güncelle";
+    this.buttonText = Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -123,7 +123,7 @@ export class PackageClassroomComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = "Kaydet";
+    this.buttonText = Save;
     this.ngOnInit();
   }
 
