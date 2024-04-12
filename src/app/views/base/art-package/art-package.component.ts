@@ -16,6 +16,7 @@ import { LessonService } from 'src/app/shared/services/lesson.service';
 import { ParticipantTypeService } from 'src/app/shared/services/participant-type.service';
 import { ParticipantService } from 'src/app/shared/services/participant.service';
 import { SubCategoryService } from 'src/app/shared/services/sub-category.service';
+import Constants from 'src/app/shared/tools/constants';
 import { participantEnum } from 'src/environments/environment';
 declare let alertify: any;
 
@@ -42,7 +43,7 @@ export class ArtPackageComponent implements OnInit {
   participants: ParticipantModel[] = [];
   lessons: VLessons[] = [];
   pageOfItems: Array<any>;
-  buttonText = Save;
+  buttonText = Constants.Save;
   isGroup: boolean = false;
 
   constructor(private service: ArtPackageService, private categoryService: CategoryService, 
@@ -178,7 +179,7 @@ export class ArtPackageComponent implements OnInit {
             if(data.success){
               this.lessons = data.dynamicClass as VLessons[];
               this.artPackage.lessonId = this.artPackage.lessonId;
-              this.buttonText = Update;
+              this.buttonText = Constants.Update;
               window.scroll({
                 top: 0,
                 left: 0,
@@ -196,7 +197,7 @@ export class ArtPackageComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 

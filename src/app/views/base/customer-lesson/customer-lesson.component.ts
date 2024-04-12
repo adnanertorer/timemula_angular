@@ -24,6 +24,7 @@ import { CustomerLessonsScheduleService } from 'src/app/shared/services/customer
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { Customer } from 'src/app/shared/model/customer';
 import { LifeartsArtServiceService } from 'src/app/shared/services/lifearts-service.service';
+import Constants from 'src/app/shared/tools/constants';
 
 @Component({
   selector: 'app-customer-lesson',
@@ -207,7 +208,7 @@ L10n.load({
           "end": "Bitiş",
           "more": "daha fazla..",
           "close": "Kapat",
-          "cancel": Cancel,
+          "cancel": Constants.Cancel,
           "noTitle": "(No Title)",
           "delete": "Sil",
           "deleteEvent": "Seçili Ders",
@@ -221,7 +222,7 @@ L10n.load({
           "subject": "Subject",
           "addTitle": "Başlık ekle",
           "moreDetails": "Daha fazla ayar",
-          "save": Save,
+          "save": Constants.Save,
           "editContent": "Serideki randevuyu nasıl değiştirmek istersiniz?",
           "deleteContent": "Bu etkinliği silmek istediğinizden emin misiniz?",
           "deleteMultipleContent": "Seçili etkinlikleri silmek istediğinizden emin misiniz?",
@@ -233,8 +234,8 @@ L10n.load({
           "startTimezone": "Başla Timezone",
           "endTimezone": "Bitiş Timezone",
           "repeat": "Tekrarlı",
-          "saveButton": Save,
-          "cancelButton": Cancel,
+          "saveButton": Constants.Save,
+          "cancelButton": Constants.Cancel,
           "deleteButton": "Sil",
           "recurrence": "Yineleme",
           "wrongPattern": "Yineleme modeli geçerli değil.",

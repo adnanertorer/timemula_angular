@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CashboxModel } from 'src/app/shared/model/cashbox-model';
 import { CashboxService } from 'src/app/shared/services/cashbox.service';
+import Constants from 'src/app/shared/tools/constants';
 import { CashBoxTypeEnum, environment } from 'src/environments/environment';
 declare let alertify: any;
 
@@ -13,7 +14,7 @@ export class CashboxComponent implements OnInit {
 
   cashBox: CashboxModel;
   cashBoxList: CashboxModel[] = [];
-  buttonText = Save;
+  buttonText = Constants.Save;
   pageOfItems: Array<any>;
   isBank: boolean = false;
   cashTypes = CashBoxTypeEnum;
@@ -52,7 +53,7 @@ export class CashboxComponent implements OnInit {
     }else{
       this.isBank = false;
     }
-    this.buttonText = Update;
+    this.buttonText = Constants.Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -61,7 +62,7 @@ export class CashboxComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 

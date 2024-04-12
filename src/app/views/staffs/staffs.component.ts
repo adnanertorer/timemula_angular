@@ -9,81 +9,87 @@ import { BranchService } from '../../shared/services/branch.service';
 import { SalaryTypeService } from '../../shared/services/salary-type.service';
 import { StaffTypeService } from '../../shared/services/staff-type.service';
 import { StaffService } from '../../shared/services/staff.service';
+import Constants from 'src/app/shared/tools/constants';
 
 @Component({
   selector: 'app-staffs',
   templateUrl: './staffs.component.html',
-  styleUrls: ['./staffs.component.scss']
+  styleUrls: ['./staffs.component.scss'],
 })
 export class StaffsComponent implements OnInit, Qrud {
-
   staff: StaffModel;
   staffList: VStaffsModel[] = [];
   staffTypes: StaffType[] = [];
   salaryTypes: SalaryType[] = [];
   pageOfItems: Array<any>;
-  buttonText = Save;
+  buttonText = Constants.Save;
   branches: Branch[] = [];
 
-  constructor(private service: StaffService, private staffTypeService: StaffTypeService,
-    private salaryTypeService: SalaryTypeService, private branchService: BranchService) { }
+  constructor(
+    private service: StaffService,
+    private staffTypeService: StaffTypeService,
+    private salaryTypeService: SalaryTypeService,
+    private branchService: BranchService
+  ) {}
 
   getList(): void {
-    this.service.getList().subscribe((data)=>{
+    this.service.getList().subscribe((data) => {
       this.staffList = data.dynamicClass as VStaffsModel[];
       this.pageOfItems = this.staffList;
-    })
+    });
   }
 
   onChangePage(pageOfItems: any[]): void {
     this.pageOfItems = pageOfItems;
   }
 
-  getBranches(){
-    this.branchService.getList().subscribe((data)=>{
-      if(data.success){
+  getBranches() {
+    this.branchService.getList().subscribe((data) => {
+      if (data.success) {
         this.branches = data.dynamicClass as Branch[];
       }
-    })
+    });
   }
 
   getDetailFromTable(resource: any): void {
     //this.staff = resource;
     const id = resource.id;
-    this.service.getDetails(id).subscribe((data)=>{
-      if(data.success){
+    this.service.getDetails(id).subscribe((data) => {
+      if (data.success) {
         this.staff = data.dynamicClass as StaffModel;
-        this.buttonText = Update;
-        window.scroll({ 
-          top: 0, 
-          left: 0, 
-          behavior: 'smooth' 
+        this.buttonText = Constants.Update;
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth',
         });
       }
-    })
-    
+    });
   }
 
   add(): void {
-    if(this.staff.id == 0){
+    if (this.staff.id == 0) {
       this.staff.identityNumber = this.staff.identityNumber.toString();
-      this.service.add(this.staff).subscribe((data)=>{
-        if(data.success){
-          alert(data.clientMessage);
-          this.ngOnInit();
-        }else{
-          alert(data.clientMessage);
+      this.service.add(this.staff).subscribe(
+        (data) => {
+          if (data.success) {
+            alert(data.clientMessage);
+            this.ngOnInit();
+          } else {
+            alert(data.clientMessage);
+          }
+        },
+        (err) => {
+          alert(err);
         }
-      }, (err)=>{
-        alert(err);
-      });
-    }else{
+      );
+    } else {
       this.staff.identityNumber = this.staff.identityNumber.toString();
-      this.service.update(this.staff).subscribe((data)=>{
-        if(data.success){
+      this.service.update(this.staff).subscribe((data) => {
+        if (data.success) {
           alert(data.clientMessage);
           this.ngOnInit();
-        }else{
+        } else {
           alert(data.clientMessage);
         }
       });
@@ -91,18 +97,18 @@ export class StaffsComponent implements OnInit, Qrud {
   }
 
   remove(id: number): void {
-   this.service.remove(id).subscribe((data)=>{
-      if(data.success){
+    this.service.remove(id).subscribe((data) => {
+      if (data.success) {
         alert(data.clientMessage);
         this.ngOnInit();
-      }else{
+      } else {
         alert(data.clientMessage);
       }
     });
   }
 
   reset(): void {
-   this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 
@@ -124,7 +130,7 @@ export class StaffsComponent implements OnInit, Qrud {
       birthDate: null,
       branchId: 0,
       isTeacher: false,
-      salaryAmount: 0
+      salaryAmount: 0,
     };
     this.getList();
     this.getStaffTypes();
@@ -139,20 +145,19 @@ export class StaffsComponent implements OnInit, Qrud {
     return null;
   }
 
-  getStaffTypes(){
-    this.staffTypeService.getList().subscribe((data)=>{
-      if(data.success){
+  getStaffTypes() {
+    this.staffTypeService.getList().subscribe((data) => {
+      if (data.success) {
         this.staffTypes = data.dynamicClass as StaffType[];
       }
     });
   }
 
-  getSalaryTypes(){
-    this.salaryTypeService.getList().subscribe((data)=>{
-      if(data.success){
+  getSalaryTypes() {
+    this.salaryTypeService.getList().subscribe((data) => {
+      if (data.success) {
         this.salaryTypes = data.dynamicClass as SalaryType[];
       }
-    })
+    });
   }
-
 }

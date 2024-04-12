@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MissionModel } from '../../../shared/model/mission-model';
 import { MissionService } from '../../../shared/services/mission.service';
+import Constants from 'src/app/shared/tools/constants';
 declare let alertify: any;
 
 
@@ -14,7 +15,7 @@ export class MissionComponent implements OnInit {
   mission: MissionModel;
   missionList: MissionModel[] = [];
   pageOfItems: Array<any>;
-  buttonText = Save;
+  buttonText = Constants.Save;
 
   constructor(private service: MissionService) { }
 
@@ -34,7 +35,7 @@ export class MissionComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.mission = resource;
-    this.buttonText = Update;
+    this.buttonText = Constants.Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -43,7 +44,7 @@ export class MissionComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 

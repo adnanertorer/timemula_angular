@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Branch } from '../../../shared/model/branch';
 import { BranchService } from '../../../shared/services/branch.service';
+import Constants from 'src/app/shared/tools/constants';
 declare let alertify: any;
 
 @Component({
@@ -13,7 +14,7 @@ export class BranchComponent implements OnInit {
   branch: Branch;
   branchList: Branch[] = [];
   pageOfItems: Array<any>;
-  buttonText = Save;
+  buttonText = Constants.Save;
 
   constructor(private service: BranchService) { }
 
@@ -34,7 +35,7 @@ export class BranchComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.branch = resource;
-    this.buttonText = Update;
+    this.buttonText = Constants.Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -43,7 +44,7 @@ export class BranchComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 

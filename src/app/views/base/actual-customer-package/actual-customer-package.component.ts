@@ -26,6 +26,7 @@ import { CustomerService } from 'src/app/shared/services/customer.service';
 import { EducatorDaysHoursService } from 'src/app/shared/services/educator-days-hours.service';
 import { LessonService } from 'src/app/shared/services/lesson.service';
 import { StaffService } from 'src/app/shared/services/staff.service';
+import Constants from 'src/app/shared/tools/constants';
 import { daysEnum, participantEnum } from 'src/environments/environment';
 
 declare let alertify: any;
@@ -86,7 +87,7 @@ export class ActualCustomerPackageComponent implements OnInit {
   filterResponses: FilterResponseModel[] = [];
   filterDetailResponses: FilterResponseModel[] = [];
   pageOfItems: Array<any>;
-  buttonText = Save;
+  buttonText = Constants.Save;
   closedGroup: number = participantEnum.closedGroup;
   personCount: number = 1;
   selectedDays: dayOf[] = [];
@@ -344,7 +345,7 @@ export class ActualCustomerPackageComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 

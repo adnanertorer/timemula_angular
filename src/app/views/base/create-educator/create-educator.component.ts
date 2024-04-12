@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StaffModel } from 'src/app/shared/model/staff-model';
 import { VStaffsModel } from 'src/app/shared/model/v-staffs-model';
 import { StaffService } from 'src/app/shared/services/staff.service';
+import Constants from 'src/app/shared/tools/constants';
 
 @Component({
   selector: 'app-create-educator',
@@ -13,7 +14,7 @@ export class CreateEducatorComponent implements OnInit {
   staff: StaffModel;
   staffList: any[] = [];
   pageOfItems: Array<any>;
-  buttonText = Save;
+  buttonText = Constants.Save;
   
   constructor(private service: StaffService) { }
 
@@ -57,7 +58,7 @@ export class CreateEducatorComponent implements OnInit {
     this.service.getDetails(id).subscribe((data)=>{
       if(data.success){
         this.staff = data.dynamicClass as StaffModel;
-        this.buttonText = Update;
+        this.buttonText = Constants.Update;
         window.scroll({ 
           top: 0, 
           left: 0, 
@@ -103,7 +104,7 @@ export class CreateEducatorComponent implements OnInit {
   }
 
   reset(): void {
-   this.buttonText = Save;
+   this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 

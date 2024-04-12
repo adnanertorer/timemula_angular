@@ -5,6 +5,7 @@ import { VCustomerLessonsTempMain } from 'src/app/shared/model/v-customer-lesson
 import { VCustomerMainModel } from 'src/app/shared/model/v-customer-main-model';
 import { CustomerLessonService } from 'src/app/shared/services/customer-lesson.service';
 import { CustomerService } from 'src/app/shared/services/customer.service';
+import Constants from 'src/app/shared/tools/constants';
 
 @Component({
   selector: 'app-customer-lesson-detail',
@@ -16,7 +17,7 @@ export class CustomerLessonDetailComponent implements OnInit {
   list:VCustomerMainModel[] = [];
   tempList:VCustomerLessonsTempMain[] = [];
   pageOfItems: Array<any>;
-  buttonText = Save;
+  buttonText = Constants.Save;
   name:string = "";
   surname:string = "";
   selectedCustomerId: number= 0;

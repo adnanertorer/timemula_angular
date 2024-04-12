@@ -1,3 +1,6 @@
-const Save: string = Save;
-const Cancel: string = "İptal";
-const Update: string = "Güncelle";
+export default class Constants{
+    static Save: string = "Kaydet";
+    static Cancel: string = "İptal";
+    static Update: string = "Güncelle";
+}
+

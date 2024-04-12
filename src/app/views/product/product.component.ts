@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ProductModel } from 'src/app/shared/model/product-model';
 import { ProductService } from 'src/app/shared/services/product.service';
+import Constants from 'src/app/shared/tools/constants';
 import { environment } from 'src/environments/environment';
 declare let alertify: any;
 
@@ -14,7 +15,7 @@ declare let alertify: any;
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  buttonText = Save;
+  buttonText = Constants.Save;
   product: ProductModel;
   productList: ProductModel[] = [];
   pageOfItems: Array<any>;
@@ -54,7 +55,7 @@ export class ProductComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.product = resource;
-    this.buttonText = Update;
+    this.buttonText = Constants.Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -63,7 +64,7 @@ export class ProductComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 

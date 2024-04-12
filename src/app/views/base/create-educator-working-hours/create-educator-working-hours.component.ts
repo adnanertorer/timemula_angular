@@ -6,6 +6,7 @@ import { EducatorDaysHoursModel } from 'src/app/shared/model/educator-days-hours
 import { StaffModel } from 'src/app/shared/model/staff-model';
 import { EducatorDaysHoursService } from 'src/app/shared/services/educator-days-hours.service';
 import { StaffService } from 'src/app/shared/services/staff.service';
+import Constants from 'src/app/shared/tools/constants';
 import { daysEnum } from 'src/environments/environment';
 
 @Component({
@@ -18,7 +19,7 @@ export class CreateEducatorWorkingHoursComponent implements OnInit {
   model: EducatorDaysHoursModel;
   list: EducatorDaysHoursModel[] = [];
   staffList: StaffModel[] = [];
-  buttonText: string = Save;
+  buttonText: string = Constants.Save;
   displayColums: string[] = ['educatorId', 'dayName', 'startTime', 'finishTime', 'id'];
   dataSource: MatTableDataSource<EducatorDaysHoursModel>;
 
@@ -31,7 +32,7 @@ export class CreateEducatorWorkingHoursComponent implements OnInit {
   constructor(private service: EducatorDaysHoursService, private staffService: StaffService) { }
 
   ngOnInit() {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.model = {
       createdAt: new Date(),
       createdBy: 0,
@@ -94,7 +95,7 @@ export class CreateEducatorWorkingHoursComponent implements OnInit {
     this.service.getDetails(id).subscribe((data)=>{
       if(data.success){
         this.model = data.dynamicClass as EducatorDaysHoursModel;
-        this.buttonText = Update;
+        this.buttonText = Constants.Update;
       }
     })
   }

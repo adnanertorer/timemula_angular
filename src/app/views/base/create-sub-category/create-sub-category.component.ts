@@ -5,6 +5,7 @@ import { VSubCategory } from 'src/app/shared/model/v-sub-category';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { SubCategoryService } from 'src/app/shared/services/sub-category.service';
 import {StepsService} from "../../../shared/services/steps.service";
+import Constants from 'src/app/shared/tools/constants';
 declare let alertify: any;
 
 @Component({
@@ -20,7 +21,7 @@ export class CreateSubCategoryComponent implements OnInit {
   subCategories: VSubCategory[] = [];
   pageOfItems: Array<any>;
   pageOfSubItems: Array<any>;
-  buttonText = Save;
+  buttonText = Constants.Save;
 
   constructor(private categoryService: CategoryService, private subCategoryService: SubCategoryService) { }
 
@@ -106,13 +107,13 @@ export class CreateSubCategoryComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 
   getDetailFromTable(resource: any): void {
     this.subCategory = resource;
-    this.buttonText = Update;
+    this.buttonText = Constants.Update;
     window.scroll({
       top: 0,
       left: 0,

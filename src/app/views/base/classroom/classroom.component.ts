@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ClassroomModel } from '../../../shared/model/classroom-model';
 import { ClassroomService } from '../../../shared/services/classroom.service';
+import Constants from 'src/app/shared/tools/constants';
 declare let alertify: any;
 
 @Component({
@@ -15,7 +16,7 @@ export class ClassroomComponent implements OnInit {
   classrooms: ClassroomModel[] = [];
   subServiceId: number;
   pageOfItems: Array<any>;
-  buttonText = Save;
+  buttonText = Constants.Save;
   constructor(private activatedRoute: ActivatedRoute, private service: ClassroomService) { }
 
   ngOnInit() {
@@ -41,7 +42,7 @@ export class ClassroomComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.classroom = resource;
-    this.buttonText = Update;
+    this.buttonText = Constants.Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -50,7 +51,7 @@ export class ClassroomComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 

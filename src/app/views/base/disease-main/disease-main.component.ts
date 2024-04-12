@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { DiseaseMainModel } from 'src/app/shared/model/disease-main-model';
 import { DiseaseMainService } from 'src/app/shared/services/disease-main.service';
+import Constants from 'src/app/shared/tools/constants';
 
 @Component({
   selector: 'app-disease-main',
@@ -16,7 +17,7 @@ export class DiseaseMainComponent implements OnInit {
   model: DiseaseMainModel;
   list: DiseaseMainModel[] = [];
 
-  buttonText: string = Save;
+  buttonText: string = Constants.Save;
   displayColums: string[] = ['diseaseCategoryName', 'isActive','id'];
   dataSource: MatTableDataSource<DiseaseMainModel>;
 
@@ -26,7 +27,7 @@ export class DiseaseMainComponent implements OnInit {
   constructor(private service: DiseaseMainService, private router: Router) { }
 
   ngOnInit() {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.model = {
       createdAt: new Date(),
       createdBy: 0,
@@ -60,7 +61,7 @@ export class DiseaseMainComponent implements OnInit {
     this.service.getDetails(id).subscribe((data)=>{
       if(data.success){
         this.model = data.dynamicClass as DiseaseMainModel;
-        this.buttonText = Update;
+        this.buttonText = Constants.Update;
       }
     })
   }

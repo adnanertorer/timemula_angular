@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SupplierModel } from 'src/app/shared/model/supplier-model';
 import { SupplierService } from 'src/app/shared/services/supplier.service';
+import Constants from 'src/app/shared/tools/constants';
 declare let alertify: any;
 
 @Component({
@@ -10,7 +11,7 @@ declare let alertify: any;
 })
 export class SupplierComponent implements OnInit {
 
-  buttonText = Save;
+  buttonText = Constants.Save;
   supplier: SupplierModel;
   supplierList: SupplierModel[] = [];
   pageOfItems: Array<any>;
@@ -36,7 +37,7 @@ export class SupplierComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.supplier = resource;
-    this.buttonText = Update;
+    this.buttonText = Constants.Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -45,7 +46,7 @@ export class SupplierComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 

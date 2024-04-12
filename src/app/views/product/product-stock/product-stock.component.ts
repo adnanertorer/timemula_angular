@@ -11,6 +11,7 @@ import { CustomerService } from 'src/app/shared/services/customer.service';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { SupplierService } from 'src/app/shared/services/supplier.service';
 import { WarehouseService } from 'src/app/shared/services/warehouse.service';
+import Constants from 'src/app/shared/tools/constants';
 declare let alertify: any;
 
 @Component({
@@ -19,7 +20,7 @@ declare let alertify: any;
   styleUrls: ['./product-stock.component.css']
 })
 export class ProductStockComponent implements OnInit {
-  buttonText = Save;
+  buttonText = Constants.Save;
   warehosue: WarehouseModel;
   stockList: VWarehouseModel[] = [];
   products: ProductModel[] = [];
@@ -134,7 +135,7 @@ export class ProductStockComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.warehosue = resource;
-    this.buttonText = Update;
+    this.buttonText = Constants.Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -143,7 +144,7 @@ export class ProductStockComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 

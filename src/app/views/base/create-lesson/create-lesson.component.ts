@@ -7,6 +7,7 @@ import { VLessons } from 'src/app/shared/model/v-lessons';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { LessonService } from 'src/app/shared/services/lesson.service';
 import { SubCategoryService } from 'src/app/shared/services/sub-category.service';
+import Constants from 'src/app/shared/tools/constants';
 import { environment } from 'src/environments/environment';
 declare let alertify: any;
 
@@ -21,7 +22,7 @@ export class CreateLessonComponent implements OnInit {
   lesson: LessonModel;
   lessons: VLessons[] = [];
   pageOfItems: Array<any>;
-  buttonText = Save;
+  buttonText = Constants.Save;
   categories: CategoryModel[] = [];
   subCategories: SubCategoryModel[] = [];
   filesTemp:any;
@@ -103,7 +104,7 @@ export class CreateLessonComponent implements OnInit {
             if(data.success){
               this.subCategories = data.dynamicClass as SubCategoryModel[];
               this.lesson = resource;
-              this.buttonText = Update;
+              this.buttonText = Constants.Update;
                   window.scroll({
                     top: 0,
                     left: 0,
@@ -116,7 +117,7 @@ export class CreateLessonComponent implements OnInit {
     }
 
     reset(): void {
-      this.buttonText = Save;
+      this.buttonText = Constants.Save;
       this.ngOnInit();
     }
 

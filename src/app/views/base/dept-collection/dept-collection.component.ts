@@ -17,6 +17,7 @@ import { DatePickerComponent } from '@syncfusion/ej2-angular-calendars';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { VGeneralCustomerBalanceModel } from 'src/app/shared/model/v-general-customer-balance-model';
 import { VCurrentLastBalanceModel } from 'src/app/shared/model/v-current-last-balance-model';
+import Constants from 'src/app/shared/tools/constants';
 
 @Component({
   selector: 'app-dept-collection',
@@ -55,7 +56,7 @@ export class DeptCollectionComponent implements OnInit {
   cashBoxList: CashboxModel[] = [];
   cashBoxes: CashboxModel[] = [];
   customers: Customer[] = [];
-  buttonText = Save;
+  buttonText = Constants.Save;
   pageOfItems: Array<any>;
   pageOfItemTransactions: Array<any>;
   isCollection: boolean = false;
@@ -154,7 +155,7 @@ export class DeptCollectionComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.deptCollection = resource;
-    this.buttonText = Update;
+    this.buttonText = Constants.Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -184,7 +185,7 @@ export class DeptCollectionComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 

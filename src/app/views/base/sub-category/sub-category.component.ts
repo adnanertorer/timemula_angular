@@ -4,6 +4,7 @@ import { SubCategoryModel } from 'src/app/shared/model/sub-category-model';
 import { VSubCategory } from 'src/app/shared/model/v-sub-category';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { SubCategoryService } from 'src/app/shared/services/sub-category.service';
+import Constants from 'src/app/shared/tools/constants';
 declare let alertify: any;
 
 @Component({
@@ -18,7 +19,7 @@ export class SubCategoryComponent implements OnInit {
   categories: CategoryModel[] = [];
   categoryId: number;
   pageOfItems: Array<any>;
-  buttonText = Save;
+  buttonText = Constants.Save;
   constructor(private service: SubCategoryService, private categoryService: CategoryService) { }
 
   ngOnInit() {
@@ -57,7 +58,7 @@ export class SubCategoryComponent implements OnInit {
     this.service.getDetails(id).subscribe((data)=>{
       if(data.success){
         this.subCategory = data.dynamicClass as SubCategoryModel;
-        this.buttonText = Update;
+        this.buttonText = Constants.Update;
         window.scroll({
           top: 0,
           left: 0,
@@ -68,7 +69,7 @@ export class SubCategoryComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 

@@ -12,6 +12,7 @@ import { StaffService } from '../../../shared/services/staff.service';
 import { SubServiceClassroomService } from '../../../shared/services/sub-service-classroom.service';
 import { SubServiceTeacherService } from '../../../shared/services/sub-service-teacher.service';
 import { SubServiceService } from '../../../shared/services/sub-service.service';
+import Constants from 'src/app/shared/tools/constants';
 declare let alertify: any;
 
 @Component({
@@ -25,9 +26,9 @@ export class SubServiceComponent implements OnInit {
   subServiceList: SubService[] = [];
   staffs: StaffModel[] = [];
   pageOfItems: Array<any>;
-  buttonText = Save;
-  classroomButtonText = Save;
-  teacherButtonText = Save;
+  buttonText = Constants.Save;
+  classroomButtonText = Constants.Save;
+  teacherButtonText = Constants.Save;
   isUpdateClassroom: boolean = false;
   isUpdateTeacher: boolean = false;
   modalOpen:boolean = false;
@@ -55,9 +56,9 @@ export class SubServiceComponent implements OnInit {
     this.modalOpen = false;
     this.classroomModalOpen = false;
     this.teacherModalOpen = false;
-    this.buttonText = Save;
-    this.classroomButtonText = Save;
-    this.teacherButtonText = Save;
+    this.buttonText = Constants.Save;
+    this.classroomButtonText = Constants.Save;
+    this.teacherButtonText = Constants.Save;
     this.subService = {
       createdBy: 0,
       id: 0,
@@ -117,7 +118,7 @@ export class SubServiceComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.subService = resource;
-    this.buttonText = Update;
+    this.buttonText = Constants.Update;
     this.modalOpen = true;
     window.scroll({
       top: 0,
@@ -129,7 +130,7 @@ export class SubServiceComponent implements OnInit {
   getDetailClassroom(resource: any): void {
     this.subserviceClassroom = resource;
     this.isUpdateClassroom = true;
-    this.classroomButtonText = Update;
+    this.classroomButtonText = Constants.Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -140,7 +141,7 @@ export class SubServiceComponent implements OnInit {
   getDetailTeacher(resource: any): void {
     this.subServiceTeacher = resource;
     this.isUpdateTeacher = true;
-    this.teacherButtonText = Update;
+    this.teacherButtonText = Constants.Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -157,7 +158,7 @@ export class SubServiceComponent implements OnInit {
       priority: 0,
       sub_service_id: 0
     };
-    this.classroomButtonText = Save;
+    this.classroomButtonText = Constants.Save;
   }
 
   resetTeacher(){
@@ -169,11 +170,11 @@ export class SubServiceComponent implements OnInit {
       staff_id: 0,
       sub_service_id: 0
     };
-    this.teacherButtonText = Save;
+    this.teacherButtonText = Constants.Save;
   }
 
   reset(): void {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 
@@ -290,7 +291,7 @@ export class SubServiceComponent implements OnInit {
   openClassroomModal(id: number){
     this.subServiceId = id;
     this.isUpdateClassroom = false;
-    this.classroomButtonText = Save;
+    this.classroomButtonText = Constants.Save;
     this.getClassrooms();
     this.getSubServiceClassroomList(this.subServiceId);
     this.classroomModalOpen = true;
@@ -300,7 +301,7 @@ export class SubServiceComponent implements OnInit {
     this.teacherModalOpen = true;
     this.subServiceId = id;
     this.isUpdateTeacher = false;
-    this.teacherButtonText = Save;
+    this.teacherButtonText = Constants.Save;
     this.getTeachers();
     this.getSubServiceTeacherList(this.subServiceId);
     

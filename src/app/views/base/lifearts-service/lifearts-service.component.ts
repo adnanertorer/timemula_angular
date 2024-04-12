@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LifeartsService } from 'src/app/shared/model/lifearts-service';
 import { LifeartsArtServiceService } from 'src/app/shared/services/lifearts-service.service';
+import Constants from 'src/app/shared/tools/constants';
 declare let alertify: any;
 
 @Component({
@@ -14,11 +15,11 @@ export class LifeartsServiceComponent implements OnInit {
   lifeartsService: LifeartsService;
   serviceList: LifeartsService[] = [];
   pageOfItems: Array<any>;
-  buttonText = Save;
+  buttonText = Constants.Save;
   constructor(private service: LifeartsArtServiceService, private router: Router) { }
 
   ngOnInit() {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.lifeartsService = {
       createdBy: 0,
       id: 0,
@@ -37,7 +38,7 @@ export class LifeartsServiceComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.lifeartsService = resource;
-    this.buttonText = Update;
+    this.buttonText = Constants.Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -46,7 +47,7 @@ export class LifeartsServiceComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 

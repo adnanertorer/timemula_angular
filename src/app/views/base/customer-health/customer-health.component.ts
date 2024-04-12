@@ -14,6 +14,7 @@ import { DiseaseMainService } from 'src/app/shared/services/disease-main.service
 import jspdf from 'jspdf';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import Constants from 'src/app/shared/tools/constants';
 
 @Component({
   selector: 'app-customer-health',
@@ -31,7 +32,7 @@ export class CustomerHealthComponent implements OnInit {
   isRequeiredDescription: boolean = false;
   customer:Customer;
 
-  buttonText: string = Save;
+  buttonText: string = Constants.Save;
 
   displayColums: string[] = ['diseaseCategoryName', 'diaseName', 'description', 'id'];
   dataSource: MatTableDataSource<VCustomerHealthModel>;
@@ -204,7 +205,7 @@ export class CustomerHealthComponent implements OnInit {
     this.service.getDetails(id).subscribe((data)=>{
       if(data.success){
         this.model = data.dynamicClass as CustomerHealthModel;
-        this.buttonText = Update;
+        this.buttonText = Constants.Update;
       }
     })
   }

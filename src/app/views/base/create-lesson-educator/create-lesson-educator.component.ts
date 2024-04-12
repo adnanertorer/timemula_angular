@@ -5,6 +5,7 @@ import { StaffModel } from 'src/app/shared/model/staff-model';
 import { LessonEducatorService } from 'src/app/shared/services/lesson-educator.service';
 import { LessonService } from 'src/app/shared/services/lesson.service';
 import { StaffService } from 'src/app/shared/services/staff.service';
+import Constants from 'src/app/shared/tools/constants';
 import { SalaryTypeEnum } from 'src/environments/environment';
 declare let alertify: any;
 
@@ -21,7 +22,7 @@ export class CreateLessonEducatorComponent implements OnInit {
   lessonList: LessonModel[];
   staffList: StaffModel[] = [];
   pageOfItems: Array<any>;
-  buttonText = Save;
+  buttonText = Constants.Save;
   isSeancePrice: boolean = false;
   
   constructor(private service: LessonEducatorService, private lessonService: LessonService, private staffService: StaffService) { }
@@ -73,7 +74,7 @@ export class CreateLessonEducatorComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.model = resource;
-    this.buttonText = Update;
+    this.buttonText = Constants.Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -94,7 +95,7 @@ export class CreateLessonEducatorComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 

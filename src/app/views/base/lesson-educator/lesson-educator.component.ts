@@ -6,6 +6,7 @@ import { VLessonEducator } from 'src/app/shared/model/v-lesson-educator';
 import { LessonEducatorService } from 'src/app/shared/services/lesson-educator.service';
 import { LessonService } from 'src/app/shared/services/lesson.service';
 import { StaffService } from 'src/app/shared/services/staff.service';
+import Constants from 'src/app/shared/tools/constants';
 declare let alertify: any;
 
 @Component({
@@ -20,7 +21,7 @@ export class LessonEducatorComponent implements OnInit {
   lessonList: LessonModel[];
   staffList: StaffModel[] = [];
   pageOfItems: Array<any>;
-  buttonText = Save;
+  buttonText = Constants.Save;
 
   constructor(private service: LessonEducatorService, private lessonService: LessonService, private staffService: StaffService) { }
 
@@ -69,7 +70,7 @@ export class LessonEducatorComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.model = resource;
-    this.buttonText = Update;
+    this.buttonText = Constants.Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -78,7 +79,7 @@ export class LessonEducatorComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 

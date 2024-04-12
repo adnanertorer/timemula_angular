@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryModel } from 'src/app/shared/model/category-model';
 import { CategoryService } from 'src/app/shared/services/category.service';
+import Constants from 'src/app/shared/tools/constants';
 declare let alertify: any;
 
 @Component({
@@ -13,7 +14,7 @@ export class CategoryComponent implements OnInit {
   category: CategoryModel;
   categories: CategoryModel[] = [];
   pageOfItems: Array<any>;
-  buttonText = Save;
+  buttonText = Constants.Save;
 
   constructor(private service: CategoryService) { }
 
@@ -41,7 +42,7 @@ export class CategoryComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.category = resource;
-    this.buttonText = Update;
+    this.buttonText = Constants.Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -50,7 +51,7 @@ export class CategoryComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 

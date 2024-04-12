@@ -35,6 +35,7 @@ import { CustomerDayModel } from 'src/app/shared/model/customer-day-model';
 import { DatePickerComponent } from '@syncfusion/ej2-angular-calendars';
 import { EducatorDaysHoursService } from 'src/app/shared/services/educator-days-hours.service';
 import { EducatorDaysHoursModel } from 'src/app/shared/model/educator-days-hours-model';
+import Constants from 'src/app/shared/tools/constants';
 declare let alertify: any;
 
 export interface dayOf{
@@ -96,7 +97,7 @@ export class CustomerPackageComponent implements OnInit {
   filterResponses: FilterResponseModel[] = [];
   filterDetailResponses: FilterResponseModel[] = [];
   pageOfItems: Array<any>;
-  buttonText = Save;
+  buttonText = Constants.Save;
   selectedCategoryId: number = 0;
   selectedSubCategoryId: number = 0;
   closedGroup: number =  participantEnum.closedGroup;
@@ -551,7 +552,7 @@ export class CustomerPackageComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.customerLesson = resource;
-    this.buttonText = Update;
+    this.buttonText = Constants.Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -560,7 +561,7 @@ export class CustomerPackageComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 

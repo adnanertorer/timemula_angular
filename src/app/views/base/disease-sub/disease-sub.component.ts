@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DiseaseMainModel } from 'src/app/shared/model/disease-main-model';
 import { DiseaseSubModel } from 'src/app/shared/model/disease-sub-model';
 import { DiseaseMainService } from 'src/app/shared/services/disease-main.service';
+import Constants from 'src/app/shared/tools/constants';
 
 @Component({
   selector: 'app-disease-sub',
@@ -18,7 +19,7 @@ export class DiseaseSubComponent implements OnInit {
   model: DiseaseSubModel;
   list: DiseaseSubModel[] = [];
   selectedMainId: number = 0;
-  buttonText: string = Save;
+  buttonText: string = Constants.Save;
 
   displayColums: string[] = ['diaseName', 'isActive', 'isRequiredDescription', 'id'];
   dataSource: MatTableDataSource<DiseaseSubModel>;
@@ -29,7 +30,7 @@ export class DiseaseSubComponent implements OnInit {
   constructor(private service: DiseaseMainService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.model = {
       createdAt: new Date(),
       diaseMainId: 0,
@@ -81,7 +82,7 @@ export class DiseaseSubComponent implements OnInit {
     this.service.getDetailSub(id).subscribe((data)=>{
       if(data.success){
         this.model = data.dynamicClass as DiseaseSubModel;
-        this.buttonText = Update;
+        this.buttonText = Constants.Update;
       }
     })
   }

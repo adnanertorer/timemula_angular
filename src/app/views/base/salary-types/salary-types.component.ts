@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SalaryType } from '../../../shared/model/salary-type';
 import { SalaryTypeService } from '../../../shared/services/salary-type.service';
+import Constants from 'src/app/shared/tools/constants';
 declare let alertify: any;
 
 @Component({
@@ -13,7 +14,7 @@ export class SalaryTypesComponent implements OnInit {
   salaryType: SalaryType;
   salaryTypes: SalaryType[] = [];
   pageOfItems: Array<any>;
-  buttonText = Save;
+  buttonText = Constants.Save;
   constructor(private service: SalaryTypeService) { }
 
   ngOnInit() {
@@ -31,7 +32,7 @@ export class SalaryTypesComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.salaryType = resource;
-    this.buttonText = Update;
+    this.buttonText = Constants.Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -40,7 +41,7 @@ export class SalaryTypesComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 

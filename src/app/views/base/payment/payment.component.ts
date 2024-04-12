@@ -17,6 +17,7 @@ import { CashboxService } from 'src/app/shared/services/cashbox.service';
 import { PaymentService } from 'src/app/shared/services/payment.service';
 import { GeneralPaymentSubComponent } from '../general-payment-sub/general-payment-sub.component';
 import { PaymentSubComponent } from '../payment-sub/payment-sub.component';
+import Constants from 'src/app/shared/tools/constants';
 declare let alertify: any;
 
 @Component({
@@ -68,7 +69,7 @@ export class PaymentComponent implements OnInit {
   paymentList: VPaymentModel[] = [];
   cashBoxList: CashboxModel[] = [];
   cashBoxListFilter: CashboxModel[] = [];
-  buttonText = Save;
+  buttonText = Constants.Save;
   pageOfItems: Array<any>;
   pageOfItemTransactions: Array<any>;
   isCollection: boolean = false;
@@ -175,7 +176,7 @@ export class PaymentComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.payment = resource;
-    this.buttonText = Update;
+    this.buttonText = Constants.Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -196,7 +197,7 @@ export class PaymentComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 

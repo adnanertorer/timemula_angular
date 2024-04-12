@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StaffType } from '../../../shared/model/staff-type';
 import { StaffTypeService } from '../../../shared/services/staff-type.service';
+import Constants from 'src/app/shared/tools/constants';
 declare let alertify: any;
 
 @Component({
@@ -13,7 +14,7 @@ export class StaffTypesComponent implements OnInit {
   staffType: StaffType;
   staffTypes: StaffType[] = [];
   pageOfItems: Array<any>;
-  buttonText = Save;
+  buttonText = Constants.Save;
 
   constructor(private service: StaffTypeService) { }
 
@@ -32,7 +33,7 @@ export class StaffTypesComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.staffType = resource;
-    this.buttonText = Update;
+    this.buttonText = Constants.Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -41,7 +42,7 @@ export class StaffTypesComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 

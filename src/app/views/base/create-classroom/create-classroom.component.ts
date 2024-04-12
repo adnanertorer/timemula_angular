@@ -11,6 +11,7 @@ import { PackageClassroomService } from 'src/app/shared/services/classroom-packa
 import { ClassroomService } from 'src/app/shared/services/classroom.service';
 import { LessonService } from 'src/app/shared/services/lesson.service';
 import { SubCategoryService } from 'src/app/shared/services/sub-category.service';
+import Constants from 'src/app/shared/tools/constants';
 import { participantEnum } from 'src/environments/environment';
 declare let alertify: any;
 
@@ -45,7 +46,7 @@ export class CreateClassroomComponent implements OnInit {
   selectedCategoryId: number = 0;
   selectedSubCategoryId: number = 0;
   pageOfItems: Array<any>;
-  buttonText = Save;
+  buttonText = Constants.Save;
 
   createClassroomForLesson: CreateClassroomForLesson;
 
@@ -135,7 +136,7 @@ export class CreateClassroomComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     this.createClassroomForLesson = resource;
-    this.buttonText = Update;
+    this.buttonText = Constants.Update;
     window.scroll({
       top: 0,
       left: 0,
@@ -144,7 +145,7 @@ export class CreateClassroomComponent implements OnInit {
   }
 
   reset(): void {
-    this.buttonText = Save;
+    this.buttonText = Constants.Save;
     this.ngOnInit();
   }
 
