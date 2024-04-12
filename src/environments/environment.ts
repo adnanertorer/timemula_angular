@@ -22,8 +22,8 @@ export const participantTypeEnum = {
 export const participantEnum = {
   personal: 1,
   group: 2,
-  closedGroup: 3,
-  none: 4
+  closedGroup: 4,
+  none: 3
 }
 
 export enum daysEnum {

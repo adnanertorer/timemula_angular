@@ -59,6 +59,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="seanceCount">Maksimum Katılımcı Sayısı</label>
+                            <div class="col-md-9">
+                                <input type="number" name="maxCapacity" class="form-control" id="maxCapacity"
+                                    [(ngModel)]="artPackage.maxCapacity" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-md-3 col-form-label" for="duration">Seansın Süresi (dk)</label>
                             <div class="col-md-9">
                                 <input type="number" name="duration" class="form-control" id="duration"
@@ -209,7 +216,9 @@
                             Katılımcı Türü
                         </th>
                         <td mat-cell *matCellDef="let row">
-                            {{ row.participantTypeName }}
+                            <span *ngIf="row.participantTypeId == 1">Yetişkin</span>
+                            <span *ngIf="row.participantTypeId == 2">Çocuk</span>
+                            <span *ngIf="row.participantTypeId == 3">Kriter Yok</span>
                         </td>
                     </ng-container>
 
@@ -217,7 +226,11 @@
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>
                             Katılım Türü
                         </th>
-                        <td mat-cell *matCellDef="let row">{{ row.participantName }}</td>
+                        <td mat-cell *matCellDef="let row">
+                            <span *ngIf="row.participantId == 1">Bireysel</span>
+                            <span *ngIf="row.participantId == 2">Grup</span>
+                            <span *ngIf="row.participantId == 3">Kriter Yok</span>    
+                        </td>
                     </ng-container>
 
                     <ng-container matColumnDef="isActive">
