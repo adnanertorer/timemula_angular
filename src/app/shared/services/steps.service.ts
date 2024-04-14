@@ -3,12 +3,12 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { StepModel } from '../model/step-model';
 
 const STEPS = [
-  { stepIndex: 1, isComplete: true },
-  { stepIndex: 2, isComplete: true },
-  { stepIndex: 3, isComplete: true },
-  { stepIndex: 4, isComplete: true },
-  { stepIndex: 5, isComplete: true },
-  { stepIndex: 6, isComplete: true },
+  { stepIndex: 1, isComplete: false },
+  { stepIndex: 2, isComplete: false },
+  { stepIndex: 3, isComplete: false },
+  { stepIndex: 4, isComplete: false },
+  { stepIndex: 5, isComplete: false },
+  { stepIndex: 6, isComplete: false },
   { stepIndex: 7, isComplete: false },
   { stepIndex: 8, isComplete: false },
   { stepIndex: 9, isComplete: false },

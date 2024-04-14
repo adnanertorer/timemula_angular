@@ -10,10 +10,18 @@ import { catchError } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { ErrorDialogService } from 'src/app/views/error/Error-Dialog/error-dialog.service';
 
 @Injectable()
 export class UnauthorizedInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService, private router: Router) {}
+
+  options = {
+    autoClose: false,
+    keepAfterRouteChange: false,
+    id: 'default-alert'
+  };
+
+  constructor(private authService: AuthService, private router: Router, private errorService: ErrorDialogService) { }
 
   intercept(
     request: HttpRequest<unknown>,
@@ -30,22 +38,23 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
 
         if (err.status === 400) {
           console.log(err);
-          if(err.error.isValid != undefined){
+          if (err.error.isValid != undefined) {
             let errorMessage = 'Lütfen aşağıda belirtilen hataları düzeltin\n\n';
             var errors = err.error.errors;
             errors.forEach(element => {
-              errorMessage += element.errorMessage+'\n';
+              errorMessage += element.errorMessage + '\n';
             });
-            alert(errorMessage);
+            this.errorService.error(errorMessage, this.options);
+            //alert(errorMessage);
           }
         }
 
-        if(err.status === 500){
+        if (err.status === 500) {
           alert('Server Error');
         }
 
         if (!environment.production) {
-         // console.error(err);
+          // console.error(err);
         }
         const error = (err && err.error && err.error.message) || err.statusText;
         return throwError(error);

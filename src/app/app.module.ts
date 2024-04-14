@@ -42,8 +42,10 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
 import { ConfirmationDialogService } from './shared/tools/confirmation-dialog/confirmation-dialog.service';
 import { DefaultLayoutComponent } from './containers/default-layout';
 import { CustomerService } from './shared/services/customer.service';
-import { AgendaService, DayService, MonthAgendaService, MonthService, TimelineMonthService,
-  TimelineViewsService, WeekService, WorkWeekService } from '@syncfusion/ej2-angular-schedule';
+import {
+  AgendaService, DayService, MonthAgendaService, MonthService, TimelineMonthService,
+  TimelineViewsService, WeekService, WorkWeekService
+} from '@syncfusion/ej2-angular-schedule';
 import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CollectionSubComponent } from './views/base/collection-sub/collection-sub.component';
 import { PaymentSubComponent } from './views/base/payment-sub/payment-sub.component';
@@ -60,11 +62,14 @@ import { JwPaginationModule } from 'jw-angular-pagination';
 import { CreateSubCategoryComponent } from './views/base/create-sub-category/create-sub-category.component';
 import { CreateLessonComponent } from './views/base/create-lesson/create-lesson.component';
 import { CreateClassroomComponent } from './views/base/create-classroom/create-classroom.component';
-import {PackageClassroomComponent} from "./views/base/package-classroom/package-classroom.component";
+import { PackageClassroomComponent } from "./views/base/package-classroom/package-classroom.component";
 import { CreateEducatorComponent } from './views/base/create-educator/create-educator.component';
 import { CreateLessonEducatorComponent } from './views/base/create-lesson-educator/create-lesson-educator.component';
 import { CreateEducatorWorkingHoursComponent } from './views/base/create-educator-working-hours/create-educator-working-hours.component';
 import { CreateLessonPackageComponent } from './views/base/create-lesson-package/create-lesson-package.component';
+import { CreateCashboxComponent } from './views/base/create-cashbox/create-cashbox.component';
+import { ErrorDialogComponent } from './views/error/Error-Dialog/Error-Dialog.component';
+import { ErrorDialogService } from './views/error/Error-Dialog/error-dialog.service';
 
 
 
@@ -93,7 +98,9 @@ import { CreateLessonPackageComponent } from './views/base/create-lesson-package
     CreateEducatorComponent,
     CreateLessonEducatorComponent,
     CreateEducatorWorkingHoursComponent,
-    CreateLessonPackageComponent
+    CreateLessonPackageComponent,
+    CreateCashboxComponent,
+    ErrorDialogComponent
     //ConfirmationDialogComponent,
   ],
   imports: [
@@ -132,7 +139,7 @@ import { CreateLessonPackageComponent } from './views/base/create-lesson-package
     CustomerService,
     CustomerLessonsTempService,
     DayService, WeekService, WorkWeekService, MonthService,
-     AgendaService, MonthAgendaService, TimelineViewsService, TimelineMonthService
+    AgendaService, MonthAgendaService, TimelineViewsService, TimelineMonthService, ErrorDialogService
   ],
   bootstrap: [AppComponent]
 })

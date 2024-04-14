@@ -14,33 +14,18 @@
           <form action="" method="post" class="form-horizontal">
             <input type="hidden" name="id" id="id" [(ngModel)]="category.id" />
             <div class="form-group row">
-              <label class="col-md-3 col-form-label" for="categoryName"
-                >Kategori Adı</label
-              >
+              <label class="col-md-3 col-form-label" for="categoryName">Kategori Adı</label>
               <div class="col-md-9">
-                <input
-                  type="text"
-                  id="categoryName"
-                  [(ngModel)]="category.categoryName"
-                  name="categoryName"
-                  class="form-control"
-                />
+                <input type="text" id="categoryName" [(ngModel)]="category.categoryName" name="categoryName"
+                  class="form-control" />
               </div>
             </div>
           </form>
           <div class="card-footer">
-            <button
-              type="submit"
-              (click)="add()"
-              class="btn btn-sm btn-primary"
-            >
+            <button type="submit" (click)="add()" class="btn btn-sm btn-primary">
               <i class="fa fa-dot-circle-o"></i> {{ buttonText }}
             </button>
-            <button
-              type="reset"
-              (click)="reset()"
-              class="btn btn-sm btn-danger"
-            >
+            <button type="reset" (click)="reset()" class="btn btn-sm btn-danger">
               <i class="fa fa-ban"></i> Vazgeç
             </button>
           </div>
@@ -67,18 +52,9 @@
                 <tr *ngFor="let item of pageOfItems">
                   <td>{{ item.categoryName }}</td>
                   <td>
-                    <button
-                      class="btn btn-info"
-                      (click)="getDetailFromTable(item)"
-                      title="Detay"
-                    >
-                      Detay</button
-                    >&nbsp;
-                    <button
-                      class="btn btn-danger"
-                      (click)="remove(item.id)"
-                      title="Sil"
-                    >
+                    <button class="btn btn-info" (click)="getDetailFromTable(item)" title="Detay">
+                      Detay</button>&nbsp;
+                    <button class="btn btn-danger" (click)="remove(item.id)" title="Sil">
                       Sil
                     </button>
                   </td>
@@ -87,10 +63,7 @@
             </table>
           </div>
           <div class="card-footer pb-0 pt-3">
-            <jw-pagination
-              [items]="categories"
-              (changePage)="onChangePage($event)"
-            ></jw-pagination>
+            <jw-pagination [items]="categories" (changePage)="onChangePage($event)"></jw-pagination>
           </div>
         </div>
         <!--/.col-->

@@ -52,9 +52,7 @@ export class LoginComponent implements OnInit {
   }
   
   login() {
-    if (!this.user.email || !this.user.password) {
-      return;
-    }
+    console.log('login');
     const returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'genel-rapor.html';
     this.authService
       .login(this.user)
@@ -67,14 +65,6 @@ export class LoginComponent implements OnInit {
           }else{
             this.returnClientMessage = data.clientMessage;
           }
-        },
-        (data) => {
-          this.returnClientMessage = data;
-          this.loginError = true;
-          if(this.returnClientMessage.trim().length > 0){
-            alert(this.returnClientMessage = data);
-          }
-          
         }
       );
   }

@@ -23,6 +23,9 @@
   <div *ngIf="step.stepIndex == 8">
     <app-create-lesson-package></app-create-lesson-package>
   </div>
+  <div *ngIf="step.stepIndex == 9">
+    <app-create-cashbox></app-create-cashbox>
+  </div>
   <button class="step-complete-btn" (click)="onCompleteStep()">
     <span class="completed-step-check material-icons">
       {{ step.isComplete ? "check_circle" : "panorama_fish_eye" }} </span>Complete Step {{ step.stepIndex }}

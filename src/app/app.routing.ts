@@ -41,11 +41,10 @@ export const routes: Routes = [
   },
   {
     path: 'register',
-    redirectTo: '/form',
-    /*component: RegisterComponent,
+    component: RegisterComponent,
     data: {
       title: 'Register Page'
-    }*/
+    }
   },
   {
     path: 'form',
