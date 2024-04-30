@@ -71,9 +71,6 @@ import { CreateCashboxComponent } from './views/base/create-cashbox/create-cashb
 import { ErrorDialogComponent } from './views/error/Error-Dialog/Error-Dialog.component';
 import { ErrorDialogService } from './views/error/Error-Dialog/error-dialog.service';
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,

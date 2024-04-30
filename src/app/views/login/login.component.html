@@ -1,29 +1,46 @@
-<div class="content">
-  <div class="container">
-    <div class="row justify-content-center" style="padding-top: 50px;">
-      <h5 style="color: cadetblue;">TIMEMULA</h5>
-    </div>
-    <div class="row" style="margin-top: 100px;">
-      <div class="col-md-6">
-        <img src="../../../assets/img/login_register.jpg" style="width: 372px;" alt="Register">
-      </div>
-      <div class="col-md-6 contents">
-        <div class="row justify-content-center">
-          <div class="col-md-12">
-            <div class="mb-12">
-              <div class="form-group first">
-                <span class="input-group-text"><i class="icon-user"></i>&nbsp;E-Posta Adresiniz</span>
-                <input type="email" name="email" id="email" [(ngModel)]="user.email" class="form-control" 
-            placeholder="e-posta adresiniz" autocomplete="email" required>
+<div class="wrapper">
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6">
+            <img src="../../../assets/img/login_register.jpg" style="width: 100%;" alt="Register">
+          </div>
+          <div class="col-md-6 contents">
+            <div class="row justify-content-center">
+              <div class="col-md-12">
+                <div class="card" style="margin-top: 50px;">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-title">TIMEMULA</h4>
+                  </div>
+                  <div class="card-body">
+                    <form>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">E-Posta Adresiniz</label>
+                            <input type="email" class="form-control" name="email" id="email" [(ngModel)]="user.email"
+                              required>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">Parolanız</label>
+                            <input type="email" class="form-control" name="password" id="password"
+                              [(ngModel)]="user.password" required>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" (click)="login()" class="btn btn-primary pull-right">Giriş</button>
+                      <button type="button" (click)="register()" class="btn btn-success pull-left">Hesap
+                        Oluştur</button>
+                      <div class="clearfix"></div>
+                    </form>
+                  </div>
+                </div>
               </div>
-              <div class="form-group last mb-12">
-                <span class="input-group-text"><i class="icon-lock"></i>&nbsp;Parolanız</span>
-                <input type="password" name="password" id="password" [(ngModel)]="user.password" class="form-control" placeholder="parolanız" autocomplete="current-password" required>
-              </div>
-              <button type="button" (click)="login()" class="btn btn-primary btn-block px-4">Giriş</button>
-              <button type="button" class="btn btn-block btn-success" (click)="register()">Hesap Oluştur</button>
+            </div>
           </div>
         </div>
       </div>
-  </div>
+    </div>
 </div>
