@@ -1,60 +1,78 @@
-<div class="content">
-  <div class="container">
-    <div class="row justify-content-center" style="padding-top: 10px;">
-      <h5 style="color: cadetblue;">SCHEDULA</h5>
-    </div>
-    <div class="row" style="margin-top: 25px;">
-      <div class="col-md-4">
-        <img src="../../../assets/img/login_register.jpg" style="width: 372px;" alt="Register">
-      </div>
-      <div class="col-md-4 contents">
-        <div class="row justify-content-center">
-          <div class="col-md-12">
-            <div class="mb-12">
-              <p>Firma Bilgileriniz</p>
-            </div>
-              <div class="form-group first">
-                <label for="companyName">Firma Adı</label>
-                <input type="text" class="form-control" name="companyName" [(ngModel)]="model.companyName" placeholder="Firma adını yazınız" autocomplete="companyName" required>
-              </div>
-              <div class="form-group last mb-12">
-                <label for="companyPhone">Firma Telefon</label>
-                <input type="tel" class="form-control" name="companyPhone" [(ngModel)]="model.companyPhone" placeholder="Firma telefonunu yazınız" autocomplete="companyPhone" required>
-              </div>
-              <div class="form-group last mb-12">
-                <label for="companyAddress">Firma Adresi</label>
-                <input type="text" class="form-control" name="companyAddress" [(ngModel)]="model.companyAddress" placeholder="Firma adresini yazınız" autocomplete="companyAddress" required>
-              </div>
-              <div class="form-group last mb-12">
-                <label for="name">Adınız</label>
-                <input type="text" class="form-control" name="name" [(ngModel)]="model.name" placeholder="Adınızı yazınız" autocomplete="name" required>
-              </div>
-              <div class="form-group last mb-12">
-                <label for="surname">Soyadınız</label>
-                <input type="text" class="form-control" name="surname" [(ngModel)]="model.surname" placeholder="Soyadınızı yazınız" autocomplete="surname" required>
-              </div>
+<div class="wrapper">
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <img width="100" src="../../../assets/img/brand/almula-logo.png" />
+        <div class="card" style="margin-top: 40px;">
+          <div class="card-header card-header-primary justify-content-center">
+            <h4 class="card-title" style="text-align: center;">TIMEMULA FİRMA BİLGİLERİNİZ</h4> 
           </div>
-        </div>
-      </div>
-      <div class="col-md-4 contents">
-        <div class="row justify-content-center">
-          <div class="col-md-12">
-            <div class="mb-12">
-              <p>Kullanıcı Bilgileriniz</p>
+          <div class="card-body">
+            <div class="row justify-content-center">
+              <div class="col-md-6 contents">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="companyName">Firma Adı</label>
+                    <input type="text" class="form-control" name="companyName" [(ngModel)]="model.companyName"
+                      placeholder="Firma adını yazınız" autocomplete="companyName" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="companyPhone">Firma Telefon</label>
+                    <input type="tel" class="form-control" name="companyPhone" [(ngModel)]="model.companyPhone"
+                      placeholder="Firma telefonunu yazınız" autocomplete="companyPhone" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="companyPhone">Firma Adresi</label>
+                    <input type="text" class="form-control" name="companyAddress" [(ngModel)]="model.companyAddress"
+                      placeholder="Firma adresini yazınız" autocomplete="companyAddress" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="companyPhone">Adınız</label>
+                    <input type="text" class="form-control" name="name" [(ngModel)]="model.name"
+                      placeholder="Adınızı yazınız" autocomplete="name" required>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 contents">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="companyPhone">Soyadınız</label>
+                    <input type="text" class="form-control" name="surname" [(ngModel)]="model.surname"
+                      placeholder="Soyadınızı yazınız" autocomplete="surname" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="companyPhone">E-Posta Adresiniz</label>
+                    <input type="email" class="form-control" name="email" [(ngModel)]="model.email"
+                      placeholder="E-Posta adresinizi yazınız" autocomplete="email" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="companyPhone">Parolanız</label>
+                    <input type="password" class="form-control" name="password" [(ngModel)]="model.password" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="companyPhone">Tekrar Parolanız</label>
+                    <input type="password" class="form-control" name="passwordAgain" [(ngModel)]="passwordAgain"
+                      required>
+                  </div>
+                </div>
+              </div>
+              <button type="button" (click)="register()" class="btn btn-success pull-left">Hesap
+                Oluştur</button>
+              <div class="clearfix"></div>
             </div>
-            <div class="form-group last mb-12">
-              <label for="email">E-Posta Adresiniz</label>
-              <input type="email" class="form-control" name="email" [(ngModel)]="model.email" placeholder="E-Posta adresinizi yazınız" autocomplete="email" required>
-            </div>
-            <div class="form-group last mb-12">
-              <label for="password">Parolanız</label>
-              <input type="password" class="form-control" name="password" [(ngModel)]="model.password" required>
-            </div>
-            <div class="form-group last mb-12">
-              <label for="passwordAgain">Parolanız</label>
-              <input type="password" class="form-control" name="passwordAgain" [(ngModel)]="passwordAgain" required>
-            </div>
-            <button type="button" class="btn btn-block btn-success" (click)="register()">Kayıt Ol</button>
+          </div>
         </div>
       </div>
     </div>
