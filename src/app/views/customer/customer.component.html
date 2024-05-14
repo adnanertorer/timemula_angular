@@ -331,7 +331,7 @@
 
     <ng-container matColumnDef="blood_group_name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Kan Grubu</th>
-      <td mat-cell *matCellDef="let row">{{row.blood_group_name}}</td>
+      <td mat-cell *matCellDef="let row">{{row.bloodGroup.bloodGroupName}}</td>
     </ng-container>
 
     <ng-container matColumnDef="isChild">
@@ -374,5 +374,5 @@
     </tr>
   </table>
 
-  <mat-paginator #customerPaginator [pageSizeOptions]="[10, 25, 50, 75, 100]" aria-label="Select page of users"></mat-paginator>
+  <mat-paginator #customerPaginator [pageSizeOptions]="[10, 25, 50, 75, 100, 150]" aria-label="Select page of users"></mat-paginator>
 </div>

@@ -11,7 +11,6 @@ import { CustomerFilter } from 'src/app/shared/model/customer-filter';
 import { GenderModel } from 'src/app/shared/model/gender-model';
 import { ParentTypeModel } from 'src/app/shared/model/parent-type-model';
 import { SearchResourceModel } from 'src/app/shared/model/search-resource-model';
-import { VCustomer } from 'src/app/shared/model/v-customer';
 import { BloodGroupService } from 'src/app/shared/services/blood-group.service';
 import { ParentTypeService } from 'src/app/shared/services/parent-type.service';
 import { SearchResourceService } from 'src/app/shared/services/search-resource.service';
@@ -37,7 +36,7 @@ export class CustomerComponent implements OnInit {
   startDateModel: NgbDateStruct;
 
   customer: Customer;
-  customerList: VCustomer[] = [];
+  customerList: any[] = [];
   bloodGroups: BloodGroupModel[] = [];
   searchServices: SearchResourceModel[] = [];
   parentTypes: ParentTypeModel[] = [];
@@ -51,7 +50,7 @@ export class CustomerComponent implements OnInit {
 
   displayedColumns: string[] = ['citizenIdentityNumber', 'name', 'gsm',
   'email', 'birthDate', 'blood_group_name', 'isChild', 'isActive', 'id'];
-  dataSource: MatTableDataSource<VCustomer>;
+  dataSource: MatTableDataSource<any>;
   @ViewChild('customerPaginator') paginator: MatPaginator;
   @ViewChild('customerSort') sort: MatSort;
 
@@ -77,7 +76,6 @@ export class CustomerComponent implements OnInit {
       address: '',
       birthDate: new Date(), //
       birthPlace: '', //
-      bloodGroupId: 0, //
       citizenIdentityNumber: '', //
       disease: '',
       email: '', //
@@ -99,10 +97,8 @@ export class CustomerComponent implements OnInit {
       parentName: '', //
       parentProf: '', //
       parentSurname: '', //
-      parentTypeId: 0,
       password: '',
       phone: '', //
-      searchResourceId: 0,//
       smsRequest: false,//
       surname: ''//
     };
@@ -137,9 +133,9 @@ export class CustomerComponent implements OnInit {
       'parentName': new UntypedFormControl(this.customer.parentName, [Validators.required, Validators.maxLength(50)]),
       'parentProf': new UntypedFormControl(this.customer.parentProf, null),
       'parentSurname': new UntypedFormControl(this.customer.parentSurname, [Validators.required, Validators.maxLength(50)]),
-      'parentTypeId': new UntypedFormControl(this.customer.parentTypeId, Validators.required),
+      'parentTypeId': new UntypedFormControl(this.customer.parentTypeId),
       'phone':  new UntypedFormControl(this.customer.phone, null),
-      'searchResourceId': new UntypedFormControl(this.customer.searchResourceId, Validators.required),
+      'searchResourceId': new UntypedFormControl(this.customer.searchResourceId),
       //'smsRequest': new FormControl(this.customer.smsRequest, Validators.required),
       'surname': new UntypedFormControl(this.customer.surname, [Validators.required, Validators.maxLength(50)]),
       'password': new UntypedFormControl(this.customer.password, [Validators.required, Validators.maxLength(20)]),
@@ -226,7 +222,7 @@ export class CustomerComponent implements OnInit {
   getList(){
     this.service.getList().subscribe((data) => {
       if (data.success){
-        this.customerList = data.dynamicClass as VCustomer[];
+        this.customerList = data.dynamicClass as any[];
         this.dataSource = new MatTableDataSource(this.customerList);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -237,7 +233,7 @@ export class CustomerComponent implements OnInit {
   getWithFilter(){
     this.service.getListWithFilter(this.customerFilter).subscribe((data) => {
       if (data.success){
-        this.customerList = data.dynamicClass as VCustomer[];
+        this.customerList = data.dynamicClass as any[];
         this.dataSource = new MatTableDataSource(this.customerList);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -270,11 +266,11 @@ export class CustomerComponent implements OnInit {
     console.log(this.customer);
     if (this.customer.id === 0){
       // tslint:disable-next-line: radix
-      this.customer.bloodGroupId = parseInt(this.customer.bloodGroupId.toString());
+      this.customer.bloodGroupId = this.customer.bloodGroupId != undefined ? parseInt(this.customer.bloodGroupId.toString()) : null;
       // tslint:disable-next-line: radix
-      this.customer.parentTypeId = parseInt(this.customer.parentTypeId.toString());
+      this.customer.parentTypeId = this.customer.parentTypeId != undefined ? parseInt(this.customer.parentTypeId.toString()): null;
       // tslint:disable-next-line: radix
-      this.customer.searchResourceId = parseInt(this.customer.searchResourceId.toString());
+      this.customer.searchResourceId = this.customer.searchResourceId != undefined ? parseInt(this.customer.searchResourceId.toString()): null;
       this.customer.citizenIdentityNumber = this.customer.citizenIdentityNumber.toString();
       this.customer.parentIdentity = this.customer.parentIdentity.toString();
       this.customer.birthDate = new Date(this.dateValue.getFullYear(), this.dateValue.getMonth(), this.dateValue.getDate(), 0, 0, 0, 0);

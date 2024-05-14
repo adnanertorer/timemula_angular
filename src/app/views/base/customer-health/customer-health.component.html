@@ -56,12 +56,12 @@
 
     <ng-container matColumnDef="diseaseCategoryName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Rahatsızlık Başlığı</th>
-      <td mat-cell *matCellDef="let row">{{row.diseaseCategoryName}}</td>
+      <td mat-cell *matCellDef="let row">{{row.diseaseMain.diseaseCategoryName}}</td>
     </ng-container>
 
     <ng-container matColumnDef="diaseName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Rahatsızlık</th>
-      <td mat-cell *matCellDef="let row">{{row.diaseName}}</td>
+      <td mat-cell *matCellDef="let row">{{row.diseaseSub.diaseName}}</td>
     </ng-container>
 
     <ng-container matColumnDef="description">

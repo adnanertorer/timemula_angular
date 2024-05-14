@@ -7,11 +7,9 @@ import { Customer } from 'src/app/shared/model/customer';
 import { CustomerHealthModel } from 'src/app/shared/model/customer-health-model';
 import { DiseaseMainModel } from 'src/app/shared/model/disease-main-model';
 import { DiseaseSubModel } from 'src/app/shared/model/disease-sub-model';
-import { VCustomerHealthModel } from 'src/app/shared/model/v-customer-health-model';
 import { CustomerHealthService } from 'src/app/shared/services/customer-health.service';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { DiseaseMainService } from 'src/app/shared/services/disease-main.service';
-import jspdf from 'jspdf';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import Constants from 'src/app/shared/tools/constants';
@@ -24,7 +22,7 @@ import Constants from 'src/app/shared/tools/constants';
 export class CustomerHealthComponent implements OnInit {
 
   model: CustomerHealthModel;
-  list: VCustomerHealthModel[] = [];
+  list: CustomerHealthModel[] = [];
   selectedCustomerId:number = 0;
   diseaseMainList: DiseaseMainModel[] = [];
   diseaseSubList: DiseaseSubModel[] = [];
@@ -35,7 +33,7 @@ export class CustomerHealthComponent implements OnInit {
   buttonText: string = Constants.Save;
 
   displayColums: string[] = ['diseaseCategoryName', 'diaseName', 'description', 'id'];
-  dataSource: MatTableDataSource<VCustomerHealthModel>;
+  dataSource: MatTableDataSource<CustomerHealthModel>;
 
   @ViewChild('paginatorHealth') paginator: MatPaginator;
   @ViewChild('healthSort') sort: MatSort;
@@ -52,7 +50,6 @@ export class CustomerHealthComponent implements OnInit {
       address: '',
       birthDate: new Date(), //
       birthPlace: '', //
-      bloodGroupId: 0, //
       citizenIdentityNumber: '', //
       disease: '',
       email: '', //
@@ -74,10 +71,8 @@ export class CustomerHealthComponent implements OnInit {
       parentName: '', //
       parentProf: '', //
       parentSurname: '', //
-      parentTypeId: 0,
       password: '',
       phone: '', //
-      searchResourceId: 0,//
       smsRequest: false,//
       surname: ''//
     };
@@ -194,7 +189,7 @@ export class CustomerHealthComponent implements OnInit {
           },
           ],
           ...this.list.map(ed => {
-            return [ed.diseaseCategoryName, ed.diaseName, ed.description];
+            return [ed.diseaseMain.diseaseCategoryName, ed.diseaseSub.diaseName, ed.description];
           })
         ]
       }
@@ -247,7 +242,7 @@ export class CustomerHealthComponent implements OnInit {
   getList(){
     this.service.getList(this.selectedCustomerId).subscribe((data)=>{
       if(data.success){
-        this.list = data.dynamicClass as VCustomerHealthModel[];
+        this.list = data.dynamicClass as CustomerHealthModel[];
         this.dataSource = new MatTableDataSource(this.list);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;

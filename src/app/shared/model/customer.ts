@@ -1,3 +1,7 @@
+import { BloodGroupModel } from "./blood-group-model";
+import { ParentTypeModel } from "./parent-type-model";
+import { SearchResourceModel } from "./search-resource-model";
+
 export interface Customer {
     id: number;
     citizenIdentityNumber: string;
@@ -15,12 +19,12 @@ export interface Customer {
     linkedinAddress: string;
     isChild: boolean;
     isActive: boolean;
-    bloodGroupId: number;
+    bloodGroupId?: number;
     disease: string;
-    searchResourceId: number;
+    searchResourceId?: number;
     smsRequest: boolean;
     emailRequest: boolean;
-    parentTypeId: number;
+    parentTypeId?: number;
     parentIdentity: string;
     parentName: string;
     parentSurname: string;
@@ -31,4 +35,7 @@ export interface Customer {
     linkedinParentAddress: string;
     isAdult?: boolean;
     gender?: number;
+    bloodGroup?: BloodGroupModel;
+    parentType?: ParentTypeModel;
+    searchResource?: SearchResourceModel;
 }
