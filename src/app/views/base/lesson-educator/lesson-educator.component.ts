@@ -9,7 +9,7 @@ import { StaffService } from 'src/app/shared/services/staff.service';
 import Constants from 'src/app/shared/tools/constants';
 declare let alertify: any;
 
-@Component({
+@Component({ 
   selector: 'app-lesson-educator',
   templateUrl: './lesson-educator.component.html',
   styleUrls: ['./lesson-educator.component.css']
@@ -17,7 +17,7 @@ declare let alertify: any;
 export class LessonEducatorComponent implements OnInit {
 
   model: LessonEducatorModel;
-  list: VLessonEducator[] = [];
+  list: LessonEducatorModel[] = [];
   lessonList: LessonModel[];
   staffList: StaffModel[] = [];
   pageOfItems: Array<any>;
@@ -43,7 +43,7 @@ export class LessonEducatorComponent implements OnInit {
   getList(){
     this.service.getList().subscribe((data)=>{
       if(data.success){
-        this.list = data.dynamicClass as VLessonEducator[];
+        this.list = data.dynamicClass as LessonEducatorModel[];
       }
     })
   }
@@ -111,15 +111,17 @@ export class LessonEducatorComponent implements OnInit {
   }
 
   remove(id: number): void {
-    this.service.remove(id).subscribe((data) => {
-      if (data.success) {
-        this.ngOnInit();
-        alertify.set('notifier', 'position', 'top-right');
-        alertify.success(data.clientMessage, 2);
-      } else {
-        alert(data.clientMessage);
-      }
-    });
+    const approve = confirm('Ders/Eğitmen ilişkisi silmek üzeresiniz, devam etmek istiyor musunuz?');
+    if(approve){
+      this.service.remove(id).subscribe((data) => {
+        if (data.success) {
+          this.ngOnInit();
+          alertify.set('notifier', 'position', 'top-right');
+          alertify.success(data.clientMessage, 2);
+        } else {
+          alert(data.clientMessage);
+        }
+      });
+    }
   }
-
 }

@@ -85,6 +85,12 @@ export class ArtPackageComponent implements OnInit {
     this.getParticipants();
   }
 
+  onChangeSeancePrice(event: any): void {
+    const seancePrice = (event.target as HTMLInputElement).value;
+    var price = parseFloat(seancePrice) * this.artPackage.seanceCount;
+    this.artPackage.seancePrice = price;
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -204,13 +210,14 @@ export class ArtPackageComponent implements OnInit {
   add(): void {
     this.artPackage.categoryId =parseInt(this.artPackage.categoryId.toString());
     this.artPackage.subCategoryId =parseInt(this.artPackage.subCategoryId.toString());
-    this.artPackage.discount =parseFloat(this.artPackage.discount.toString());
-    this.artPackage.participantId =parseInt(this.artPackage.participantId.toString());
-    this.artPackage.participantTypeId =parseInt(this.artPackage.participantTypeId.toString());
-    this.artPackage.seanceCount =parseInt(this.artPackage.seanceCount.toString());
-    this.artPackage.seancePrice =parseFloat(this.artPackage.seancePrice.toString());
-    this.artPackage.unitPrice =parseFloat(this.artPackage.unitPrice.toString());
-    this.artPackage.duration =parseFloat(this.artPackage.duration.toString());
+    this.artPackage.discount = this.artPackage.discount ? parseFloat(this.artPackage.discount.toString()) : 0;
+    this.artPackage.participantId =this.artPackage.participantId ? parseInt(this.artPackage.participantId.toString(), 10) : 3;
+    this.artPackage.participantTypeId = this.artPackage.participantTypeId ? parseInt(this.artPackage.participantTypeId.toString(), 10) : 3;
+    this.artPackage.seanceCount = this.artPackage.seanceCount;
+    this.artPackage.seancePrice = this.artPackage.seancePrice ?? 0;
+    this.artPackage.unitPrice = this.artPackage.unitPrice ?? 0;
+    this.artPackage.duration = this.artPackage.duration ?? 45;
+    this.artPackage.lessonId = this.artPackage.lessonId ? parseInt(this.artPackage.lessonId.toString(), 10) : 0;
     if (this.artPackage.id == 0) {
       this.service.add(this.artPackage).subscribe((data) => {
         if (data.success) {

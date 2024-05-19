@@ -91,15 +91,18 @@ export class ParentTypeComponent implements OnInit {
   }
 
   remove(id: number): void {
-    this.service.remove(id).subscribe((data) => {
-      if (data.success) {
-        this.ngOnInit();
-        alertify.set('notifier', 'position', 'top-right');
-        alertify.success(data.clientMessage, 2);
-      } else {
-        alert(data.clientMessage);
-      }
-    });
+    const approve = confirm('Ebeveyn türü silmek üzeresiniz, devam etmek istiyor musunuz?');
+    if(approve){
+      this.service.remove(id).subscribe((data) => {
+        if (data.success) {
+          this.ngOnInit();
+          alertify.set('notifier', 'position', 'top-right');
+          alertify.success(data.clientMessage, 2);
+        } else {
+          alert(data.clientMessage);
+        }
+      });
+    }
   }
 
 }

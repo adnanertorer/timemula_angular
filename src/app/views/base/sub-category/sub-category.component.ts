@@ -34,8 +34,8 @@ export class SubCategoryComponent implements OnInit {
     this.getList();
   }
 
-  getCategoryList(){
-    this.categoryService.getList().subscribe((data)=>{
+  getCategoryList() {
+    this.categoryService.getList().subscribe((data) => {
       this.categories = data.dynamicClass as CategoryModel[];
     })
   }
@@ -44,7 +44,7 @@ export class SubCategoryComponent implements OnInit {
     this.service.getListAll().subscribe((data) => {
       this.subCategories = data.dynamicClass as VSubCategory[];
       this.pageOfItems = this.subCategories;
-    }, (err)=>{
+    }, (err) => {
       console.log(err);
     })
   }
@@ -55,8 +55,8 @@ export class SubCategoryComponent implements OnInit {
 
   getDetailFromTable(resource: any): void {
     const id = parseInt(resource.id);
-    this.service.getDetails(id).subscribe((data)=>{
-      if(data.success){
+    this.service.getDetails(id).subscribe((data) => {
+      if (data.success) {
         this.subCategory = data.dynamicClass as SubCategoryModel;
         this.buttonText = Constants.Update;
         window.scroll({
@@ -98,15 +98,18 @@ export class SubCategoryComponent implements OnInit {
   }
 
   remove(id: number): void {
-    this.service.remove(id).subscribe((data) => {
-      if (data.success) {
-        this.ngOnInit();
-        alertify.set('notifier', 'position', 'top-right');
-        alertify.success(data.clientMessage, 2);
-      } else {
-        alert(data.clientMessage);
-      }
-    });
+    const approve = confirm('Alt Kategori silmek üzeresiniz, devam etmek istiyor musunuz?');
+    if (approve) {
+      this.service.remove(id).subscribe((data) => {
+        if (data.success) {
+          this.ngOnInit();
+          alertify.set('notifier', 'position', 'top-right');
+          alertify.success(data.clientMessage, 2);
+        } else {
+          alert(data.clientMessage);
+        }
+      });
+    }
   }
 
 }

@@ -92,9 +92,8 @@
                 <th>Ders Min. Kişi Sayısı</th>
                 <th>Ders Maks. Kişi Sayısı</th>
                 <th>Dersin Önceliği</th>
-                <th>Kaydeden Kullanıcı</th>
                 <th>Kayıt Zamanı</th>
-                <th>İşlemler</th>
+                <th style="text-align: right;">İşlemler</th>
               </tr>
             </thead>
             <tbody>
@@ -105,11 +104,10 @@
                 <td>{{item.minCapacity}}</td>
                 <td>{{item.maxCapacity}}</td>
                 <td>{{item.priority}}</td>
-                <td>{{item.createdByName}}</td>
                 <td>{{item.createdAt | date: 'dd/M/yyyy hh:mm'}}</td>
-                <td>
-                  <a (click)="getDetailFromTable(item)" title="Detay">Detay</a>
-                  <a (click)="remove(item.id)" title="Sil">Sil</a>
+                <td style="text-align: right;">
+                  <button class="btn btn-success btn-info" (click)="getDetailFromTable(item)">Detay</button>
+                  <button class="btn btn-danger btn-info" (click)="remove(item.id)">Sil</button>
                 </td>
               </tr>
             </tbody>

@@ -80,6 +80,12 @@ export class CategoryComponent implements OnInit {
   }
 
   remove(id: number): void {
+    const approve = confirm('Kategori silmek üzeresiniz, devam etmek istiyor musunuz?');
+    if(approve)
+      this.approveRemove(id);
+  }
+
+ approveRemove = (id: number) =>{
     this.service.remove(id).subscribe((data) => {
       if (data.success) {
         this.ngOnInit();
@@ -90,5 +96,4 @@ export class CategoryComponent implements OnInit {
       }
     });
   }
-
 }

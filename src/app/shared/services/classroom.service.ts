@@ -46,7 +46,7 @@ export class ClassroomService {
 
   getDetails(id: number){
     return this.http
-        .get<BaseResponse>(`${this.apiUrl}Clasroom/Detail/?id=${id.toString()}`, {observe: 'body'})
+        .get<BaseResponse>(`${this.apiUrl}/Clasroom/Detail/?id=${id.toString()}`, {observe: 'body'})
         .pipe(
             map((x)=> {
                 return x;
@@ -56,7 +56,7 @@ export class ClassroomService {
 
   remove(id: number){
     return this.http
-    .delete<BaseResponse>(`${this.apiUrl}Clasroom/Remove/?id=${id.toString()}`, {observe: 'body'})
+    .delete<BaseResponse>(`${this.apiUrl}/Clasroom/Remove/?id=${id.toString()}`, {observe: 'body'})
         .pipe(
             map((x)=> {
                 return x;

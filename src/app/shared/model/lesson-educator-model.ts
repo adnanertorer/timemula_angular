@@ -1,3 +1,6 @@
+import { LessonModel } from "./lesson-model";
+import { StaffModel } from "./staff-model";
+
 export interface LessonEducatorModel {
     id: number;
     staffId: number;
@@ -6,4 +9,6 @@ export interface LessonEducatorModel {
     createdAt: Date;
     lessonId?: number;
     seansPrice: number;
+    lesson?: LessonModel;
+    staff?: StaffModel;
 }

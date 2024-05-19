@@ -10,7 +10,7 @@ export interface ArtPackageModel {
     seanceCount: number;
     unitPrice: number;
     seancePrice: number;
-    discount: number;
+    discount?: number;
     description: string;
     isActive: boolean;
     participantId?: number;
