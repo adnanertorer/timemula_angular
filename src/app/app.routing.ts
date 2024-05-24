@@ -10,7 +10,7 @@ import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { RegisterFormPageComponent } from './views/register-wizard-steps/register-form-page/register-form-page.component';
-import { ComplateRegisterWizardComponent } from './views/register-wizard-steps/complate-register-wizard/complate-register-wizard.component';
+import { CompleteRegisterWizardComponent } from './views/register-wizard-steps/complete-register-wizard/complete-register-wizard.component';
 
 export const routes: Routes = [
   {
@@ -52,7 +52,7 @@ export const routes: Routes = [
   },
   {
     path: 'complete',
-    component: ComplateRegisterWizardComponent,
+    component: CompleteRegisterWizardComponent,
   },
   {
     path: '',

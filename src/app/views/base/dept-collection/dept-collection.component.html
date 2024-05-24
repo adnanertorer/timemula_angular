@@ -10,8 +10,7 @@
             <thead>
             <tr>
               <th>Adı</th>
-              <th>Nakit Borç</th>
-              <th>Taksitli/Vadeli Borç</th>
+              <th>Kalan Müşteri Borcu</th>
               <th>İşlemler</th>
             </tr>
             </thead>
@@ -19,11 +18,8 @@
             <tr *ngFor="let item of pageOfItemTransactions">
               <td>{{item.name}} {{item.surname}}</td>
               <td>{{item.cashDebt}}</td>
-              <td>{{item.installmentDebt}}</td>
               <td>
-                <button *ngIf="item.cashDebt > 0" (click)="getCollection(item)" type="button" class="btn btn-success">Vadesiz Tahsilat</button>&nbsp;
-                <button *ngIf="item.installmentDebt > 0 || item.cashDebt > 0" (click)="getInstallment(item)" type="button" class="btn btn-info">Taksitlendir</button>&nbsp;
-                <button *ngIf="item.installmentDebt > 0" (click)="openInstallmentItems(item)" type="button" class="btn btn-warning">Taksit Ödeme</button>
+                <button *ngIf="item.cashDebt > 0" (click)="getCollection(item)" type="button" class="btn btn-success">Tahsilat</button>
               </td>
             </tr>
             </tbody>

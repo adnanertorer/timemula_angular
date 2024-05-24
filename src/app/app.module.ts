@@ -54,7 +54,7 @@ import { GeneralPaymentSubComponent } from './views/base/general-payment-sub/gen
 import { CustomerLessonsTempService } from './shared/services/customer-lessons-temp.service';
 import { InstallmentCollectionComponent } from './views/base/installment-collection/installment-collection.component';
 import { RegisterWizardStepsComponent } from './views/register-wizard-steps/register-wizard-steps.component';
-import { ComplateRegisterWizardComponent } from './views/register-wizard-steps/complate-register-wizard/complate-register-wizard.component';
+import { CompleteRegisterWizardComponent } from './views/register-wizard-steps/complete-register-wizard/complete-register-wizard.component';
 import { RegisterFormPageComponent } from './views/register-wizard-steps/register-form-page/register-form-page.component';
 import { StepTemplateComponent } from './views/register-wizard-steps/step-template/step-template.component';
 import { CreateCategoryComponent } from './views/base/create-category/create-category.component';
@@ -85,7 +85,7 @@ import { ErrorDialogService } from './views/error/Error-Dialog/error-dialog.serv
     GeneralPaymentSubComponent,
     InstallmentCollectionComponent,
     RegisterWizardStepsComponent,
-    ComplateRegisterWizardComponent,
+    CompleteRegisterWizardComponent,
     RegisterFormPageComponent,
     StepTemplateComponent,
     CreateCategoryComponent,
