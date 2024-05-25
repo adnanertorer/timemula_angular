@@ -8,27 +8,27 @@
 
     <ng-container matColumnDef="educatorName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Eğitmen</th>
-      <td mat-cell *matCellDef="let row"> {{row.educatorName}}</td>
+      <td mat-cell *matCellDef="let row"> {{row.staff.name}} {{row.staff.surname}}</td>
     </ng-container>
 
     <ng-container matColumnDef="classromName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Sınıf</th>
-      <td mat-cell *matCellDef="let row"> {{row.classromName}}</td>
+      <td mat-cell *matCellDef="let row"> {{row.classroom.classromName}}</td>
     </ng-container>
 
     <ng-container matColumnDef="artPackageName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Paket Adı</th>
-      <td mat-cell *matCellDef="let row"> {{row.artPackageName}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.artPackage.artPackageName}} </td>
     </ng-container>
 
     <ng-container matColumnDef="lessonName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Ders Adı</th>
-      <td mat-cell *matCellDef="let row"> {{row.lessonName}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.lesson.lessonName}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="currentDate">
+    <ng-container matColumnDef="startDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Tarih</th>
-      <td mat-cell *matCellDef="let row"> {{row.currentDate}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.startDate}} </td>
     </ng-container>
 
     <ng-container matColumnDef="educatorId">

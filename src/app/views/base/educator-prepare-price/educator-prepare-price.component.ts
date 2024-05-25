@@ -11,6 +11,8 @@ import { VEducatorCostProgram } from 'src/app/shared/model/v-educator-cost-progr
 import { ActualCustomerLessonService } from 'src/app/shared/services/actual-customer-lesson.service';
 import { EducatorCostService } from 'src/app/shared/services/educator-cost.service';
 import { EducatorLessonCostModalComponent } from '../educator-lesson-cost-modal/educator-lesson-cost-modal.component';
+import { CustomerLesson } from 'src/app/shared/model/customer-lesson';
+import { CustomerLessonModel } from 'src/app/shared/model/customer-lesson-model';
 
 @Component({
   selector: 'app-educator-prepare-price',
@@ -20,16 +22,16 @@ import { EducatorLessonCostModalComponent } from '../educator-lesson-cost-modal/
 export class EducatorPreparePriceComponent implements OnInit {
 
   modalData: EducatorCostModel;
-  lessonList: VDoneLessonModel[] = [];
-  doneLessonList: VDoneLessonModel[] = [];
-  costList: VEducatorCost[] =[];
+  lessonList: CustomerLessonModel[] = [];
+  doneLessonList: CustomerLessonModel[] = [];
+  costList: EducatorCostModel[] =[];
 
-  displayedColumns: string[] = ['educatorName', 'classromName', 'currentDate', 'artPackageName', 'lessonName',
+  displayedColumns: string[] = ['educatorName', 'classromName', 'startDate', 'artPackageName', 'lessonName',
   'educatorId'];
-  dataSource: MatTableDataSource<VDoneLessonModel>;
+  dataSource: MatTableDataSource<CustomerLessonModel>;
 
   costDisplayColums: string[] = ['name', 'cost', 'lessonName', 'cashBoxName', 'createdAt', 'description', 'id'];
-  costDataSource: MatTableDataSource<VEducatorCost>;
+  costDataSource: MatTableDataSource<EducatorCostModel>;
   educatorName: string = '';
   selectedEducatorId: number = 0;
 
@@ -65,16 +67,16 @@ export class EducatorPreparePriceComponent implements OnInit {
       this.selectedEducatorId = parseInt(params["id"]);
       this.service.getDoneLessonsByEducator(this.selectedEducatorId).subscribe((data)=>{
         if(data.success){
-          this.lessonList = data.dynamicClass as VDoneLessonModel[];
+          this.lessonList = data.dynamicClass as CustomerLessonModel[];
           if(this.lessonList.length > 0){
-            this.educatorName = this.lessonList[0].educatorName;
+            this.educatorName = this.lessonList[0].staff.name+' '+this.lessonList[0].staff.surname;
             this.dataSource = new MatTableDataSource(this.lessonList);
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
           }
           this.educatorCostService.getByEducator(this.selectedEducatorId).subscribe((data)=>{
             if(data.success){
-              this.costList = data.dynamicClass as VEducatorCost[];
+              this.costList = data.dynamicClass as EducatorCostModel[];
               this.costList.forEach(element => {
                 this.totalCost += element.cost;
               });

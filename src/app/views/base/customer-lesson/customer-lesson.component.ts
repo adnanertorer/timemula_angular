@@ -101,7 +101,8 @@ export class CustomerLessonComponent implements OnInit {
           process_detail: '',
           service_id: parseInt(this.serviceInputSelect.value.toString()),        
           staff_id: 0,
-          sub_service_id: parseInt(this.subServiceInput.value.toString())
+          sub_service_id: parseInt(this.subServiceInput.value.toString()),
+          startDate: new Date()
         };
 
         /*this.service.add(this.customerLesson).subscribe((data)=>{
@@ -175,7 +176,8 @@ export class CustomerLessonComponent implements OnInit {
       staff_id: 0,
       sub_service_id: 0,
       classroom_id: 0,
-      lesson_group_id:0
+      lesson_group_id:0,
+      startDate: new Date()
     };
     this.activatedRoute.params.subscribe(params => {
       this.selectedCustomerId = parseInt(params["id"]);

@@ -1,3 +1,8 @@
+import { ArtPackageModel } from "./art-package-model";
+import { ClassroomModel } from "./classroom-model";
+import { LessonModel } from "./lesson-model";
+import { StaffModel } from "./staff-model";
+
 export interface CustomerLessonModel {
     id: number;
     created_by: number;
@@ -16,5 +21,10 @@ export interface CustomerLessonModel {
     remaining_payment_at?: Date;
     branch_id: number;
     classroom_id: number;
+    startDate: Date;
     lesson_group_id?: number;
+    artPackage?: ArtPackageModel;
+    classroom?: ClassroomModel;
+    lesson?: LessonModel;
+    staff?: StaffModel;
 }
