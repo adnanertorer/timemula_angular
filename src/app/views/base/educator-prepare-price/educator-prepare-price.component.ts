@@ -93,7 +93,7 @@ export class EducatorPreparePriceComponent implements OnInit {
   getCostList(){
     this.educatorCostService.getByEducator(this.selectedEducatorId).subscribe((data)=>{
       if(data.success){
-        this.costList = data.dynamicClass as VEducatorCost[];
+        this.costList = data.dynamicClass as EducatorCostModel[];
         this.costDataSource = new MatTableDataSource(this.costList);
         this.costDataSource.paginator = this.paginatorCosts;
         this.costDataSource.sort = this.sortCosts;
