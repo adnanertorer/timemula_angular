@@ -102,12 +102,12 @@ export class EducatorPreparePriceComponent implements OnInit {
   }
 
   openDialog(): void {
-    
+    console.log(this.modalData);
     const dialogRef = this.dialog.open(EducatorLessonCostModalComponent, {
       width: '600px',
       data: {cost: this.modalData.cost, description: this.modalData.description, educatorId: this.modalData.educatorId, staffName: this.modalData.staffName,
         classroomName: this.modalData.classroomName, lessonName: this.modalData.lessonName, lessonId: this.modalData.lessonId, cashBoxId: 0,
-        currentDate: this.modalData.currentDate, packageId: this.modalData.packageId, transactionType: this.modalData.transactionType}
+        currentDate: this.modalData.currentDate, packageId: this.modalData.packageId, transactionType: this.modalData.transactionType, id: this.modalData.id}
     });
     dialogRef.afterClosed().subscribe(result => {
       this.ngOnInit();
@@ -136,15 +136,17 @@ export class EducatorPreparePriceComponent implements OnInit {
   }
 
   getCost(resource: any): void{
+    console.log(resource);
     this.modalData.educatorId = parseInt(resource.educatorId);
     this.modalData.cost = 0;
     this.modalData.description = '';
-    this.modalData.staffName = resource.educatorName;
-    this.modalData.classroomName = resource.classromName;
-    this.modalData.lessonName = resource.lessonName+'/'+resource.artPackageName;
+    this.modalData.staffName = resource.staff.name+' '+resource.staff.surname;
+    this.modalData.classroomName = resource.classroom.classromName;
+    this.modalData.lessonName = resource.lesson.lessonName+'/'+resource.artPackage.artPackageName;
     this.modalData.lessonId = resource.lessonId;
     this.modalData.packageId = resource.artPackageId;
-    this.modalData.currentDate = resource.currentDate;
+    this.modalData.currentDate = resource.startDate;
+    this.modalData.id = resource.id;
     this.openDialog();
   }
 

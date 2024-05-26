@@ -17,20 +17,19 @@ export class EducatorLessonCostModalComponent implements OnInit {
 
   isManuelCost: boolean = false;
   educatorCost: EducatorCostModel;
-  standartPrice: boolean = false;
+  standardPrice: boolean = false;
   cashboxModelList: CashboxModel[] = [];
-  selectedAppoveNumber: number = 0;
+  selectedApproveNumber: number = 0;
   constructor(private service: EducatorCostService, public dialogRef: MatDialogRef<EducatorLessonCostModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: EducatorCostModel, private lessonEducatorService: LessonEducatorService,
     private cashBoxService: CashboxService) { }
 
   ngOnInit() {
-    console.log(this.data);
     this.educatorCost = {
       cost: this.data.cost,
       createdAt: new Date(),
       description: this.data.description,
-      id: 0,
+      id: this.data.id,
       educatorId: this.data.educatorId,
       createdBy: 0,
       staffName: this.data.staffName,
@@ -51,21 +50,21 @@ export class EducatorLessonCostModalComponent implements OnInit {
   }
 
   approveChanged(value){
-    this.selectedAppoveNumber = parseInt(value);
-    this.educatorCost.transactionType = this.selectedAppoveNumber;
-    if(this.selectedAppoveNumber == 1){
+    this.selectedApproveNumber = parseInt(value);
+    this.educatorCost.transactionType = this.selectedApproveNumber;
+    if(this.selectedApproveNumber == 1){
       this.isManuelCost = false;
-      this.standartPrice = true;
+      this.standardPrice = true;
       
       this.getLessons();
-    } else if(this.selectedAppoveNumber == 2){
+    } else if(this.selectedApproveNumber == 2){
       this.isManuelCost = true;
-      this.standartPrice = false;
+      this.standardPrice = false;
       this.educatorCost.description = '';
       this.educatorCost.cost = 0;
     }else{
       this.isManuelCost = false;
-      this.standartPrice = false;
+      this.standardPrice = false;
       this.educatorCost.cost  = 0;
       this.educatorCost.description = '';
     }

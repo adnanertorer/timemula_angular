@@ -38,8 +38,8 @@
                   </select>
                 </div>
               </div>
-              <div *ngIf="selectedAppoveNumber != 3">
-                <div class="form-group row" *ngIf="selectedAppoveNumber != 0">
+              <div *ngIf="selectedApproveNumber != 3">
+                <div class="form-group row" *ngIf="selectedApproveNumber != 0">
                   <label class="col-md-3 col-form-label" for="cashBoxId">Kasa</label>
                   <div class="col-md-9">
                     <select id="cashBoxId" name="cashBoxId" [(ngModel)]="educatorCost.cashBoxId" class="form-control">
@@ -51,7 +51,7 @@
               </div>
               
 
-              <div class="form-group row" *ngIf="standartPrice">
+              <div class="form-group row" *ngIf="standardPrice">
                 <label class="col-md-3 col-form-label" for="cost">Standart Hakediş Tutarı</label>
                 <div class="col-md-9">
                   <input type="number" [(ngModel)]="educatorCost.cost" id="cost"
