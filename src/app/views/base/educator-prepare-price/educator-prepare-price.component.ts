@@ -5,13 +5,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { EducatorCostModel } from 'src/app/shared/model/educator-cost-model';
-import { VDoneLessonModel } from 'src/app/shared/model/v-done-lesson-model';
-import { VEducatorCost } from 'src/app/shared/model/v-educator-cost';
-import { VEducatorCostProgram } from 'src/app/shared/model/v-educator-cost-program';
 import { ActualCustomerLessonService } from 'src/app/shared/services/actual-customer-lesson.service';
 import { EducatorCostService } from 'src/app/shared/services/educator-cost.service';
 import { EducatorLessonCostModalComponent } from '../educator-lesson-cost-modal/educator-lesson-cost-modal.component';
-import { CustomerLesson } from 'src/app/shared/model/customer-lesson';
 import { CustomerLessonModel } from 'src/app/shared/model/customer-lesson-model';
 
 @Component({
@@ -148,6 +144,20 @@ export class EducatorPreparePriceComponent implements OnInit {
     this.modalData.currentDate = resource.startDate;
     this.modalData.id = resource.id;
     this.openDialog();
+  }
+
+  removeCostResult(id: number): void {
+    const approve = confirm('Bu hakedişi silmek üzeresiniz eğer silerseniz tüm kasa hareketlerinden de silinecektir ve dersin hakedişi alınmamış olarak kaydedilecektir, devam etmek istiyor musunuz?');
+    if(approve)
+      this.removeCost(id);
+  }
+
+  removeCost(id: number): void{
+    this.educatorCostService.removeCost(id).subscribe((data)=>{
+      if(data.success){
+        this.ngOnInit();
+      }
+    });
   }
 
 }

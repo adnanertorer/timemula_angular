@@ -86,6 +86,16 @@ export class EducatorCostService {
         );
   }
 
+  removeCost(id: number){
+    return this.http
+    .delete<BaseResponse>(`${this.apiUrl}/EducatorLessonCost/RemoveEducatorCost/?id=${id.toString()}`, {observe: 'body'})
+        .pipe(
+            map((x)=> {
+                return x;
+            })
+        );
+  }
+
   getEarning(){
     return this.http
         .get<BaseResponse>(`${this.apiUrl}/EducatorLessonCost/EarningEducator`, {observe: 'body'})
